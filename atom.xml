@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>i207M&#39;s Fantastic Blog</title>
+  
+  <subtitle>Welcome</subtitle>
+  <link href="https://blog.i207m.top/atom.xml" rel="self"/>
+  
+  <link href="https://blog.i207m.top/"/>
+  <updated>2021-07-20T13:56:16.000Z</updated>
+  <id>https://blog.i207m.top/</id>
+  
+  <author>
+    <name>i207M</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Deep Learning</title>
+    <link href="https://blog.i207m.top/2021/07/Deep-Learning/"/>
+    <id>https://blog.i207m.top/2021/07/Deep-Learning/</id>
+    <published>2021-07-16T09:48:20.000Z</published>
+    <updated>2021-07-20T13:56:16.000Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="知识" scheme="https://blog.i207m.top/categories/%E7%9F%A5%E8%AF%86/"/>
+    
+    
+    <category term="LearnSecret" scheme="https://blog.i207m.top/tags/LearnSecret/"/>
+    
+    <category term="MachineLearning" scheme="https://blog.i207m.top/tags/MachineLearning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OI趣事</title>
+    <link href="https://blog.i207m.top/2021/07/OI%E8%B6%A3%E4%BA%8B/"/>
+    <id>https://blog.i207m.top/2021/07/OI%E8%B6%A3%E4%BA%8B/</id>
+    <published>2021-07-12T03:19:22.000Z</published>
+    <updated>2021-07-20T13:56:16.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;虽然已经退役了，但是还是时常从知乎/博客/学弟&lt;s&gt;学妹&lt;/s&gt;群中看到有意思的事情，于是就记录一下吧。&lt;/p&gt;
+&lt;p&gt;现在想来，感觉非常遗憾的一件事就是当年洛谷讨论《不理解》没有保存下来。&lt;/p&gt;
+&lt;div class=&quot;success&quot;&gt;
+&lt;p&gt;为了防止这件事再度发生，以下链接均提交Internet Archive或留存PDF于GDrive: Share。&lt;/p&gt;
+&lt;/div&gt;
+&lt;h2 id=&quot;wen-zhang&quot;&gt;文章&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.com.cn/blog/pks-LOVING/post-xin-yan-jiu-zhen-dui-oi-xin-chang-ying-xia-fou-tong-jiao-pai-xi&quot;&gt;[新研究] 针对OI新场景下不同教派信仰的相关探究与概念诠释&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.com.cn/blog/command-block/post-2020-qi-cheng&quot;&gt;2020，启程&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;xue-di-xue-mei&quot;&gt;学弟学妹&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://mikeduke.blog.luogu.org/lhm-ak-ioi&quot;&gt;2019级语录&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="OI" scheme="https://blog.i207m.top/categories/OI/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-Summer</title>
+    <link href="https://blog.i207m.top/2021/07/OpenDiary-Summer/"/>
+    <id>https://blog.i207m.top/2021/07/OpenDiary-Summer/</id>
+    <published>2021-07-11T04:05:33.000Z</published>
+    <updated>2021-07-20T13:56:16.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;暑假开始了~&lt;/p&gt;
+&lt;p&gt;7.10-8.16：摸鱼。&lt;/p&gt;
+&lt;p&gt;日记写完啦！&lt;/p&gt;
+&lt;h2 id=&quot;7-15&quot;&gt;7.15&lt;/h2&gt;
+&lt;p&gt;把俺在GitHub上维护的两个项目都更新了。其中&lt;code&gt;reserves-lib-tsinghua-downloader&lt;/code&gt;更是推出了全新的2.0版本。&lt;/p&gt;
+&lt;h2 id=&quot;7-16&quot;&gt;7.16&lt;/h2&gt;
+&lt;p&gt;便携显示屏到了~完美屏，13.3寸，2K，HDR。竖着用，生产力大幅提高。使用FancyZones进行上下分屏。&lt;/p&gt;
+&lt;p&gt;VS Code is in NOI Linux 2.0!&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一百周年大会上的讲话</title>
+    <link href="https://blog.i207m.top/2021/07/%E4%B8%80%E7%99%BE%E5%91%A8%E5%B9%B4%E5%A4%A7%E4%BC%9A%E4%B8%8A%E7%9A%84%E8%AE%B2%E8%AF%9D/"/>
+    <id>https://blog.i207m.top/2021/07/%E4%B8%80%E7%99%BE%E5%91%A8%E5%B9%B4%E5%A4%A7%E4%BC%9A%E4%B8%8A%E7%9A%84%E8%AE%B2%E8%AF%9D/</id>
+    <published>2021-07-01T11:39:15.000Z</published>
+    <updated>2021-07-20T13:56:16.004Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;全文转自新华社（2021年7月1日）&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;新华社北京7月1日电&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在庆祝中国共产党成立100周年大会上的讲话&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;（2021年7月1日）&lt;/p&gt;
+&lt;p&gt;习近平&lt;/p&gt;
+&lt;p&gt;同志们，朋友们：&lt;/p&gt;
+&lt;p&gt;今天，在中国共产党历史上，在中华民族历史上，都是一个十分重大而庄严的日子。我们在这里隆重集会，同全党全国各族人民一道，庆祝中国共产党成立一百周年，回顾中国共产党百年奋斗的光辉历程，展望中华民族伟大复兴的光明前景。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Politics" scheme="https://blog.i207m.top/categories/Politics/"/>
+    
+    
+    <category term="China" scheme="https://blog.i207m.top/tags/China/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-MilitaryTraining</title>
+    <link href="https://blog.i207m.top/2021/06/OpenDiary-MilitaryTraining/"/>
+    <id>https://blog.i207m.top/2021/06/OpenDiary-MilitaryTraining/</id>
+    <published>2021-06-28T14:59:11.000Z</published>
+    <updated>2021-07-20T13:56:16.000Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>音乐课论文-新中国爱国歌曲的特征变化及其思考</title>
+    <link href="https://blog.i207m.top/2021/06/%E9%9F%B3%E4%B9%90%E8%AF%BE%E8%AE%BA%E6%96%87-%E6%96%B0%E4%B8%AD%E5%9B%BD%E7%88%B1%E5%9B%BD%E6%AD%8C%E6%9B%B2%E7%9A%84%E7%89%B9%E5%BE%81%E5%8F%98%E5%8C%96%E5%8F%8A%E5%85%B6%E6%80%9D%E8%80%83/"/>
+    <id>https://blog.i207m.top/2021/06/%E9%9F%B3%E4%B9%90%E8%AF%BE%E8%AE%BA%E6%96%87-%E6%96%B0%E4%B8%AD%E5%9B%BD%E7%88%B1%E5%9B%BD%E6%AD%8C%E6%9B%B2%E7%9A%84%E7%89%B9%E5%BE%81%E5%8F%98%E5%8C%96%E5%8F%8A%E5%85%B6%E6%80%9D%E8%80%83/</id>
+    <published>2021-06-19T15:59:32.000Z</published>
+    <updated>2021-07-20T13:56:16.004Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="思考" scheme="https://blog.i207m.top/categories/%E6%80%9D%E8%80%83/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>写作与沟通-长文终稿</title>
+    <link href="https://blog.i207m.top/2021/06/%E5%86%99%E4%BD%9C%E4%B8%8E%E6%B2%9F%E9%80%9A-%E9%95%BF%E6%96%87%E7%BB%88%E7%A8%BF/"/>
+    <id>https://blog.i207m.top/2021/06/%E5%86%99%E4%BD%9C%E4%B8%8E%E6%B2%9F%E9%80%9A-%E9%95%BF%E6%96%87%E7%BB%88%E7%A8%BF/</id>
+    <published>2021-06-12T14:05:45.000Z</published>
+    <updated>2021-07-20T13:56:16.004Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Finally.&lt;/p&gt;
+&lt;p&gt;🌹山高水长，曲终不散！&lt;/p&gt;
+&lt;p&gt;“当写作与沟通成为一种生活方式，你们此刻照见的，将只是一个美好的起点。”&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;du-te-kai-fang-zi-ran&quot;&gt;独特、开放、自然&lt;/h2&gt;
+&lt;p&gt;—— Minecraft作为可定制的青少年社交平台的优势&lt;/p&gt;
+&lt;p&gt;摘要：沙盒游戏具有极高的自由度，Minecraft是其最突出的代表。目前，对Minecraft的教育优势的研究较为充分，将它本身作为社交平台的研究较少。然而，从“动森”的现象级成功中，我们可以窥见在隔离情景下潜在的大量社交需求，以及将游戏作为社交平台的潜力。新冠疫情期间Fremantle图书馆借助经模组改造的LibraryCraft服务器，继续组织青少年的社交和学习活动，发挥社区作用。面向自闭症患儿的Autcraft服务器通过精心设计，努力克服青少年的社交心理障碍，从三个角度实现了沙盒游戏优势的转化。这些事例共同揭示了，在物理或心理隔离情景下，Minecraft作为可定制的青少年社交平台是可行且有效的。结合场域理论和交友模型，这一做法的优势要素可以从独特、开放、自然三方面进行分析。&lt;/p&gt;
+&lt;p&gt;关键词：&lt;em&gt;Minecraft；社交平台；青少年；定制化；沙盒游戏&lt;/em&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="思考" scheme="https://blog.i207m.top/categories/%E6%80%9D%E8%80%83/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>离散数学《图论与代数结构》第15周习题</title>
+    <link href="https://blog.i207m.top/2021/06/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E3%80%8A%E5%9B%BE%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84%E3%80%8B%E7%AC%AC15%E5%91%A8%E4%B9%A0%E9%A2%98/"/>
+    <id>https://blog.i207m.top/2021/06/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E3%80%8A%E5%9B%BE%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84%E3%80%8B%E7%AC%AC15%E5%91%A8%E4%B9%A0%E9%A2%98/</id>
+    <published>2021-06-06T14:14:20.000Z</published>
+    <updated>2021-07-20T13:56:16.004Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;证明：6阶群G有且只有一个3阶子群&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;存在性&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;若G为6阶循环群，设G=&amp;lt;a&amp;gt;，则&amp;lt;a^2&amp;gt;是一个3阶子群。&lt;/p&gt;
+&lt;p&gt;否则，假设G没有3阶子群。则G的元素的阶数只能为1,2. 对于阶数为1或2的元素&lt;img data-src=&quot;https://latex2img.i207m.top?inline=x&quot; style=&quot;display:inline-block;margin: 0;&quot;&gt;有&lt;img data-src=&quot;https://latex2img.i207m.top?inline=x%5E2%3D1&quot; style=&quot;display:inline-block;margin: 0;&quot;&gt;. 则&lt;img data-src=&quot;https://latex2img.i207m.top?inline=xy%3D%28xy%29%5E%7B-1%7D%3Dy%5E%7B-1%7Dx%5E%7B-1%7D%3Dyx&quot; style=&quot;display:inline-block;margin: 0;&quot;&gt;，故取G中两个不同元素&lt;img data-src=&quot;https://latex2img.i207m.top?inline=x%2Cy&quot; style=&quot;display:inline-block;margin: 0;&quot;&gt;，可构造群&lt;img data-src=&quot;https://latex2img.i207m.top?inline=%5C%7Be%2Cx%2Cy%2Cxy%5C%7D&quot; style=&quot;display:inline-block;margin: 0;&quot;&gt;，阶为4，与Lagrange定理矛盾。&lt;/p&gt;
+&lt;p&gt;综上，G一定存在3阶子群。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;唯一性&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;若G有2个3阶子群&amp;lt;a&amp;gt;&amp;lt;b&amp;gt;，则G至少有4个3阶元：a, a^2, b, b^2. 那么有e, a, a^2, b, b^2, ab, a^2b^2这7个元素两两不同，与G的阶为6矛盾。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="作业" scheme="https://blog.i207m.top/categories/%E4%BD%9C%E4%B8%9A/"/>
+    
+    
+    <category term="离散数学" scheme="https://blog.i207m.top/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>人生笔记</title>
+    <link href="https://blog.i207m.top/2021/06/%E4%BA%BA%E7%94%9F%E7%AC%94%E8%AE%B0/"/>
+    <id>https://blog.i207m.top/2021/06/%E4%BA%BA%E7%94%9F%E7%AC%94%E8%AE%B0/</id>
+    <published>2021-06-04T13:59:18.000Z</published>
+    <updated>2021-07-20T13:56:16.004Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Life" scheme="https://blog.i207m.top/categories/Life/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-2021.6</title>
+    <link href="https://blog.i207m.top/2021/06/OpenDiary-2021.6/"/>
+    <id>https://blog.i207m.top/2021/06/OpenDiary-2021.6/</id>
+    <published>2021-06-01T01:32:54.000Z</published>
+    <updated>2021-07-20T13:56:16.000Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+    <category term="Archived" scheme="https://blog.i207m.top/tags/Archived/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>离散数学《图论与代数结构》第13周习题</title>
+    <link href="https://blog.i207m.top/2021/05/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E3%80%8A%E5%9B%BE%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84%E3%80%8B%E7%AC%AC13%E5%91%A8%E4%B9%A0%E9%A2%98/"/>
+    <id>https://blog.i207m.top/2021/05/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E3%80%8A%E5%9B%BE%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84%E3%80%8B%E7%AC%AC13%E5%91%A8%E4%B9%A0%E9%A2%98/</id>
+    <published>2021-05-24T02:05:41.000Z</published>
+    <updated>2021-07-20T13:56:16.004Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;7&quot;&gt;7.&lt;/h2&gt;
+&lt;p&gt;证明自然数集上的模m同余关系是等价关系。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;zi-fan-xing&quot;&gt;自反性&lt;/h3&gt;
+&lt;p style&gt;&lt;img data-src=&quot;https://latex2img.i207m.top?from=%5Cforall%20x%20%5Cin%20N%2Cx%3Dkm%2Br%5C%5C%0A%5Cbecause%20r%3Dr%5C%5C%0A%5Ctherefore%20x%5Cequiv%20x%5Cpmod%20m%5C%5C%0A%5Ctherefore%20x%5Csim%20x%0A&quot;&gt;&lt;/p&gt;&lt;h3 id=&quot;dui-cheng-xing&quot;&gt;对称性&lt;/h3&gt;
+&lt;p style&gt;&lt;img data-src=&quot;https://latex2img.i207m.top?from=x%20%5Cin%20N%2Cx%3Dkm%2Br_x%5C%5C%0Ay%20%5Cin%20N%2Cy%3Dkm%2Br_y%5C%5C%0A%5Cbecause%20x%5Csim%20y%5C%5C%0A%5Ctherefore%20x%5Cequiv%20y%5Cpmod%20m%5C%5C%0A%5Ctherefore%20r_x%3Dr_y%5C%5C%0A%5Ctherefore%20y%5Cequiv%20x%5Cpmod%20m%5C%5C%0A%5Ctherefore%20y%5Csim%20x%0A&quot;&gt;&lt;/p&gt;&lt;h3 id=&quot;chuan-di-xing&quot;&gt;传递性&lt;/h3&gt;</summary>
+    
+    
+    
+    <category term="作业" scheme="https://blog.i207m.top/categories/%E4%BD%9C%E4%B8%9A/"/>
+    
+    
+    <category term="离散数学" scheme="https://blog.i207m.top/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python学习笔记-2</title>
+    <link href="https://blog.i207m.top/2021/05/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/"/>
+    <id>https://blog.i207m.top/2021/05/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/</id>
+    <published>2021-05-21T09:44:27.000Z</published>
+    <updated>2021-07-20T13:56:16.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;之前暑假学习的笔记在&lt;a href=&quot;https://blog.i207m.top/2021/02/Python-learning/&quot;&gt;这里&lt;/a&gt;，因为过于久远，所以俺再开一篇。这一篇可能就比较琐碎了，并且会加上其他包的内容。&lt;/p&gt;
+&lt;h2 id=&quot;yu-yan&quot;&gt;语言&lt;/h2&gt;
+&lt;h3 id=&quot;iter&quot;&gt;iter()&lt;/h3&gt;
+&lt;p&gt;用来生成迭代器，形式为&lt;code&gt;iter(object[, sentinel])&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;object&lt;/code&gt;：支持迭代的集合对象。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sentinel&lt;/code&gt; ：如果传递了第二个参数，则参数 &lt;code&gt;object&lt;/code&gt; 必须是一个可调用的对象（如函数），此时，&lt;code&gt;iter()&lt;/code&gt; 创建了一个迭代器对象，每次调用这个迭代器对象的&lt;code&gt;__next__()&lt;/code&gt;方法时，都会调用 &lt;code&gt;object&lt;/code&gt;。当返回值等于&lt;code&gt;sentinel&lt;/code&gt;时，迭代停止，&lt;code&gt;sentinel&lt;/code&gt;不会被返回。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;yi-chang&quot;&gt;异常&lt;/h3&gt;
+&lt;p&gt;Python内置的异常类型：&lt;/p&gt;
+&lt;details&gt;
+    &lt;summary&gt;折叠代码&lt;/summary&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;47&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;48&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;49&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;50&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;51&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;52&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;53&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;54&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;55&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;56&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;57&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;58&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;59&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;60&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;61&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;62&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;63&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;64&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;BaseException&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; +-- SystemExit&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; +-- KeyboardInterrupt&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; +-- GeneratorExit&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; +-- Exception&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- StopIteration&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- StopAsyncIteration&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- ArithmeticError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- FloatingPointError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- OverflowError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- ZeroDivisionError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- AssertionError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- AttributeError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- BufferError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- EOFError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- ImportError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- ModuleNotFoundError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- LookupError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- IndexError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- KeyError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- MemoryError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- NameError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- UnboundLocalError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- OSError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- BlockingIOError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- ChildProcessError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- ConnectionError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    |    +-- BrokenPipeError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    |    +-- ConnectionAbortedError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    |    +-- ConnectionRefusedError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    |    +-- ConnectionResetError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- FileExistsError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- FileNotFoundError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- InterruptedError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- IsADirectoryError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- NotADirectoryError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- PermissionError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- ProcessLookupError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- TimeoutError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- ReferenceError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- RuntimeError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- NotImplementedError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- RecursionError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- SyntaxError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- IndentationError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |         +-- TabError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- SystemError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- TypeError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- ValueError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |    +-- UnicodeError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |         +-- UnicodeDecodeError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |         +-- UnicodeEncodeError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      |         +-- UnicodeTranslateError&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      +-- Warning&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           +-- DeprecationWarning&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           +-- PendingDeprecationWarning&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           +-- RuntimeWarning&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           +-- SyntaxWarning&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           +-- UserWarning&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           +-- FutureWarning&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           +-- ImportWarning&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           +-- UnicodeWarning&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           +-- BytesWarning&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           +-- ResourceWarning&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/details&gt;</summary>
+    
+    
+    
+    <category term="编程" scheme="https://blog.i207m.top/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="Python" scheme="https://blog.i207m.top/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>写作与沟通-长文初稿</title>
+    <link href="https://blog.i207m.top/2021/05/%E5%86%99%E4%BD%9C%E4%B8%8E%E6%B2%9F%E9%80%9A-%E9%95%BF%E6%96%87%E5%88%9D%E7%A8%BF/"/>
+    <id>https://blog.i207m.top/2021/05/%E5%86%99%E4%BD%9C%E4%B8%8E%E6%B2%9F%E9%80%9A-%E9%95%BF%E6%96%87%E5%88%9D%E7%A8%BF/</id>
+    <published>2021-05-17T14:36:29.000Z</published>
+    <updated>2021-07-20T13:56:16.004Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;写沟真的不能碰啊。写吐了。差不多看看吧。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;duo-ren-sha-he-you-xi-zuo-wei-ke-ding-zhi-de-qing-shao-nian-she-jiao-ping-tai-de-tan-suo&quot;&gt;多人沙盒游戏作为可定制的青少年社交平台的探索&lt;/h2&gt;
+&lt;p&gt;——以Minecraft的案例为核心&lt;/p&gt;
+&lt;p&gt;摘要：沙盒游戏具有极高的自由度，Minecraft是其最突出的代表。与教育领域的充分研究不同，沙盒游戏本身作为社交平台的研究较少，但在一些情景下显示出此做法的潜力。社交需要是人的基本需要之一。游戏具有社交性。通过对新冠疫情期间Fremantle图书馆的社区项目LibraryCraft和面向自闭症患者的Autcraft两个案例的建设过程、服务内容、用户反馈的分析，得出在现实交往受到抑制的特殊情景下，定制化的多人沙盒游戏作为青少年社交补充平台是可行且有效的，并结合场域理论，分析事例的经验和这一做法的四点优势。&lt;/p&gt;
+&lt;p&gt;关键词：&lt;em&gt;沙盒游戏；社交平台；青少年；Minecraft&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;沙盒游戏是一种给予玩家极高自由度的电子游戏类型，游戏一般不强迫玩家完成指定任务或目标。沙盒游戏是“开放世界”这一概念的最极致体现。玩家从解决关卡、积累物品这种简单的过程，逐渐演变到了一种在一个完整的游戏世界中自我体验、自我探索、自我反馈的状态。作为提升游戏沉浸感的重要手段，开放世界元素不仅成为了应用在各类游戏设计中的既成趋势，而且为心理学、认知科学的研究提供了适宜的平台[&lt;a href=&quot;#_ftn1&quot;&gt;①]&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;目前，对于电子游戏的正向作用的研究主要集中在教育领域[&lt;a href=&quot;#_ftn2&quot;&gt;②]&lt;/a&gt;。目前已经有充分的证据证明电子游戏有以下三方面正向作用：增强视觉注意力[&lt;a href=&quot;#_ftn3&quot;&gt;③]&lt;/a&gt;，提高空间能力任务的表现[&lt;a href=&quot;#_ftn4&quot;&gt;④]&lt;/a&gt;，以及通过教育性视频游戏教授特定的知识和技能。这些研究主要从心理学和认知科学的视角来进行，并且已经发展的较为全面。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="思考" scheme="https://blog.i207m.top/categories/%E6%80%9D%E8%80%83/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>离散数学《图论与代数结构》第12周习题</title>
+    <link href="https://blog.i207m.top/2021/05/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E3%80%8A%E5%9B%BE%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84%E3%80%8B%E7%AC%AC12%E5%91%A8%E4%B9%A0%E9%A2%98/"/>
+    <id>https://blog.i207m.top/2021/05/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E3%80%8A%E5%9B%BE%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84%E3%80%8B%E7%AC%AC12%E5%91%A8%E4%B9%A0%E9%A2%98/</id>
+    <published>2021-05-13T09:17:10.000Z</published>
+    <updated>2021-07-20T13:56:16.004Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;上次写离散已经是4周之前了…&lt;/p&gt;
+&lt;h2 id=&quot;1&quot;&gt;1.&lt;/h2&gt;
+&lt;p&gt;n个点的图最多有n-2个割点。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;构造方法&lt;/strong&gt;：将n个点连成链，除2个端点外，都是割点。&lt;/p&gt;
+&lt;h3 id=&quot;shang-jie-zheng-ming&quot;&gt;上界证明&lt;/h3&gt;
+&lt;p&gt;首先删去图中的所有重边和自环，这对割点个数无影响。&lt;/p&gt;
+&lt;h4 id=&quot;yin-li&quot;&gt;引理&lt;/h4&gt;
+&lt;p&gt;对于一个连通图，生成树的叶节点都不是割点。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="作业" scheme="https://blog.i207m.top/categories/%E4%BD%9C%E4%B8%9A/"/>
+    
+    
+    <category term="离散数学" scheme="https://blog.i207m.top/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Secret KEY</title>
+    <link href="https://blog.i207m.top/2021/05/Secret-KEY/"/>
+    <id>https://blog.i207m.top/2021/05/Secret-KEY/</id>
+    <published>2021-05-13T08:52:44.000Z</published>
+    <updated>2021-07-20T13:56:16.000Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    
+    <category term="DevSecret" scheme="https://blog.i207m.top/tags/DevSecret/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我不会C++.html</title>
+    <link href="https://blog.i207m.top/2021/05/%E6%88%91%E4%B8%8D%E4%BC%9AC++.html/"/>
+    <id>https://blog.i207m.top/2021/05/%E6%88%91%E4%B8%8D%E4%BC%9AC++.html/</id>
+    <published>2021-05-07T14:59:28.000Z</published>
+    <updated>2021-07-20T13:56:16.004Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;虽然俺不想学C++，但是在使用中（室友询问OOP时）发现自己不会C++，于是本着求知的心态记录一下C++中进阶的复杂的操作。&lt;/p&gt;
+&lt;h2 id=&quot;oop-xiang-guan&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="编程" scheme="https://blog.i207m.top/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="C++" scheme="https://blog.i207m.top/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-2021.5</title>
+    <link href="https://blog.i207m.top/2021/05/OpenDiary-2021.5/"/>
+    <id>https://blog.i207m.top/2021/05/OpenDiary-2021.5/</id>
+    <published>2021-05-03T05:56:18.000Z</published>
+    <updated>2021-07-20T13:56:16.000Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+    <category term="Archived" scheme="https://blog.i207m.top/tags/Archived/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Rust入门</title>
+    <link href="https://blog.i207m.top/2021/04/Rust%E5%85%A5%E9%97%A8/"/>
+    <id>https://blog.i207m.top/2021/04/Rust%E5%85%A5%E9%97%A8/</id>
+    <published>2021-04-28T07:06:55.000Z</published>
+    <updated>2021-07-20T13:56:16.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Rust has been voted the “most loved programming language” in the Stack Overflow Developer Survey every year since 2016.&lt;/p&gt;
+&lt;p&gt;Rust的（非官方）吉祥物：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;https://www.rust-lang.org/static/images/ferris.gif&quot; alt&gt;&lt;/p&gt;
+&lt;p&gt;数据类型、变量、循环、函数啥的就不放了。接下来说点有意思的。&lt;/p&gt;
+&lt;p&gt;变量默认是不可变的（这句话读起来怪怪的），需要额外声明为可变的才能修改。Rust也有常量，常量和不可变变量的区别是，常量不能被Shadowing.（Rust 允许程序员用同一个变量名重复声明变量。此时，新的变量将覆盖旧的变量。）&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Rust和其他语言真正的区别在于：快速地安全。变量超出作用域会自动释放；变量具有唯一的所有权。&lt;a href=&quot;https://www.runoob.com/rust/rust-ownership.html&quot;&gt;这里&lt;/a&gt;写的比较详细。&lt;/p&gt;
+&lt;p&gt;所有权规则：&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="编程" scheme="https://blog.i207m.top/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="Rust" scheme="https://blog.i207m.top/tags/Rust/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>110周年校庆感受</title>
+    <link href="https://blog.i207m.top/2021/04/110%E5%91%A8%E5%B9%B4%E6%A0%A1%E5%BA%86%E6%84%9F%E5%8F%97/"/>
+    <id>https://blog.i207m.top/2021/04/110%E5%91%A8%E5%B9%B4%E6%A0%A1%E5%BA%86%E6%84%9F%E5%8F%97/</id>
+    <published>2021-04-24T16:37:58.000Z</published>
+    <updated>2021-07-20T13:56:16.000Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+    <category term="DiarySecret" scheme="https://blog.i207m.top/tags/DiarySecret/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>离散数学《图论与代数结构》第8周习题</title>
+    <link href="https://blog.i207m.top/2021/04/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E3%80%8A%E5%9B%BE%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84%E3%80%8B%E7%AC%AC8%E5%91%A8%E4%B9%A0%E9%A2%98/"/>
+    <id>https://blog.i207m.top/2021/04/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E3%80%8A%E5%9B%BE%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84%E3%80%8B%E7%AC%AC8%E5%91%A8%E4%B9%A0%E9%A2%98/</id>
+    <published>2021-04-19T08:14:08.000Z</published>
+    <updated>2021-07-20T13:56:16.004Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;应该用电脑写的，字太多，亏了亏了。既然写完了，就把题抄一下吧。&lt;/p&gt;
+&lt;h2 id=&quot;2&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="作业" scheme="https://blog.i207m.top/categories/%E4%BD%9C%E4%B8%9A/"/>
+    
+    
+    <category term="离散数学" scheme="https://blog.i207m.top/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+</feed>
