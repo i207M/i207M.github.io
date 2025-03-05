@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.i207m.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="我说的新时代不是指的那个新时代，不要魔怔了  本文实际上是网原的一次作业，也许可以帮到后来人。当作自己更博了  End To End Arguments in system design是极其重要的一篇系统设计论文，其中提出了先进的“端到端”设计理念，即，端到端的可靠通信应通过两个终端的应用层来保证，在底层实现的功能可能是没有价值的，除非对于性能有很高的要求。简而言之，底层负责尽力尽快传输数据，而">
+<meta property="og:type" content="article">
+<meta property="og:title" content="端到端设计理念与新的时代">
+<meta property="og:url" content="https://blog.i207m.top/2022/10/%E7%AB%AF%E5%88%B0%E7%AB%AF%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5%E4%B8%8E%E6%96%B0%E7%9A%84%E6%97%B6%E4%BB%A3/index.html">
+<meta property="og:site_name" content="i207M&#39;s Fantastic Blog">
+<meta property="og:description" content="我说的新时代不是指的那个新时代，不要魔怔了  本文实际上是网原的一次作业，也许可以帮到后来人。当作自己更博了  End To End Arguments in system design是极其重要的一篇系统设计论文，其中提出了先进的“端到端”设计理念，即，端到端的可靠通信应通过两个终端的应用层来保证，在底层实现的功能可能是没有价值的，除非对于性能有很高的要求。简而言之，底层负责尽力尽快传输数据，而">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-06T13:59:46.000Z">
+<meta property="article:modified_time" content="2025-03-05T01:24:34.780Z">
+<meta property="article:author" content="i207M">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="作业">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.i207m.top/2022/10/%E7%AB%AF%E5%88%B0%E7%AB%AF%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5%E4%B8%8E%E6%96%B0%E7%9A%84%E6%97%B6%E4%BB%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+
+  <title>端到端设计理念与新的时代 | i207M's Fantastic Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="i207M's Fantastic Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">i207M's Fantastic Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-留言">
+
+    <a href="/messages/" rel="section"><i class="fa fa-fw fa-comments"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.i207m.top/2022/10/%E7%AB%AF%E5%88%B0%E7%AB%AF%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5%E4%B8%8E%E6%96%B0%E7%9A%84%E6%97%B6%E4%BB%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="i207M">
+      <meta itemprop="description" content="i207M's Fantastic Blog - Love">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="i207M's Fantastic Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          端到端设计理念与新的时代
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-06 21:59:46" itemprop="dateCreated datePublished" datetime="2022-10-06T21:59:46+08:00">2022-10-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">课程</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><s>我说的新时代不是指的那个新时代，不要魔怔了</s></p>
+<div class="info">
+<p>本文实际上是网原的一次作业，也许可以帮到后来人。<s>当作自己更博了</s></p>
+</div>
+<p>End To End Arguments in system design是极其重要的一篇系统设计论文，其中提出了先进的“端到端”设计理念，即，端到端的可靠通信应通过两个终端的应用层来保证，在底层实现的功能可能是没有价值的，除非对于性能有很高的要求。简而言之，底层负责尽力尽快传输数据，而高层负责可靠性及更多应用。</p>
+<p>在文中，作者通过文件传输的例子证明，数据传递的任何一个环节都有可能出问题，保证每一步都可靠的代价太大。为了实现可靠传输，需要一个高于不可靠的网络层的可靠传输协议。这样的做法效率会更好。TCP/IP协议应运而生，就是这一论文思想的重要体现。除了可靠性，还有许多功能应该在高层实现。例如数据加密，只要也必须在终端处进行加密，传输过程中的安全性就可以得到保障，同时减少过程中加解密的overhead。底层应用不了解也不必了解高层的逻辑，也就无法针对它们优化。</p>
+<p>每一个系统都是针对需求和成本进行权衡后的结果。我们应当注意到，随着时代发展，虽然互联网的大框架不变，互联互通的功能不变，但是其上的主流应用在进化，我们的需求也在随之变化。</p>
+<span id="more"></span>
+<p>对即时性的保证。随着远程办公在后疫情时代更加普及，人们对在线会议、视频直播的需求增长。我们知道TCP是可靠的传输协议，UDP追求数据的快速到达，但是很多时候，我们需要一个折中，即，在保证可靠性的情况下提高传输速度。于是，KCP协议被设计出来。TCP协议是为流量设计的，它的拥塞控制算法的目的是充分利用带宽。这使得TCP具有加速慢，显著受到丢包率影响的特点。KCP通过选择性重传、非延迟ACK等方法，“以10%-20%带宽浪费的代价换取了比TCP快30%-40%的传输速度”（来自<a target="_blank" rel="noopener" href="https://github.com/skywind3000/kcp">skywind3000/kcp</a>）。诚然，KCP不一定是最佳的解决方案，但是它确实体现出，我们基于旧的需求设计的协议需要更新以适应新的时代。</p>
+<p>集中的、有缓存的访问。随着人们消费内容向视频转移，这些视频往往集中于几个网站，这就使得流量极其不平衡，浪费了许多带宽和设备的性能。这是与早期互联网，每台设备之间都要点对点访问的需求是不一样的。目前的解决方案一般是使用CDN对内容进行就近缓存，但是它仍然是一个权宜之计。有一些基于P2P模式的探索正在进行。但是，鉴于目前互联网的流量特征已经与十几年前大为不同，我们应该把这些新的“特征”视为一个基本需求，在设计底层硬件时考虑到它们，才能够在效率、速度上实现显著的进步。</p>
+<p>事实上，从软件到硬件是目前科技发展的一个有趣的“逆潮流”。许多应用已经不满足于仅在高层实现功能，而底层相对简陋。应用的发展一定程度上受到硬件阻碍，需要底层硬件一起升级。例如大热的AI芯片、专用计算芯片等，就是针对某一个特定的应用，在底层实现它们，从而获得收益。回到我们更关注的网络层面，以前的操作系统内核负责管理一切网络、储存等，但是逐渐出现了DPDK等直接接管底层的应用程序，以实现加速。</p>
+<p>端到端的设计理念是重要的、奠基性的，也是持久的。它极大的促进了互联网的发展，尤其是应用的快速搭建、项目的快速启动。但是随着应用的专一化，底层可以预知上层的需求。所以，底层为上层服务、依上层改进的趋势也不可忽视。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+              <a href="/tags/%E4%BD%9C%E4%B8%9A/" rel="tag"><i class="fa fa-tag"></i> 作业</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/09/OpenDiary-2022.10/" rel="prev" title="OpenDiary-2022.10">
+      <i class="fa fa-chevron-left"></i> OpenDiary-2022.10
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/10/Diary2022-Part-Two/" rel="next" title="Diary2022 Part Two">
+      Diary2022 Part Two <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="i207M"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">i207M</p>
+  <div class="site-description" itemprop="description">i207M's Fantastic Blog - Love</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/i207M" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;i207M" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:connect_at_mail.i207m.top" title="E-Mail → mailto:connect_at_mail.i207m.top" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-fas fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/i207M/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;i207M&#x2F;" rel="noopener" target="_blank">Luogu Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://speranzaleaf.github.io/" title="https:&#x2F;&#x2F;speranzaleaf.github.io&#x2F;" rel="noopener" target="_blank">Speranza Leaf</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kamome.moe/" title="https:&#x2F;&#x2F;kamome.moe&#x2F;" rel="noopener" target="_blank">Siunaus</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/cjyyb/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;cjyyb&#x2F;" rel="noopener" target="_blank">yyb</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nekko.moe/" title="https:&#x2F;&#x2F;nekko.moe&#x2F;" rel="noopener" target="_blank">nekko</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/zjp-shadow/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zjp-shadow&#x2F;" rel="noopener" target="_blank">zjp_shadow</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ywy-c-asm.cn/" title="https:&#x2F;&#x2F;www.ywy-c-asm.cn&#x2F;" rel="noopener" target="_blank">ywy_c_asm</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/Miracevin/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Miracevin&#x2F;" rel="noopener" target="_blank">Miracle</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hahamengbier.top/" title="https:&#x2F;&#x2F;hahamengbier.top&#x2F;" rel="noopener" target="_blank">mengbier</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">i207M</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '09f5f1273e68e2e773c5',
+      clientSecret: 'b9b92a06fa16f2c2905b55b35c509e55c03fc596',
+      repo        : 'blog-comment',
+      owner       : 'i207M',
+      admin       : ['i207M'],
+      id          : '2fcaba70ad72d3906559e60d1185e97f',
+      proxy       : 'https://cors.i207m.workers.dev/?https://github.com/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>

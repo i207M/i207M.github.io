@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.i207m.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="之前暑假学习的笔记在这里，因为过于久远，所以俺再开一篇。这一篇可能就比较琐碎了，并且会加上其他包的内容。 语言 iter() 用来生成迭代器，形式为iter(object[, sentinel])  object：支持迭代的集合对象。 sentinel ：如果传递了第二个参数，则参数 object 必须是一个可调用的对象（如函数），此时，iter() 创建了一个迭代器对象，每次调用这个迭代器对象的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习笔记-2">
+<meta property="og:url" content="https://blog.i207m.top/2021/05/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/index.html">
+<meta property="og:site_name" content="i207M&#39;s Fantastic Blog">
+<meta property="og:description" content="之前暑假学习的笔记在这里，因为过于久远，所以俺再开一篇。这一篇可能就比较琐碎了，并且会加上其他包的内容。 语言 iter() 用来生成迭代器，形式为iter(object[, sentinel])  object：支持迭代的集合对象。 sentinel ：如果传递了第二个参数，则参数 object 必须是一个可调用的对象（如函数），此时，iter() 创建了一个迭代器对象，每次调用这个迭代器对象的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.i207m.top/2021/07_b766157d8571f4ed87d302f8c1c5293d.png">
+<meta property="og:image" content="https://img.i207m.top/2021/08_618732fded5927e529f30edba55732cb.png">
+<meta property="article:published_time" content="2021-05-21T09:44:27.000Z">
+<meta property="article:modified_time" content="2025-03-05T01:24:34.775Z">
+<meta property="article:author" content="i207M">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.i207m.top/2021/07_b766157d8571f4ed87d302f8c1c5293d.png">
+
+<link rel="canonical" href="https://blog.i207m.top/2021/05/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+
+  <title>Python学习笔记-2 | i207M's Fantastic Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="i207M's Fantastic Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">i207M's Fantastic Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-留言">
+
+    <a href="/messages/" rel="section"><i class="fa fa-fw fa-comments"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.i207m.top/2021/05/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="i207M">
+      <meta itemprop="description" content="i207M's Fantastic Blog - Love">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="i207M's Fantastic Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python学习笔记-2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-21 17:44:27" itemprop="dateCreated datePublished" datetime="2021-05-21T17:44:27+08:00">2021-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Dev/" itemprop="url" rel="index"><span itemprop="name">Dev</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>之前暑假学习的笔记在<a href="https://blog.i207m.top/2021/02/Python-learning/">这里</a>，因为过于久远，所以俺再开一篇。这一篇可能就比较琐碎了，并且会加上其他包的内容。</p>
+<h2 id="yu-yan" id="语言">语言</h2>
+<h3 id="iter" id="iter">iter()</h3>
+<p>用来生成迭代器，形式为<code>iter(object[, sentinel])</code></p>
+<ul>
+<li><code>object</code>：支持迭代的集合对象。</li>
+<li><code>sentinel</code> ：如果传递了第二个参数，则参数 <code>object</code> 必须是一个可调用的对象（如函数），此时，<code>iter()</code> 创建了一个迭代器对象，每次调用这个迭代器对象的<code>__next__()</code>方法时，都会调用 <code>object</code>。当返回值等于<code>sentinel</code>时，迭代停止，<code>sentinel</code>不会被返回。</li>
+</ul>
+<h3 id="yi-chang" id="异常">异常</h3>
+<p>Python内置的异常类型：</p>
+<details>
+    <summary>折叠代码</summary>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">BaseException</span><br><span class="line"> +-- SystemExit</span><br><span class="line"> +-- KeyboardInterrupt</span><br><span class="line"> +-- GeneratorExit</span><br><span class="line"> +-- Exception</span><br><span class="line">      +-- StopIteration</span><br><span class="line">      +-- StopAsyncIteration</span><br><span class="line">      +-- ArithmeticError</span><br><span class="line">      |    +-- FloatingPointError</span><br><span class="line">      |    +-- OverflowError</span><br><span class="line">      |    +-- ZeroDivisionError</span><br><span class="line">      +-- AssertionError</span><br><span class="line">      +-- AttributeError</span><br><span class="line">      +-- BufferError</span><br><span class="line">      +-- EOFError</span><br><span class="line">      +-- ImportError</span><br><span class="line">      |    +-- ModuleNotFoundError</span><br><span class="line">      +-- LookupError</span><br><span class="line">      |    +-- IndexError</span><br><span class="line">      |    +-- KeyError</span><br><span class="line">      +-- MemoryError</span><br><span class="line">      +-- NameError</span><br><span class="line">      |    +-- UnboundLocalError</span><br><span class="line">      +-- OSError</span><br><span class="line">      |    +-- BlockingIOError</span><br><span class="line">      |    +-- ChildProcessError</span><br><span class="line">      |    +-- ConnectionError</span><br><span class="line">      |    |    +-- BrokenPipeError</span><br><span class="line">      |    |    +-- ConnectionAbortedError</span><br><span class="line">      |    |    +-- ConnectionRefusedError</span><br><span class="line">      |    |    +-- ConnectionResetError</span><br><span class="line">      |    +-- FileExistsError</span><br><span class="line">      |    +-- FileNotFoundError</span><br><span class="line">      |    +-- InterruptedError</span><br><span class="line">      |    +-- IsADirectoryError</span><br><span class="line">      |    +-- NotADirectoryError</span><br><span class="line">      |    +-- PermissionError</span><br><span class="line">      |    +-- ProcessLookupError</span><br><span class="line">      |    +-- TimeoutError</span><br><span class="line">      +-- ReferenceError</span><br><span class="line">      +-- RuntimeError</span><br><span class="line">      |    +-- NotImplementedError</span><br><span class="line">      |    +-- RecursionError</span><br><span class="line">      +-- SyntaxError</span><br><span class="line">      |    +-- IndentationError</span><br><span class="line">      |         +-- TabError</span><br><span class="line">      +-- SystemError</span><br><span class="line">      +-- TypeError</span><br><span class="line">      +-- ValueError</span><br><span class="line">      |    +-- UnicodeError</span><br><span class="line">      |         +-- UnicodeDecodeError</span><br><span class="line">      |         +-- UnicodeEncodeError</span><br><span class="line">      |         +-- UnicodeTranslateError</span><br><span class="line">      +-- Warning</span><br><span class="line">           +-- DeprecationWarning</span><br><span class="line">           +-- PendingDeprecationWarning</span><br><span class="line">           +-- RuntimeWarning</span><br><span class="line">           +-- SyntaxWarning</span><br><span class="line">           +-- UserWarning</span><br><span class="line">           +-- FutureWarning</span><br><span class="line">           +-- ImportWarning</span><br><span class="line">           +-- UnicodeWarning</span><br><span class="line">           +-- BytesWarning</span><br><span class="line">           +-- ResourceWarning</span><br></pre></td></tr></table></figure>
+</details>
+<h3 id="duo-xian-cheng" id="多线程">多线程</h3>
+<p><code>multiprocessing.pool.ThreadPool</code>可以方便地开启多线程。</p>
+<h3 id="code-inspect-code-ku" id="inspect库"><code>inspect</code>库</h3>
+<p>Python真的是啥都能干啊。</p>
+<p>使某个函数的签名与另一个函数一致：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> inspect <span class="keyword">import</span> signature</span><br><span class="line"></span><br><span class="line"><span class="comment"># create a decorator to copy signatures</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">copy_signature</span>(<span class="params">source_fct</span>): </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">copy</span>(<span class="params">target_fct</span>): </span><br><span class="line">        target_fct.__signature__ = signature(source_fct) </span><br><span class="line">        <span class="keyword">return</span> target_fct </span><br><span class="line">    <span class="keyword">return</span> copy </span><br><span class="line"></span><br><span class="line"><span class="comment"># create a short test function as example</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">a, /, b, c=<span class="number">1</span>, *, d, e</span>): </span><br><span class="line">    <span class="built_in">print</span>(a, b, c, d, e)</span><br><span class="line"></span><br><span class="line"><span class="comment"># now wrap it</span></span><br><span class="line"><span class="meta">@copy_signature(<span class="params">test</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">forwards</span>(<span class="params">*args, **kwds</span>):</span><br><span class="line">    <span class="comment"># assert that arguments are correct</span></span><br><span class="line">    signature(forwards).bind(*args, **kwds) </span><br><span class="line">    <span class="comment"># now do potentially complicated and obscuring tasks</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Just wrapping&#x27;</span>) </span><br><span class="line">    test(*args, **kwds)</span><br><span class="line"><span class="comment"># 使用函数签名的bind的方法，可以检查函数参数是否匹配签名。</span></span><br></pre></td></tr></table></figure>
+<h3 id="yu-xu" id="语序">语序</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = [(i, j) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">0</span>, <span class="number">1</span>), (<span class="number">0</span>, <span class="number">2</span>), (<span class="number">1</span>, <span class="number">0</span>), (<span class="number">1</span>, <span class="number">1</span>), (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">2</span>, <span class="number">0</span>), (<span class="number">2</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">2</span>)]</span><br></pre></td></tr></table></figure>
+<p>注意它的输出顺序。这说明for循环是从左到右进行的。</p>
+<h3 id="za-xiang" id="杂项">杂项</h3>
+<p>Python的import是共用变量的。</p>
+<p>Python也是有箭头函数的！</p>
+<h4 id="ming-ming-gui-fan" id="命名规范">命名规范</h4>
+<ul>
+<li><strong>前置单下划线</strong><code>_var</code>：命名约定，用来表示该名称仅在内部使用。一般对Python解释器没有特殊含义（通配符导入除外），只能作为对程序员的提示。</li>
+<li><strong>后置单下划线</strong><code>var_</code>：命名约定，用于避免与Python关键字发生命名冲突。</li>
+<li><strong>前置双下划线</strong><code>__var</code>：在类环境中使用时会触发名称改写，对Python解释器有特殊含义。</li>
+<li><strong>前后双下划线</strong><code>__var__</code>：表示由Python语言定义的特殊方法。在自定义的属性中要避免使用这种命名方式。</li>
+<li><strong>单下划线</strong><code>_</code>：用作临时或无意义变量的名称。此外还能表示Python REPL会话中上一个表达式的结果。</li>
+</ul>
+<h2 id="shi-yong-ku" id="实用库">实用库</h2>
+<h3 id="hashlib" id="hashlib">hashlib</h3>
+<p>这是官方库。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">md5 = hashlib.md5()  <span class="comment"># sha1 = hashlib.sha1()</span></span><br><span class="line">md5.update(<span class="string">&#x27;how to use md5 in python hashlib?&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(md5.hexdigest())</span><br></pre></td></tr></table></figure>
+<p>可以把较长的内容分多次<code>update</code>，结果是一样的。</p>
+<p>对于文件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="comment"># memory inefficient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">md5</span>(<span class="params">fname</span>)：</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(fname, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">return</span> hashlib.md5(f.read()).hexdigest()</span><br><span class="line"><span class="comment"># memory efficient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">md5</span>(<span class="params">fname</span>):</span><br><span class="line">    md5 = hashlib.md5()</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(fname, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> chunk <span class="keyword">in</span> <span class="built_in">iter</span>(<span class="keyword">lambda</span>: f.read(<span class="number">4096</span>), <span class="string">b&quot;&quot;</span>):</span><br><span class="line">            md5.update(chunk)</span><br><span class="line">    <span class="keyword">return</span> md5.hexdigest()</span><br></pre></td></tr></table></figure>
+<p>（发现自己不会<code>iter()</code>，于是滚去学了）</p>
+<h3 id="pathlib" id="pathlib">pathlib</h3>
+<p><img data-src="https://img.i207m.top/2021/07_b766157d8571f4ed87d302f8c1c5293d.png" alt="下载"></p>
+<p><img data-src="https://img.i207m.top/2021/08_618732fded5927e529f30edba55732cb.png" alt="image-20210824154148584"></p>
+<p>补充一些：</p>
+<ul>
+<li>列出路径下的对象：<code>p.iterdir()</code></li>
+<li>获取绝对路径：<code>p.resolve()</code></li>
+<li>相对其他某个路径的结果：<code>p.relative_to('')</code></li>
+</ul>
+<h3 id="zipfile" id="zipfile">zipfile</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># unzip</span></span><br><span class="line">zip_file = zipfile.ZipFile(zip_file_name)</span><br><span class="line">    <span class="keyword">for</span> file <span class="keyword">in</span> zip_file.namelist():</span><br><span class="line">        zip_file.extract(file, <span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">        </span><br><span class="line"><span class="comment"># zip</span></span><br><span class="line">new_zip_file = zipfile.ZipFile(new_zip_file_name)</span><br><span class="line">    <span class="keyword">for</span> file <span class="keyword">in</span> p.iterdir():</span><br><span class="line">        new_zip_file.write(file)</span><br></pre></td></tr></table></figure>
+<h3 id="pprint" id="pprint">pprint</h3>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/pprint.html#module-pprint"><code>pprint</code></a> 模块提供了“美化打印”任意 Python 数据结构的功能。</p>
+<h2 id="pytorch" id="Pytorch">Pytorch</h2>
+<p>Pytorch实现的BatchNorm好像是带梯度的…</p>
+<h2 id="3-10-xin-te-xing" id="3-10新特性">3.10新特性</h2>
+<p>上下文管理器支持在括号里写多个了。</p>
+<p>类型注释可以用<code>|</code>来表示多种可能，而不是臃肿的<code>Union</code>。</p>
+<h3 id="code-match-case-code-jie-gou-hua-mo-shi-pi-pei" id="match-case结构化模式匹配"><code>match-case</code>结构化模式匹配</h3>
+<p>可以使用通配符，可以提取变量，可以匹配<code>tuple, dict, list</code>，甚至是对象的属性！</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/%E5%86%99%E4%BD%9C%E4%B8%8E%E6%B2%9F%E9%80%9A-%E9%95%BF%E6%96%87%E5%88%9D%E7%A8%BF/" rel="prev" title="写作与沟通-长文初稿">
+      <i class="fa fa-chevron-left"></i> 写作与沟通-长文初稿
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E3%80%8A%E5%9B%BE%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84%E3%80%8B%E7%AC%AC13%E5%91%A8%E4%B9%A0%E9%A2%98/" rel="next" title="离散数学《图论与代数结构》第13周习题">
+      离散数学《图论与代数结构》第13周习题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#yu-yan"><span class="nav-number">1.</span> <span class="nav-text">语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iter"><span class="nav-number">1.1.</span> <span class="nav-text">iter()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yi-chang"><span class="nav-number">1.2.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#duo-xian-cheng"><span class="nav-number">1.3.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-inspect-code-ku"><span class="nav-number">1.4.</span> <span class="nav-text">inspect库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yu-xu"><span class="nav-number">1.5.</span> <span class="nav-text">语序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#za-xiang"><span class="nav-number">1.6.</span> <span class="nav-text">杂项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ming-ming-gui-fan"><span class="nav-number">1.6.1.</span> <span class="nav-text">命名规范</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shi-yong-ku"><span class="nav-number">2.</span> <span class="nav-text">实用库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hashlib"><span class="nav-number">2.1.</span> <span class="nav-text">hashlib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pathlib"><span class="nav-number">2.2.</span> <span class="nav-text">pathlib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zipfile"><span class="nav-number">2.3.</span> <span class="nav-text">zipfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pprint"><span class="nav-number">2.4.</span> <span class="nav-text">pprint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pytorch"><span class="nav-number">3.</span> <span class="nav-text">Pytorch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-10-xin-te-xing"><span class="nav-number">4.</span> <span class="nav-text">3.10新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#code-match-case-code-jie-gou-hua-mo-shi-pi-pei"><span class="nav-number">4.1.</span> <span class="nav-text">match-case结构化模式匹配</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="i207M"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">i207M</p>
+  <div class="site-description" itemprop="description">i207M's Fantastic Blog - Love</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/i207M" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;i207M" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:connect_at_mail.i207m.top" title="E-Mail → mailto:connect_at_mail.i207m.top" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-fas fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/i207M/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;i207M&#x2F;" rel="noopener" target="_blank">Luogu Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://speranzaleaf.github.io/" title="https:&#x2F;&#x2F;speranzaleaf.github.io&#x2F;" rel="noopener" target="_blank">Speranza Leaf</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kamome.moe/" title="https:&#x2F;&#x2F;kamome.moe&#x2F;" rel="noopener" target="_blank">Siunaus</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/cjyyb/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;cjyyb&#x2F;" rel="noopener" target="_blank">yyb</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nekko.moe/" title="https:&#x2F;&#x2F;nekko.moe&#x2F;" rel="noopener" target="_blank">nekko</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/zjp-shadow/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zjp-shadow&#x2F;" rel="noopener" target="_blank">zjp_shadow</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ywy-c-asm.cn/" title="https:&#x2F;&#x2F;www.ywy-c-asm.cn&#x2F;" rel="noopener" target="_blank">ywy_c_asm</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/Miracevin/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Miracevin&#x2F;" rel="noopener" target="_blank">Miracle</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hahamengbier.top/" title="https:&#x2F;&#x2F;hahamengbier.top&#x2F;" rel="noopener" target="_blank">mengbier</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">i207M</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '09f5f1273e68e2e773c5',
+      clientSecret: 'b9b92a06fa16f2c2905b55b35c509e55c03fc596',
+      repo        : 'blog-comment',
+      owner       : 'i207M',
+      admin       : ['i207M'],
+      id          : '840be2daf9e1a082a8293a52d0aa63b7',
+      proxy       : 'https://cors.i207m.workers.dev/?https://github.com/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>

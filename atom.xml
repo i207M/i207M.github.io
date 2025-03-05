@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>i207M&#39;s Fantastic Blog</title>
+  
+  <subtitle>Welcome</subtitle>
+  <link href="https://blog.i207m.top/atom.xml" rel="self"/>
+  
+  <link href="https://blog.i207m.top/"/>
+  <updated>2025-03-05T01:24:34.776Z</updated>
+  <id>https://blog.i207m.top/</id>
+  
+  <author>
+    <name>i207M</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>unRAID 入坑记</title>
+    <link href="https://blog.i207m.top/2024/12/unRAID-%E5%85%A5%E5%9D%91%E8%AE%B0/"/>
+    <id>https://blog.i207m.top/2024/12/unRAID-%E5%85%A5%E5%9D%91%E8%AE%B0/</id>
+    <published>2024-12-07T16:15:31.000Z</published>
+    <updated>2025-03-05T01:24:34.776Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;今年黑五攒了一台整机，用来放客厅里做NAS。是的，男人的玩具。&lt;/p&gt;
+&lt;p&gt;配置如下：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;https://img.i207m.top/2024/12/4c8e6345eac23ad879e751ef291a462b.png&quot; alt=&quot;image-20241208100410536&quot;&gt;&lt;/p&gt;
+&lt;p&gt;是的，你看到的是抽象的12100+Z790的搭配，问就是战未来。好吧，其实是有原因的，因为这个主板有8个SATA口，刚刚好搭配我的机箱8个盘位。低端一点的主板往往没有这么多SATA口，如果买PCIe转SATA的转接卡要20刀左右，还占一个PCIe槽， 加上这个差价都够我上Z790了，别提还有其他方面的提升。&lt;/p&gt;
+&lt;p&gt;内存64G是因为不可告人的秘密doge.&lt;/p&gt;
+&lt;p&gt;硬盘买的容量保守了一点，因为觉得短期内填不满12T。买的是Manufacturer Refurbished版本，便宜不少。&lt;/p&gt;
+&lt;p&gt;这个MSI的SSD想吐槽一下。Eco-Pack真环保啊，寄过来就一个纸袋子里装一个透明塑料片，里面夹着SSD。没别的了。&lt;/p&gt;
+&lt;p&gt;买的机箱特地选择了多盘位+隔音的。装上去感觉隔音也就那样，可能因为没有对比吧。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Dev" scheme="https://blog.i207m.top/categories/Dev/"/>
+    
+    
+    <category term="unRAID" scheme="https://blog.i207m.top/tags/unRAID/"/>
+    
+    <category term="NAS" scheme="https://blog.i207m.top/tags/NAS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>身败名裂线段树</title>
+    <link href="https://blog.i207m.top/2024/08/%E8%BA%AB%E8%B4%A5%E5%90%8D%E8%A3%82%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    <id>https://blog.i207m.top/2024/08/%E8%BA%AB%E8%B4%A5%E5%90%8D%E8%A3%82%E7%BA%BF%E6%AE%B5%E6%A0%91/</id>
+    <published>2024-08-07T06:59:32.000Z</published>
+    <updated>2025-03-05T01:24:34.780Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;最近在讲课的时候，竟然连续WA了一道线段树的题，一番debug下来才意识到自己犯了&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="OI" scheme="https://blog.i207m.top/categories/OI/"/>
+    
+    
+    <category term="C++" scheme="https://blog.i207m.top/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-2024.7</title>
+    <link href="https://blog.i207m.top/2024/07/OpenDiary-2024.7/"/>
+    <id>https://blog.i207m.top/2024/07/OpenDiary-2024.7/</id>
+    <published>2024-07-06T14:14:26.000Z</published>
+    <updated>2025-03-05T01:24:34.774Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;7-1&quot;&gt;7.1&lt;/h2&gt;
+&lt;p&gt;今天退宿的时候，发现我们宿舍周围的六间宿舍有七个人延毕/非正常毕业。着实吓人。后来看到张总宿舍周围好像没有延毕的。这就是数学/物理的含金量吗。&lt;/p&gt;
+&lt;p&gt;重温致理数学一字班保研水平。&lt;/p&gt;
+&lt;h2 id=&quot;7-2&quot;&gt;7.2&lt;/h2&gt;
+&lt;p&gt;拍完毕业照，今天的雨就淅淅沥沥地下了一整天。&lt;/p&gt;
+&lt;p&gt;中午和陈学长吃饭。&lt;/p&gt;
+&lt;p&gt;下！午！是！Vision！Pro！时！间！去西单大悦城体验了半个小时的Vision Pro，体验的人很多。我们来的晚，排队大概半小时吧。Vision Pro，画质好，但是没有想象中的好。可能是因为之前用其他VR设备比较少吧，对比其他设备应该优势挺明显的。空间视频是30帧的，透传还可以，但是播放沉浸式视频的时候，清晰度感觉真的很低很出戏。画面的FOV比较小，看近处的物体，近处的手比较费劲。手的抠图还需要加强。我特别喜欢多窗口的时候，把窗口放远，这个时候眼睛非常舒服。佩戴半小时之后，感觉不是很不适。但是可以想到佩戴一个小时以上就会很难受了。&lt;/p&gt;
+&lt;p&gt;晚上吃的西班牙餐厅。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>与靳老师的谈话</title>
+    <link href="https://blog.i207m.top/2024/06/%E4%B8%8E%E9%9D%B3%E8%80%81%E5%B8%88%E7%9A%84%E8%B0%88%E8%AF%9D/"/>
+    <id>https://blog.i207m.top/2024/06/%E4%B8%8E%E9%9D%B3%E8%80%81%E5%B8%88%E7%9A%84%E8%B0%88%E8%AF%9D/</id>
+    <published>2024-06-18T10:41:48.000Z</published>
+    <updated>2025-03-05T01:24:34.776Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Life" scheme="https://blog.i207m.top/categories/Life/"/>
+    
+    
+    <category term="China" scheme="https://blog.i207m.top/tags/China/"/>
+    
+    <category term="America" scheme="https://blog.i207m.top/tags/America/"/>
+    
+    <category term="人生" scheme="https://blog.i207m.top/tags/%E4%BA%BA%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>清华树洞观察</title>
+    <link href="https://blog.i207m.top/2024/06/%E6%B8%85%E5%8D%8E%E6%A0%91%E6%B4%9E%E8%A7%82%E5%AF%9F/"/>
+    <id>https://blog.i207m.top/2024/06/%E6%B8%85%E5%8D%8E%E6%A0%91%E6%B4%9E%E8%A7%82%E5%AF%9F/</id>
+    <published>2024-06-15T16:10:01.000Z</published>
+    <updated>2025-03-05T01:24:34.779Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    
+    <category term="THU" scheme="https://blog.i207m.top/tags/THU/"/>
+    
+    <category term="Fun" scheme="https://blog.i207m.top/tags/Fun/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-2024.6</title>
+    <link href="https://blog.i207m.top/2024/06/OpenDiary-2024.6/"/>
+    <id>https://blog.i207m.top/2024/06/OpenDiary-2024.6/</id>
+    <published>2024-06-15T13:41:06.000Z</published>
+    <updated>2025-03-05T01:24:34.774Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+    <category term="Archived" scheme="https://blog.i207m.top/tags/Archived/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-2024.5</title>
+    <link href="https://blog.i207m.top/2024/05/OpenDiary-2024.5/"/>
+    <id>https://blog.i207m.top/2024/05/OpenDiary-2024.5/</id>
+    <published>2024-05-03T03:53:32.000Z</published>
+    <updated>2025-03-05T01:24:34.774Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+    <category term="Archived" scheme="https://blog.i207m.top/tags/Archived/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>奇葩新主楼（密码是贵校缩写）</title>
+    <link href="https://blog.i207m.top/2024/04/%E5%A5%87%E8%91%A9%E6%96%B0%E4%B8%BB%E6%A5%BC/"/>
+    <id>https://blog.i207m.top/2024/04/%E5%A5%87%E8%91%A9%E6%96%B0%E4%B8%BB%E6%A5%BC/</id>
+    <published>2024-04-08T08:10:43.000Z</published>
+    <updated>2025-03-05T01:24:34.778Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    
+    <category term="THU" scheme="https://blog.i207m.top/tags/THU/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-2024.4</title>
+    <link href="https://blog.i207m.top/2024/04/OpenDiary-2024.4/"/>
+    <id>https://blog.i207m.top/2024/04/OpenDiary-2024.4/</id>
+    <published>2024-04-04T14:51:13.000Z</published>
+    <updated>2025-03-05T01:24:34.774Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+    <category term="Archived" scheme="https://blog.i207m.top/tags/Archived/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-2024.3</title>
+    <link href="https://blog.i207m.top/2024/03/OpenDiary-2024.3/"/>
+    <id>https://blog.i207m.top/2024/03/OpenDiary-2024.3/</id>
+    <published>2024-03-10T14:36:56.000Z</published>
+    <updated>2025-03-05T01:24:34.774Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+    <category term="Archived" scheme="https://blog.i207m.top/tags/Archived/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>奇葩任一说（密码是贵校缩写）</title>
+    <link href="https://blog.i207m.top/2024/01/%E5%A5%87%E8%91%A9%E4%BB%BB%E4%B8%80%E8%AF%B4/"/>
+    <id>https://blog.i207m.top/2024/01/%E5%A5%87%E8%91%A9%E4%BB%BB%E4%B8%80%E8%AF%B4/</id>
+    <published>2024-01-05T14:10:25.000Z</published>
+    <updated>2025-03-05T01:24:34.778Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Politics" scheme="https://blog.i207m.top/categories/Politics/"/>
+    
+    
+    <category term="THU" scheme="https://blog.i207m.top/tags/THU/"/>
+    
+    <category term="Fun" scheme="https://blog.i207m.top/tags/Fun/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-2024 Part One</title>
+    <link href="https://blog.i207m.top/2024/01/OpenDiary-2024-Part-One/"/>
+    <id>https://blog.i207m.top/2024/01/OpenDiary-2024-Part-One/</id>
+    <published>2024-01-03T08:30:42.000Z</published>
+    <updated>2025-03-05T01:24:34.774Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+    <category term="Archived" scheme="https://blog.i207m.top/tags/Archived/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Diary2024</title>
+    <link href="https://blog.i207m.top/2024/01/Diary2024/"/>
+    <id>https://blog.i207m.top/2024/01/Diary2024/</id>
+    <published>2024-01-03T08:30:41.000Z</published>
+    <updated>2025-03-05T01:24:34.771Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+    <category term="DiarySecret" scheme="https://blog.i207m.top/tags/DiarySecret/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网络安全工程与实践 CTF比赛 WriteUp</title>
+    <link href="https://blog.i207m.top/2023/12/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E7%A8%8B%E4%B8%8E%E5%AE%9E%E8%B7%B5-CTF%E6%AF%94%E8%B5%9B-WriteUp/"/>
+    <id>https://blog.i207m.top/2023/12/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E7%A8%8B%E4%B8%8E%E5%AE%9E%E8%B7%B5-CTF%E6%AF%94%E8%B5%9B-WriteUp/</id>
+    <published>2023-12-30T13:45:18.000Z</published>
+    <updated>2025-03-05T01:24:34.780Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;我很少打CTF比赛，这次比赛又加深了我对CTF比赛的不明所以的印象。可能是题目的问题吧。&lt;/p&gt;
+&lt;p&gt;有一些题目，我感觉就是很无厘头，没有逻辑，如果你和出题人想到一块去了，那你就做出来了，不然你就只能看运气了。（我认为一道好的CTF题不是这样的）在我看来最有意义的CTF题目是你可以从中学到新知识，而不是简单地重复尝试你知道的。&lt;/p&gt;
+&lt;h2 id=&quot;misc&quot;&gt;Misc&lt;/h2&gt;
+&lt;div class=&quot;info&quot;&gt;
+&lt;p&gt;这道题目在我看来就是缝合怪，只要叠够多层，这道题就变得有意思了（？）&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;观察pcap包发现有很多DNS请求，看字符集像是base64编码的。用wireshark提取域名再decode之后得到一个压缩包，解压得到一个png文件。&lt;/p&gt;
+&lt;div class=&quot;warning&quot;&gt;
+&lt;p&gt;这道题被ChatGPT坑了，ChatGPT使用了&lt;code&gt;([\w\.]+)&lt;/code&gt;来匹配Base64，然而Base64还有其他字符。&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img data-src=&quot;https://img.i207m.top/2023/12_f8b8ee6ccf02e78fa679078fbc2c4cee.png&quot; alt=&quot;image-20231230215232071&quot;&gt;&lt;/p&gt;
+&lt;p&gt;（此处细节用Windows打开）&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="CTF" scheme="https://blog.i207m.top/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>申请小记</title>
+    <link href="https://blog.i207m.top/2023/12/%E7%94%B3%E8%AF%B7%E5%B0%8F%E8%AE%B0/"/>
+    <id>https://blog.i207m.top/2023/12/%E7%94%B3%E8%AF%B7%E5%B0%8F%E8%AE%B0/</id>
+    <published>2023-12-24T07:10:00.000Z</published>
+    <updated>2025-03-05T01:24:34.779Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="留学" scheme="https://blog.i207m.top/categories/%E7%95%99%E5%AD%A6/"/>
+    
+    
+    <category term="DiarySecret" scheme="https://blog.i207m.top/tags/DiarySecret/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-2023.12</title>
+    <link href="https://blog.i207m.top/2023/12/OpenDiary-2023.12/"/>
+    <id>https://blog.i207m.top/2023/12/OpenDiary-2023.12/</id>
+    <published>2023-12-24T07:07:10.000Z</published>
+    <updated>2025-03-05T01:24:34.773Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+    <category term="Archived" scheme="https://blog.i207m.top/tags/Archived/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-2023.10</title>
+    <link href="https://blog.i207m.top/2023/10/OpenDiary-2023.10/"/>
+    <id>https://blog.i207m.top/2023/10/OpenDiary-2023.10/</id>
+    <published>2023-10-08T02:50:13.000Z</published>
+    <updated>2025-03-05T01:24:34.773Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+    <category term="Archived" scheme="https://blog.i207m.top/tags/Archived/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>航司横评</title>
+    <link href="https://blog.i207m.top/2023/09/%E8%88%AA%E5%8F%B8%E6%A8%AA%E8%AF%84/"/>
+    <id>https://blog.i207m.top/2023/09/%E8%88%AA%E5%8F%B8%E6%A8%AA%E8%AF%84/</id>
+    <published>2023-09-05T12:11:39.000Z</published>
+    <updated>2025-03-05T01:24:34.780Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;最近最飞机的次数明显变多了，体验过的航空公司的数量也变多了，于是记录一下！&lt;/p&gt;
+&lt;h2 id=&quot;guo-hang&quot;&gt;国航&lt;/h2&gt;
+&lt;p&gt;唯一见过就餐给一盒纯净水的航班，饮料可选项非常少，飞机餐非常难吃，不知道他们怎么把菜做到一点味道都没有还有一股难吃的味道。黄油也是一个不能理解的状态。&lt;/p&gt;
+&lt;h2 id=&quot;han-ya-hang-kong&quot;&gt;韩亚航空&lt;/h2&gt;
+&lt;p&gt;我的星空会员卡就是开的韩亚航空的，因为里程不会过期，更容易升级。&lt;/p&gt;
+&lt;p&gt;韩亚的优点就是便宜吧…别的体验都一般，座椅狭窄，电影选择少（虽然我刷完了小丑🤡，一直以来想看的电影），起飞降落很猛很不平稳，下降过程耳朵有较大的不适感。&lt;/p&gt;
+&lt;p&gt;餐饮还可以，猪肉辣白菜不错。反正全部薄纱国航就是了。&lt;/p&gt;
+&lt;p&gt;飞机上网络，下行可以看视频，当时没有研究怎么共享出来，估计是可以的：&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="旅行" scheme="https://blog.i207m.top/categories/%E6%97%85%E8%A1%8C/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>UGVR Summary</title>
+    <link href="https://blog.i207m.top/2023/09/UGVR-Experience/"/>
+    <id>https://blog.i207m.top/2023/09/UGVR-Experience/</id>
+    <published>2023-09-04T12:33:46.000Z</published>
+    <updated>2025-03-05T01:24:34.776Z</updated>
+    
+    
+    <summary type="html">你发现了一处秘密, 请输入密码查看.</summary>
+    
+    
+    
+    <category term="留学" scheme="https://blog.i207m.top/categories/%E7%95%99%E5%AD%A6/"/>
+    
+    
+    <category term="Stanford" scheme="https://blog.i207m.top/tags/Stanford/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenDiary-2023UGVR</title>
+    <link href="https://blog.i207m.top/2023/06/OpenDiary-2023UGVR/"/>
+    <id>https://blog.i207m.top/2023/06/OpenDiary-2023UGVR/</id>
+    <published>2023-06-24T07:05:29.000Z</published>
+    <updated>2025-03-05T01:24:34.774Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;TODO&lt;/p&gt;
+</summary>
+        
+      
+    
+    
+    
+    <category term="Diary" scheme="https://blog.i207m.top/categories/Diary/"/>
+    
+    
+  </entry>
+  
+</feed>

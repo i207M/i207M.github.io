@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.i207m.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="配置：1 核+1G+40G+2TB&#x2F;mo@1Gbps 这是我的第一台 VPS，现在的我已经… 在上边部署了 Xray，Nginx，Docker 等，但是由于时间过于久远，导致当时怎么安装的，踩了那些坑都忘了。 甚至我连 Xray 装到哪里都忘了 初始化 1234567891011121314151617181920212223adduser usernameusermod -aG sudo use">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拥有VPS那些事">
+<meta property="og:url" content="https://blog.i207m.top/2021/11/%E6%8B%A5%E6%9C%89VPS%E9%82%A3%E4%BA%9B%E4%BA%8B/index.html">
+<meta property="og:site_name" content="i207M&#39;s Fantastic Blog">
+<meta property="og:description" content="配置：1 核+1G+40G+2TB&#x2F;mo@1Gbps 这是我的第一台 VPS，现在的我已经… 在上边部署了 Xray，Nginx，Docker 等，但是由于时间过于久远，导致当时怎么安装的，踩了那些坑都忘了。 甚至我连 Xray 装到哪里都忘了 初始化 1234567891011121314151617181920212223adduser usernameusermod -aG sudo use">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.i207m.top/2023/03_904f4043663222706d8267786eb37749.png">
+<meta property="og:image" content="https://img.i207m.top/2022/11_a1418a099d38e5bfbd4060cb2ebcc5cd.png">
+<meta property="og:image" content="https://img.i207m.top/2023/02_0ba081be789a0d439320c8dd156311d6.png">
+<meta property="article:published_time" content="2021-11-13T13:29:18.000Z">
+<meta property="article:modified_time" content="2025-03-05T01:24:34.779Z">
+<meta property="article:author" content="i207M">
+<meta property="article:tag" content="VPS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.i207m.top/2023/03_904f4043663222706d8267786eb37749.png">
+
+<link rel="canonical" href="https://blog.i207m.top/2021/11/%E6%8B%A5%E6%9C%89VPS%E9%82%A3%E4%BA%9B%E4%BA%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+
+  <title>拥有VPS那些事 | i207M's Fantastic Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="i207M's Fantastic Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">i207M's Fantastic Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-留言">
+
+    <a href="/messages/" rel="section"><i class="fa fa-fw fa-comments"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.i207m.top/2021/11/%E6%8B%A5%E6%9C%89VPS%E9%82%A3%E4%BA%9B%E4%BA%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="i207M">
+      <meta itemprop="description" content="i207M's Fantastic Blog - Love">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="i207M's Fantastic Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          拥有VPS那些事
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-13 21:29:18" itemprop="dateCreated datePublished" datetime="2021-11-13T21:29:18+08:00">2021-11-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Dev/" itemprop="url" rel="index"><span itemprop="name">Dev</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><s>配置：1 核+1G+40G+2TB/mo@1Gbps</s> 这是我的第一台 VPS，现在的我已经<a href="https://blog.i207m.top/2023/04/%E8%BF%99%E4%B9%9F%E8%83%BD%E4%B8%8A%E7%98%BE%EF%BC%9F%E9%BC%93%E6%8D%A3VPS%E4%B9%8B%E8%B7%AF/">…</a></p>
+<p>在上边部署了 Xray，Nginx，Docker 等，但是由于时间过于久远，导致当时怎么安装的，踩了那些坑都忘了。</p>
+<p><s>甚至我连 Xray 装到哪里都忘了</s></p>
+<h2 id="chu-shi-hua" id="初始化">初始化</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">adduser username</span><br><span class="line">usermod -aG sudo username</span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> .ssh</span><br><span class="line"><span class="built_in">chmod</span> 700 .ssh</span><br><span class="line"><span class="built_in">touch</span> .ssh/authorized_keys</span><br><span class="line"><span class="built_in">chmod</span> 700 .ssh/authorized_keys</span><br><span class="line">vi .ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 禁止密码登录</span></span><br><span class="line">sudo sed -i <span class="string">&#x27;s/^#*PasswordAuthentication yes/PasswordAuthentication no/&#x27;</span> /etc/ssh/sshd_config &amp;&amp; sudo systemctl restart sshd</span><br><span class="line"></span><br><span class="line">apt update</span><br><span class="line">apt install curl build-essential htop vim wget zip unzip</span><br><span class="line">apt install nginx</span><br><span class="line"></span><br><span class="line">curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line">sh get-docker.sh</span><br><span class="line">sudo usermod -aG docker <span class="variable">$USER</span></span><br><span class="line">docker run --restart=unless-stopped --name openspeedtest -d -p 6001:3000 openspeedtest/latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 探针</span></span><br><span class="line">curl -sSLf <span class="string">&quot;https://tz.i207m.top/i?uid=[]&amp;pass=[]&amp;vnstat=1&quot;</span> | sudo bash</span><br></pre></td></tr></table></figure>
+<p>对于 RHEL 系：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release dnf-plugins-core dnf-utils yum-utils</span><br><span class="line">yum install curl wget vim htop gcc gcc-c++ make</span><br><span class="line"></span><br><span class="line">dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line">dnf -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin</span><br><span class="line">systemctl --now <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
+<h3 id="benchmark" id="Benchmark">Benchmark</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">curl -sL yabs.sh | bash</span><br><span class="line">curl -L bench.sh | bash</span><br><span class="line"></span><br><span class="line">wget http://www.vpsmark.com/sh/unixbench.sh</span><br><span class="line">sh ./unixbench.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 流媒体测试</span></span><br><span class="line">bash &lt;(curl -L -s check.unlock.media)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 路由测试</span></span><br><span class="line">curl https://raw.githubusercontent.com/zhanghanyun/backtrace/main/install.sh -sSf | sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># ChatGPT测试</span></span><br><span class="line">bash &lt;(curl -Ls https://check.deci.ml/openai.sh)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 融合怪</span></span><br><span class="line">curl -L https://gitlab.com/spiritysdx/za/-/raw/main/ecs.sh -o ecs.sh &amp;&amp; <span class="built_in">chmod</span> +x ecs.sh &amp;&amp; bash ecs.sh</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://img.i207m.top/2023/03_904f4043663222706d8267786eb37749.png" alt="image-20230306095429244"></p>
+<p>一般来说，700+是及格，900+是优秀。</p>
+<p>好干净的 IP：</p>
+<p><img data-src="https://img.i207m.top/2022/11_a1418a099d38e5bfbd4060cb2ebcc5cd.png" alt="image-20221129122114805"></p>
+<h3 id="da-kai-bbr" id="打开-BBR">打开 BBR</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.core.default_qdisc=fq&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.ipv4.tcp_congestion_control=bbr&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line">sysctl -p</span><br><span class="line"><span class="comment"># check</span></span><br><span class="line">sysctl net.ipv4.tcp_available_congestion_control</span><br></pre></td></tr></table></figure>
+<h3 id="she-zhi-swap" id="设置-swap">设置 swap</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=/swapfile bs=1024 count=1048576  <span class="comment"># 1024MB</span></span><br><span class="line"><span class="built_in">chown</span> root:root /swapfile</span><br><span class="line"><span class="built_in">chmod</span> 0600 /swapfile</span><br><span class="line">mkswap /swapfile</span><br><span class="line">swapon /swapfile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;/swapfile none swap sw 0 0&quot;</span> | sudo <span class="built_in">tee</span> -a /etc/fstab</span><br></pre></td></tr></table></figure>
+<h3 id="dd" id="dd">dd</h3>
+<p><a target="_blank" rel="noopener" href="https://github.com/leitbogioro/Tools/">https://github.com/leitbogioro/Tools/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/bin456789/reinstall">https://github.com/bin456789/reinstall</a></p>
+<h2 id="wang-luo" id="网络">网络</h2>
+<h3 id="zheng-shu" id="证书">证书</h3>
+<p>使用的工具是<code>certbot</code>。安装方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install snapd</span><br><span class="line">sudo snap install core; sudo snap refresh core</span><br><span class="line">sudo snap install --classic certbot</span><br><span class="line">sudo <span class="built_in">ln</span> -s /snap/bin/certbot /usr/bin/certbot</span><br></pre></td></tr></table></figure>
+<p>有些虚拟化平台不支持<code>snapd</code>，可以用<code>pip</code>代替：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install python3 python3-venv libaugeas0</span><br><span class="line">sudo python3 -m venv /opt/certbot/</span><br><span class="line">sudo /opt/certbot/bin/pip install --upgrade pip</span><br><span class="line">sudo /opt/certbot/bin/pip install certbot certbot-nginx certbot-dns-cloudflare</span><br><span class="line">sudo ln -s /opt/certbot/bin/certbot /usr/bin/certbot</span><br></pre></td></tr></table></figure>
+<p>申请证书：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot certonly \</span><br><span class="line">  --dns-cloudflare \</span><br><span class="line">  --dns-cloudflare-credentials /etc/letsencrypt/cloudflare.ini \</span><br><span class="line">  --key-type ecdsa \</span><br><span class="line">  --domain &quot;example.com,*.example.com&quot;</span><br></pre></td></tr></table></figure>
+<p>续期证书</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certbot renew</span><br></pre></td></tr></table></figure>
+<p>对于泛域名证书，只能用验证 DNS 的方法。而 Cloudflare 不允许用 API 修改 freenom 免费域名的 DNS，所以说只能手动续期了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">snap install certbot-dns-cloudflare</span><br><span class="line">mkdir -p /root/.secrets/certbot/</span><br><span class="line">vi /root/.secrets/certbot/cloudflare.ini</span><br><span class="line">chmod 600 /root/.secrets/certbot/cloudflare.ini</span><br><span class="line">certbot certonly \</span><br><span class="line">  --dns-cloudflare \</span><br><span class="line">  --dns-cloudflare-credentials /root/.secrets/certbot/cloudflare.ini \</span><br><span class="line">  -d example.com</span><br></pre></td></tr></table></figure>
+<h3 id="nginx" id="Nginx">Nginx</h3>
+<p>配置文件在<code>/etc/nginx/nginx.conf</code>；每个站点的配置文件在<code>/etc/nginx/sites-avaliable</code>下。</p>
+<p>通过禁用不安全的加密使 SSL 更安全：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">ssl_ciphers ECDHE-RSA-AES256-SHA384:AES256-SHA256:RC4:HIGH:!MD5:!aNULL:!eNULL:!NULL:!DH:!EDH:!AESGCM;</span><br><span class="line">ssl_prefer_server_ciphers on;</span><br></pre></td></tr></table></figure>
+<p>在使用 certbot 自动配置 Nginx 的情况下，它会在配置中自动 include 一个<code>pem</code>文件，其中包含了对加密的优化。</p>
+<p>安装最新版 Nginx 的<a target="_blank" rel="noopener" href="https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#installing-prebuilt-debian-packages">方法</a> ←</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">nginx: [emerg] unknown <span class="string">&quot;connection_upgrade&quot;</span> variable</span></span><br><span class="line">map $http_upgrade $connection_upgrade &#123;</span><br><span class="line">    default upgrade;</span><br><span class="line">    &#x27;&#x27;      close;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="i-pv-4-you-xian" id="IPv4-优先">IPv4 优先</h3>
+<p><a target="_blank" rel="noopener" href="https://www.vpser.net/manage/linux-ipv4-ipv6-precedence.html">https://www.vpser.net/manage/linux-ipv4-ipv6-precedence.html</a></p>
+<p>编辑 /etc/gai.conf 文件，查找 <code>precedence ::ffff:0:0/96 100</code> 将前面的注释 # 去掉并保存。</p>
+<h3 id="i-pv-6-zi-wang-lu-you" id="IPv6-子网路由">IPv6 子网路由</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr add 2001:1234:5678:abcd::/64 dev eth0</span><br></pre></td></tr></table></figure>
+<h3 id="warp" id="WARP">WARP</h3>
+<p>可以使用 WARP 为机器添加 IPv4、IPv6 双栈访问。Cloudflare YYDS！如果服务器能访问 IPv4，只是没有公网 IP，那么会方便很多（我突然想到如果是这样，那么就没必要用 WARP 了吧）。对于纯 IPv6 机，我之前是用 WireGuard 借助双栈机提供临时 IPv4 访问，然后开的 WARP。可惜重启后就失效了。之后发现了这个<a target="_blank" rel="noopener" href="https://ygkkk.blogspot.com/2022/12/CFwarp-go-youtube.html">脚本</a>（其他很多脚本不能用），一键完成。甚至嫖的是 WARP+。</p>
+<h3 id="docker-he-ufw" id="Docker-和-UFW">Docker 和 UFW</h3>
+<p>UFW 不能 block 在 Docker 中映射的端口。解决方法有两个，一个是在映射的时候手动指定内部 IP，另一个是使用 <a target="_blank" rel="noopener" href="https://github.com/chaifeng/ufw-docker">ufw-docker</a>，但是我没有成功。</p>
+<p>屏蔽 Docker 应用访问 25 端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo iptables -I DOCKER-USER -p tcp -m tcp --sport 25 -j DROP</span><br></pre></td></tr></table></figure>
+<h2 id="wei-hu" id="维护">维护</h2>
+<h3 id="seafile" id="Seafile">Seafile</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">su - seafile -s /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> seafile-server-latest</span><br><span class="line">./seafile.sh &#123; start | stop | restart &#125;</span><br><span class="line">./seahub.sh  &#123; start &lt;port&gt; | stop | restart &lt;port&gt; &#125;</span><br><span class="line">./seaf-gc.sh</span><br></pre></td></tr></table></figure>
+<h3 id="qing-li-ying-pan" id="清理硬盘">清理硬盘</h3>
+<table>
+<thead>
+<tr>
+<th>Package Manager</th>
+<th>Cleanup Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yum</td>
+<td>yum clean all</td>
+</tr>
+<tr>
+<td>dnf</td>
+<td>dnf clean all</td>
+</tr>
+<tr>
+<td>rvm</td>
+<td>rvm cleanup all</td>
+</tr>
+<tr>
+<td>gem</td>
+<td>gem cleanup</td>
+</tr>
+<tr>
+<td>cpan</td>
+<td>rm -rf ~/.cpan/{build,sources}/*</td>
+</tr>
+<tr>
+<td>pip</td>
+<td>rm -rf ~/.cache/pip/*</td>
+</tr>
+<tr>
+<td>apt-get</td>
+<td>apt-get clean</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo journalctl --vacuum-size=100M  # 删除日志</span><br><span class="line">sudo du -sh /* | sort -hr  # 储存空间分析</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">/var/lib/docker/containers</span></span><br><span class="line">sudo sh -c &#x27;truncate -s 0 /var/lib/docker/containers/*/*-json.log&#x27;  # 清理Docker日志</span><br></pre></td></tr></table></figure>
+<h2 id="beermoney" id="Beermoney">Beermoney</h2>
+<p>因为我在 7.1 新购置了一台 2 核 1G 的服务器，但是旧的 VPS 还有将近 5 个月的时间，不能浪费啊，于是尝试找点挂机赚钱的活，看看能不能回本。<s>不求太多，只求回本。</s> 不可能的。</p>
+<p>配置 Firefox 的时候和 Firefox 的缓存斗智斗勇（因为 VPS 里的 Firefox 经常崩溃，所以需要重启，而重启不能丢了 session），我就纳闷了为什么重启 Firefox 总是给我退出登录呢？后来在才知道，原来对于 Firefox 的设置，清除 History，就包含了 Cookie 啊…字面意思应该仅仅是历史记录啊。</p>
+<p>我觉得把目前凑活能用的方法都跑起来，跑个一天两天，看看什么效果。<s>希望主机商不要发邮件。</s></p>
+<h3 id="wa-kuang" id="挖矿">挖矿</h3>
+<p>CPU 挖矿主要就是门罗币，emm，一天只有一两毛钱，风扇还要呼呼的转。算了。</p>
+<h3 id="shua-liang" id="刷量">刷量</h3>
+<ul>
+<li><s>Vagex</s></li>
+<li>Ebesucher
+<ul>
+<li>欧洲 IP 才有收益</li>
+</ul>
+</li>
+<li>Surfe
+<ul>
+<li>每天任务量太少</li>
+</ul>
+</li>
+<li>CashMining
+<ul>
+<li>只能单点登录</li>
+</ul>
+</li>
+</ul>
+<h3 id="dai-li" id="代理">代理</h3>
+<p>这些项目大多有 Docker 镜像，就很赞。</p>
+<h4 id="jin-xian-guo-nei" id="仅限国内">仅限国内</h4>
+<ul>
+<li>网心云 PCDN</li>
+</ul>
+<h4 id="jin-xian-zhu-zhai-ip" id="仅限住宅-IP">仅限住宅 IP</h4>
+<p>学到了新词，Residential IP，家宽的 IP。</p>
+<p>这些可以尝试在中国境内部署，我先在虚拟机里试试。</p>
+<ul>
+<li>PacketStream</li>
+<li>IPRoyal Pawns</li>
+<li>Honeygain</li>
+<li>EarnApp</li>
+<li>Repocket</li>
+</ul>
+<p>Update on 2022.11.9: 有时候 IP 的分类会出错，比如自己大盘鸡的 IP 是住宅 IP…</p>
+<h4 id="wu-xian-zhi" id="无限制">无限制</h4>
+<ul>
+<li>Peer2Profit</li>
+<li>Traffmonetizer</li>
+<li>ProxyRack</li>
+</ul>
+<h3 id="ce-shi" id="测试">测试</h3>
+<p>挂了一天之后的收益：</p>
+<ul>
+<li>Traffmonetizer: 0.006(833d)</li>
+<li>Honeygain: 0.03(500d)</li>
+<li>Peer2Profit: 0.001</li>
+<li>PacketStream: 0.004(1200d)</li>
+<li>IPRoyal: 0.001</li>
+<li>Cashmining: 0.03(83d)</li>
+</ul>
+<p>除了 Honeygain 和 Cashmining，其他都是零头。按 0.07/天，一年 25 美金。还行，能 cover 成本。如果提现时间超过了 2 年，那其实做起来也没意义了。毕业之前都捞不了钱。</p>
+<p>现在看起来还是刷访问量给钱多。单凭 Cashmining 一年能提现 11 美金。但是我怀疑这个网站会跑路。</p>
+<p>使用以上这些服务，IP 会被标记为公共代理，有可能被拉黑。别问我怎么知道的（</p>
+<h3 id="ti-xian" id="提现">提现</h3>
+<p>竟然真的能提现出来…</p>
+<p><img data-src="https://img.i207m.top/2023/02_0ba081be789a0d439320c8dd156311d6.png" alt="image-20230222210345944"></p>
+<h3 id="geng-xin" id="更新">更新</h3>
+<p>总结一下现在能用的项目有：</p>
+<ul>
+<li>Traffmonetizer（安全，只支持虚拟币，已提现）</li>
+<li>PacketStream（仅限住宅 IP，但是一些 DC 也可以，遇到过封号）</li>
+<li>EarnApp（仅限住宅 IP，已提现）</li>
+<li>Proxyrack（有滥用的前科）
+<ul>
+<li>不要删除已经添加过的设备，会扣钱的（说多了都是泪）</li>
+</ul>
+</li>
+<li>Peer2Proxy（很麻烦）</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/VPS/" rel="tag"><i class="fa fa-tag"></i> VPS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/OpenDiary-2021.11/" rel="prev" title="OpenDiary-2021.11">
+      <i class="fa fa-chevron-left"></i> OpenDiary-2021.11
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/tmux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="tmux学习笔记">
+      tmux学习笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#chu-shi-hua"><span class="nav-number">1.</span> <span class="nav-text">初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#benchmark"><span class="nav-number">1.1.</span> <span class="nav-text">Benchmark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#da-kai-bbr"><span class="nav-number">1.2.</span> <span class="nav-text">打开 BBR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#she-zhi-swap"><span class="nav-number">1.3.</span> <span class="nav-text">设置 swap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dd"><span class="nav-number">1.4.</span> <span class="nav-text">dd</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wang-luo"><span class="nav-number">2.</span> <span class="nav-text">网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zheng-shu"><span class="nav-number">2.1.</span> <span class="nav-text">证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx"><span class="nav-number">2.2.</span> <span class="nav-text">Nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#i-pv-4-you-xian"><span class="nav-number">2.3.</span> <span class="nav-text">IPv4 优先</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#i-pv-6-zi-wang-lu-you"><span class="nav-number">2.4.</span> <span class="nav-text">IPv6 子网路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#warp"><span class="nav-number">2.5.</span> <span class="nav-text">WARP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-he-ufw"><span class="nav-number">2.6.</span> <span class="nav-text">Docker 和 UFW</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wei-hu"><span class="nav-number">3.</span> <span class="nav-text">维护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#seafile"><span class="nav-number">3.1.</span> <span class="nav-text">Seafile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qing-li-ying-pan"><span class="nav-number">3.2.</span> <span class="nav-text">清理硬盘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#beermoney"><span class="nav-number">4.</span> <span class="nav-text">Beermoney</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wa-kuang"><span class="nav-number">4.1.</span> <span class="nav-text">挖矿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shua-liang"><span class="nav-number">4.2.</span> <span class="nav-text">刷量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dai-li"><span class="nav-number">4.3.</span> <span class="nav-text">代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jin-xian-guo-nei"><span class="nav-number">4.3.1.</span> <span class="nav-text">仅限国内</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jin-xian-zhu-zhai-ip"><span class="nav-number">4.3.2.</span> <span class="nav-text">仅限住宅 IP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wu-xian-zhi"><span class="nav-number">4.3.3.</span> <span class="nav-text">无限制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ce-shi"><span class="nav-number">4.4.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ti-xian"><span class="nav-number">4.5.</span> <span class="nav-text">提现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#geng-xin"><span class="nav-number">4.6.</span> <span class="nav-text">更新</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="i207M"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">i207M</p>
+  <div class="site-description" itemprop="description">i207M's Fantastic Blog - Love</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/i207M" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;i207M" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:connect_at_mail.i207m.top" title="E-Mail → mailto:connect_at_mail.i207m.top" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-fas fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/i207M/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;i207M&#x2F;" rel="noopener" target="_blank">Luogu Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://speranzaleaf.github.io/" title="https:&#x2F;&#x2F;speranzaleaf.github.io&#x2F;" rel="noopener" target="_blank">Speranza Leaf</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kamome.moe/" title="https:&#x2F;&#x2F;kamome.moe&#x2F;" rel="noopener" target="_blank">Siunaus</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/cjyyb/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;cjyyb&#x2F;" rel="noopener" target="_blank">yyb</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nekko.moe/" title="https:&#x2F;&#x2F;nekko.moe&#x2F;" rel="noopener" target="_blank">nekko</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/zjp-shadow/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zjp-shadow&#x2F;" rel="noopener" target="_blank">zjp_shadow</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ywy-c-asm.cn/" title="https:&#x2F;&#x2F;www.ywy-c-asm.cn&#x2F;" rel="noopener" target="_blank">ywy_c_asm</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/Miracevin/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Miracevin&#x2F;" rel="noopener" target="_blank">Miracle</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hahamengbier.top/" title="https:&#x2F;&#x2F;hahamengbier.top&#x2F;" rel="noopener" target="_blank">mengbier</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">i207M</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '09f5f1273e68e2e773c5',
+      clientSecret: 'b9b92a06fa16f2c2905b55b35c509e55c03fc596',
+      repo        : 'blog-comment',
+      owner       : 'i207M',
+      admin       : ['i207M'],
+      id          : '08896743c0b398c5cd5dfe094b7f7357',
+      proxy       : 'https://cors.i207m.workers.dev/?https://github.com/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>

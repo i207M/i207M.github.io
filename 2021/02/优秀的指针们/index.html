@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.i207m.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="因为感觉自己想置顶的东西太多了，就专门开一个集合贴吧 主要是NOIP以后的，按照时间倒序  知识点学习 一些很小或者不是很理解的知识点就不放啦，善用搜索功能吧。  弦图-学习笔记 后缀、Border的研究-学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="优秀的指针们">
+<meta property="og:url" content="https://blog.i207m.top/2021/02/%E4%BC%98%E7%A7%80%E7%9A%84%E6%8C%87%E9%92%88%E4%BB%AC/index.html">
+<meta property="og:site_name" content="i207M&#39;s Fantastic Blog">
+<meta property="og:description" content="因为感觉自己想置顶的东西太多了，就专门开一个集合贴吧 主要是NOIP以后的，按照时间倒序  知识点学习 一些很小或者不是很理解的知识点就不放啦，善用搜索功能吧。  弦图-学习笔记 后缀、Border的研究-学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-22T04:48:17.000Z">
+<meta property="article:modified_time" content="2025-03-05T01:24:34.777Z">
+<meta property="article:author" content="i207M">
+<meta property="article:tag" content="i207M,OI,THU">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.i207m.top/2021/02/%E4%BC%98%E7%A7%80%E7%9A%84%E6%8C%87%E9%92%88%E4%BB%AC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+
+  <title>优秀的指针们 | i207M's Fantastic Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="i207M's Fantastic Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">i207M's Fantastic Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-留言">
+
+    <a href="/messages/" rel="section"><i class="fa fa-fw fa-comments"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.i207m.top/2021/02/%E4%BC%98%E7%A7%80%E7%9A%84%E6%8C%87%E9%92%88%E4%BB%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="i207M">
+      <meta itemprop="description" content="i207M's Fantastic Blog - Love">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="i207M's Fantastic Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          优秀的指针们
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-22 12:48:17" itemprop="dateCreated datePublished" datetime="2021-02-22T12:48:17+08:00">2021-02-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>因为感觉自己想置顶的东西太多了，就专门开一个集合贴吧</strong></p>
+<p>主要是NOIP以后的，按照时间倒序</p>
+<hr>
+<h2 id="zhi-shi-dian-xue-xi" id="知识点学习">知识点学习</h2>
+<p>一些很小或者不是很理解的知识点就不放啦，善用搜索功能吧。</p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/xian-tu-xue-xi-bi-ji">弦图-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/hou-zhui-border-di-yan-jiu-xue-xi-bi-ji">后缀、Border的研究-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/kosaraju-suan-fa-qiu-qiang-lian-tong-fen-liang-xue-xi-bi-ji">Kosaraju算法求强联通分量-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/xian-xing-gui-hua-dui-ou-xing-dan-chun-xing-fa-xue-xi-bi-ji">线性规划-对偶型-单纯型法-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/er-xiang-shi-fan-yan-xue-xi-bi-ji">二项式反演-斯特林反演-或计数-学习笔记</a></p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/post-mu-ban-zhi-pei-shu-xue-xi-bi-ji">支配树-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/wc2013-ping-mian-tu-ping-mian-tu-dian-ding-wei-xue-xi-bi-ji">平面图点定位-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/hou-zhui-ping-heng-shu-xue-xi-bi-ji">后缀平衡树-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/lei-ou-ji-li-dei-suan-fa-xue-xi-bi-ji">类欧几里得算法-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/er-ci-li-xian-mu-dui-xue-xi-bi-ji">二次离线莫队-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/shuo-lun-shai-fa-min25-shai-xue-xi-bi-ji">数论筛法-min_25筛-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/burnside-yin-li-polya-ding-li-zhi-huan-qun-xue-xi-bi-ji">Burnside引理&amp;Polya定理-置换群-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/chang-ji-shuo-ji-ci-xian-xing-di-tui-ju-zhen-kuai-su-mi-di-you-hua-post">常系数齐次线性递推-矩阵快速幂的优化-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/sheng-cheng-han-shuo-xue-xi-bi-ji-ge-ren-zong-jie">生成函数-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/er-ci-sheng-yu-xue-xi-bi-ji">二次剩余-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/yuan-fang-shu-xue-xi-bi-ji">圆方树-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/xu-shu-xue-xi-bi-ji">虚树-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/k-d-tree-xue-xi-bi-ji">K-D Tree-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/kuai-su-wo-er-shi-bian-huan-fwt-xue-xi-bi-ji">快速沃尔什变换FWT-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/shuo-xue-fft-xue-xi-bi-ji">多项式-FFT-NTT-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/hou-zhui-zi-dong-ji-xue-xi-bi-ji">后缀自动机-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/lct-xue-xi-bi-ji">LCT-学习笔记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/dong-tai-dp-xue-xi-bi-ji">动态DP-学习笔记</a></p>
+<h2 id="ge-ren-zong-jie" id="个人总结">个人总结</h2>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/gao-ji-dp-hui-zong-dong-tai-dp-zheng-ti-dp-ge-ren-zong-jie">高级DP汇总-动态DP-整体DP-个人总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/mu-ni-tui-huo-sui-ji-hua-luan-gao-ge-ren-zong-jie">模拟退火-随机化-乱搞-个人总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/duo-xiang-shi-fft-ntt-ge-ren-zong-jie">多项式-FFT-NTT-个人总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/dian-fen-shu-xue-xi-bi-ji">点分树-动态点分治-个人总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/hou-zhui-zi-dong-ji-ge-ren-zong-jie">后缀自动机-个人总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/hou-zhui-jia-zu-zi-fu-chuan-xue-xi-bi-ji">后缀数组-个人总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/lct-zhe-xue-ge-ren-zong-jie">LCT哲学-个人总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/ping-heng-shu-zhe-xue-xue-xi-bi-ji">平衡树哲学-个人总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/wang-lao-liu-ge-ren-zong-jie">网络流-费用流-个人总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/xue-xi-bi-ji-xian-duan-shu-zhe-xue">线段树哲学-个人总结</a></p>
+<h2 id="wen-zhang-hui-zong" id="文章汇总">文章汇总</h2>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/noi-qian-xiao-ti-xie-ge-ji-xie-ti-bao-gao">NOI前小题解合集-解题报告</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/noip-hou-xiao-ti-xie-ge-ji">省选前-小题解合集</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/xiao-ti-xie-ge-ji">NOIP前-小题解合集</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/ba-ding-zi-zhi-lu-with-ydnhaha">拔钉子之路-with ydnhaha</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/xiang-zuo-dan-shi-mei-you-shi-jian-zuo-di-ti-kou-hu-ti-xie-liu-keng">想做但是没有时间做的题-口胡题解&amp;留坑待填</a></p>
+<p>NOI前作业，省选前作业</p>
+<p>交流</p>
+<h2 id="oi-ji-lu" id="OI记录">OI记录</h2>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/noi2019-ji-you-ji">老实人的NOI2019记-游记</a></p>
+<p>THUSC2019游记</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/apio2019-you-ji-oi-ji-lu">APIO2019游记-OI记录</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/wen-ma-heoi2019-ji-you-ji">稳吗？HEOI2019(?)记</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/noiwc-jiang-you-ji-oi-ji-lu">NOIWC酱油记-OI记录</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/wen-ge-pi-pi-xia-a-bao-zha-liao-thuwc-oi-ji-lu">稳个皮皮虾啊-爆炸了-wocTM稳住了一半-THUWC-OI记录</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/dan-yuan-wen-zhu-noip2018-you-ji">但愿稳住-NOIP2018游记-OI记录</a></p>
+<h2 id="za-xiang-hui-zong" id="杂项汇总">杂项汇总</h2>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/blog/i207M/chao-xiao-zong-jie">超小总结-不知道是什么的总结</a></p>
+<p><em>这个样例，无疑是善良的出题人无私的馈赠。大量精心构造的测试数据，涵盖了测试点中所有出现性质的组合。你可以利用这个测试点，对自己的程序进行全面的检查。足量的数据组数、不大的数据范围和多种多样的数据类型，能让程序中的错误无处遁形。出题人相信，这个美妙的样例，可以给拼搏于 AC 这道题的逐梦之路上的你，提供一个有力的援助。</em></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/Machine-Learning%E5%88%9D%E8%AF%86/" rel="prev" title="Machine Learning初识">
+      <i class="fa fa-chevron-left"></i> Machine Learning初识
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/%E6%9E%81%E5%85%B6%E4%BC%98%E7%A7%80%E7%9A%84%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93%E4%BB%AC/" rel="next" title="极其优秀的个人总结们">
+      极其优秀的个人总结们 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#zhi-shi-dian-xue-xi"><span class="nav-number">1.</span> <span class="nav-text">知识点学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ge-ren-zong-jie"><span class="nav-number">2.</span> <span class="nav-text">个人总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wen-zhang-hui-zong"><span class="nav-number">3.</span> <span class="nav-text">文章汇总</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oi-ji-lu"><span class="nav-number">4.</span> <span class="nav-text">OI记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#za-xiang-hui-zong"><span class="nav-number">5.</span> <span class="nav-text">杂项汇总</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="i207M"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">i207M</p>
+  <div class="site-description" itemprop="description">i207M's Fantastic Blog - Love</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/i207M" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;i207M" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:connect_at_mail.i207m.top" title="E-Mail → mailto:connect_at_mail.i207m.top" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-fas fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/i207M/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;i207M&#x2F;" rel="noopener" target="_blank">Luogu Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://speranzaleaf.github.io/" title="https:&#x2F;&#x2F;speranzaleaf.github.io&#x2F;" rel="noopener" target="_blank">Speranza Leaf</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kamome.moe/" title="https:&#x2F;&#x2F;kamome.moe&#x2F;" rel="noopener" target="_blank">Siunaus</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/cjyyb/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;cjyyb&#x2F;" rel="noopener" target="_blank">yyb</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nekko.moe/" title="https:&#x2F;&#x2F;nekko.moe&#x2F;" rel="noopener" target="_blank">nekko</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/zjp-shadow/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zjp-shadow&#x2F;" rel="noopener" target="_blank">zjp_shadow</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ywy-c-asm.cn/" title="https:&#x2F;&#x2F;www.ywy-c-asm.cn&#x2F;" rel="noopener" target="_blank">ywy_c_asm</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/Miracevin/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Miracevin&#x2F;" rel="noopener" target="_blank">Miracle</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hahamengbier.top/" title="https:&#x2F;&#x2F;hahamengbier.top&#x2F;" rel="noopener" target="_blank">mengbier</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">i207M</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '09f5f1273e68e2e773c5',
+      clientSecret: 'b9b92a06fa16f2c2905b55b35c509e55c03fc596',
+      repo        : 'blog-comment',
+      owner       : 'i207M',
+      admin       : ['i207M'],
+      id          : '27130013749c6087744e6ad0392674ca',
+      proxy       : 'https://cors.i207m.workers.dev/?https://github.com/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.i207m.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面：本文是作为概率论与数理统计的课程论文。  从众所周知的定理说开去… 想必大家在学习概率论的时候，都听过这样一个故事：一只猴子在打字机上随机敲击键盘，无限期地敲下去，最终会打出一部莎士比亚的作品。这个故事的出处[1]有许多说法，最初提出这个故事的人也不一定是英国人（那么提到的作品也大概不是莎士比亚的），这里不做细究。但是这个故事的意义却是显而易见的：在无限的时间里，一切都有可能发生。 这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一只猴子更容易写出《静夜思》还是《八阵图》？">
+<meta property="og:url" content="https://blog.i207m.top/2023/05/%E4%B8%80%E5%8F%AA%E7%8C%B4%E5%AD%90%E6%9B%B4%E5%AE%B9%E6%98%93%E5%86%99%E5%87%BA%E3%80%8A%E9%9D%99%E5%A4%9C%E6%80%9D%E3%80%8B%E8%BF%98%E6%98%AF%E3%80%8A%E5%85%AB%E9%98%B5%E5%9B%BE%E3%80%8B%EF%BC%9F/index.html">
+<meta property="og:site_name" content="i207M&#39;s Fantastic Blog">
+<meta property="og:description" content="写在前面：本文是作为概率论与数理统计的课程论文。  从众所周知的定理说开去… 想必大家在学习概率论的时候，都听过这样一个故事：一只猴子在打字机上随机敲击键盘，无限期地敲下去，最终会打出一部莎士比亚的作品。这个故事的出处[1]有许多说法，最初提出这个故事的人也不一定是英国人（那么提到的作品也大概不是莎士比亚的），这里不做细究。但是这个故事的意义却是显而易见的：在无限的时间里，一切都有可能发生。 这">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%20%20%20%20F%28z%29%20%3D%20%5Cmathbb%20E(z%5EX)%20%3D%20%5Csum_%7Bi%3D0%7D%5E%5Cinfty%20%5Cmathrm%7BPr%7D(X%20%3D%20i)z%5Ei%0A">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%20%20%20%20F%281%29%20%3D%20%5Csum_%7Bi%3D0%7D%5E%5Cinfty%20%5Cmathrm%7BPr%7D(X%20%3D%20i)%20%3D%201%0A">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%20%20%20%20F">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=z%3D1">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%20%20%20%20%5Cmathbb%20E%28X%29%20%3D%20F">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%20%20%20%20%5Cmathrm%7BVar%7D%28X%29%20%3D%20F">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=F%28z%29">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=n">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=m">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=f_%7Bi%2Cj%7D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=i">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=j">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=g_j">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=j">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=F_i%28x%29%2CG(x)">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=F_i%281%29">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=g_i%3Dg_%7Bi%2B1%7D%2B%5Csum_%7Bj%3D1%7D%5Enf_%7Bj%2Ci%2B1%7D">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%20%20%20%20xG%28x%29%2B1%3DG(x)%2B%5Csum_%7Bi%3D1%7D%5EnF_%7Bi%7D(x)%0A">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=x%3D1">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%20%20%20%20%5Csum_%7Bi%3D1%7D%5EnF_%7Bi%7D%281%29%3D1%0A">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=f_%7Bi%2Cj%7D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=a_%7Bt%2Ci%2Cj%7D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=t">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%20%20%20%20G%28x%29(%5Cfrac%7B1%7D%7B2%7Dx)%5Em%3D%5Csum_%7Bi%3D1%7D%5En%5Csum_%7Bj%3D1%7D%5Ema_%7Bt%2Ci%2Cj%7DF_i(x)(%5Cfrac%7B1%7D%7B2%7Dx)%5E%7Bm-j%7D%0A">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=t">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=t">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=x%3D1">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%20%20%20%20G%281%29%3D%5Csum_%7Bi%3D1%7D%5En%5Csum_%7Bj%3D1%7D%5Ema_%7Bt%2Ci%2Cj%7DF_i(1)2%5E%7Bj%7D%0A">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=n">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=F_i%281%29%2CG(1)">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=n%2B1">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=O%28n%5E3%29">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=n%2Cm">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=a">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%282-(1%2F2%29%5E%7Bn-1%7D)%2F3">
+<meta property="article:published_time" content="2023-05-25T17:25:29.000Z">
+<meta property="article:modified_time" content="2025-03-05T01:24:34.776Z">
+<meta property="article:author" content="i207M">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="Fun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://latex2img.i207m.top?from=%20%20%20%20F%28z%29%20%3D%20%5Cmathbb%20E(z%5EX)%20%3D%20%5Csum_%7Bi%3D0%7D%5E%5Cinfty%20%5Cmathrm%7BPr%7D(X%20%3D%20i)z%5Ei%0A">
+
+<link rel="canonical" href="https://blog.i207m.top/2023/05/%E4%B8%80%E5%8F%AA%E7%8C%B4%E5%AD%90%E6%9B%B4%E5%AE%B9%E6%98%93%E5%86%99%E5%87%BA%E3%80%8A%E9%9D%99%E5%A4%9C%E6%80%9D%E3%80%8B%E8%BF%98%E6%98%AF%E3%80%8A%E5%85%AB%E9%98%B5%E5%9B%BE%E3%80%8B%EF%BC%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+
+  <title>一只猴子更容易写出《静夜思》还是《八阵图》？ | i207M's Fantastic Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="i207M's Fantastic Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">i207M's Fantastic Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-留言">
+
+    <a href="/messages/" rel="section"><i class="fa fa-fw fa-comments"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.i207m.top/2023/05/%E4%B8%80%E5%8F%AA%E7%8C%B4%E5%AD%90%E6%9B%B4%E5%AE%B9%E6%98%93%E5%86%99%E5%87%BA%E3%80%8A%E9%9D%99%E5%A4%9C%E6%80%9D%E3%80%8B%E8%BF%98%E6%98%AF%E3%80%8A%E5%85%AB%E9%98%B5%E5%9B%BE%E3%80%8B%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="i207M">
+      <meta itemprop="description" content="i207M's Fantastic Blog - Love">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="i207M's Fantastic Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一只猴子更容易写出《静夜思》还是《八阵图》？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-26 01:25:29" itemprop="dateCreated datePublished" datetime="2023-05-26T01:25:29+08:00">2023-05-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%80%9D%E8%80%83/" itemprop="url" rel="index"><span itemprop="name">思考</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>写在前面：本文是作为概率论与数理统计的课程论文。</p>
+</blockquote>
+<h2 id="cong-zhong-suo-zhou-zhi-de-ding-li-shuo-kai-qu" id="从众所周知的定理说开去…">从众所周知的定理说开去…</h2>
+<p>想必大家在学习概率论的时候，都听过这样一个故事：一只猴子在打字机上随机敲击键盘，无限期地敲下去，最终会打出一部莎士比亚的作品。这个故事的出处[1]有许多说法，最初提出这个故事的人也不一定是英国人（那么提到的作品也大概不是莎士比亚的），这里不做细究。但是这个故事的意义却是显而易见的：在无限的时间里，一切都有可能发生。</p>
+<p>这种一定发生的事情是多么的无聊。按照清华的传统，我们不妨把它变成一个比赛，排出一二三来。对猴子（学生）排序这件事，听起来有些恐怖。我们还是比一比哪部作品更容易被猴子写出来吧。我虽然读过莎翁的几篇著作，但是它们在我的榆木脑袋里并没有留下太多印象，而且不同作品的字数也不一样，显然不太公平。我们不妨比较一些字数相近的作品，中国古代的五言绝句就是一个很好的选择。我拍脑袋想到了《静夜思》和《八阵图》这两首诗，于是，我们的问题就是：一只猴子随机敲击键盘，更容易写出《静夜思》还是《八阵图》？</p>
+<h2 id="zhe-ge-tao-lun-zhen-de-you-yi-yi-ma" id="这个讨论真的有意义吗？">这个讨论真的有意义吗？</h2>
+<p>看到这里，很自然的一个想法是，两首诗长度相同，那么出现的概率自然也相同了。其实，问题没有这么简单。为了看清楚这一点，我们需要简化问题。键盘上的按键太多了，我们干脆让猴子抛硬币吧，这样我们得到的就是无限长的01序列（0代表正，1代表反），每个位置的结果独立，且0和1出现的概率相等。《静夜思》和《八阵图》这两首诗，我们暂且用011（正反反）和110（反反正）来表示，以便于猴子写出来。那么，这两个序列，哪一个先出现的概率高？</p>
+<p>事实上，011首先出现的概率高达75%！虽然011和110的长度相同，出现的频率也是相同的，但是它们之间存在竞争（太可怕了）！011的第一个0出现的时候，110已经输了，因为它的第一个1还没有出现。在110的前缀11出现时，011就会取得胜利。因此，二者的胜率是3:1。</p>
+<h2 id="ni-shuo-de-dui-suo-yi-zen-yao-ji-suan" id="你说的对，所以怎么计算？">你说的对，所以怎么计算？</h2>
+<h3 id="qian-zhi-zhi-shi" id="前置知识">前置知识</h3>
+<p>为了更好地计算和理解，我们引入<strong>概率生成函数</strong>这一概念。它是一个形式幂级数，有些类似于唐老师上课讲的矩母函数。如果X是非负整数集N上的离散随机变量，那么X的概率生成函数为：</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%20%20%20%20F%28z%29%20%3D%20%5Cmathbb%20E(z%5EX)%20%3D%20%5Csum_%7Bi%3D0%7D%5E%5Cinfty%20%5Cmathrm%7BPr%7D(X%20%3D%20i)z%5Ei%0A" /></p><p>它有一些很好的性质。由于所有取值的概率之和为1，所以有：</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%20%20%20%20F%281%29%20%3D%20%5Csum_%7Bi%3D0%7D%5E%5Cinfty%20%5Cmathrm%7BPr%7D(X%20%3D%20i)%20%3D%201%0A" /></p><p>对F（形式）求导，得到：</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%20%20%20%20F'%28z%29%20%3D%20%5Csum_%7Bi%3D1%7D%5E%5Cinfty%20i%5Cmathrm%7BPr%7D(X%20%3D%20i)z%5E%7Bi-1%7D%0A" /></p><p>令<img data-src="https://latex2img.i207m.top?inline=z%3D1" style="display:inline-block;margin: 0;"/>，得到X的期望（这里不讨论它的存在性）：</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%20%20%20%20%5Cmathbb%20E%28X%29%20%3D%20F'(1)%20%3D%20%5Csum_%7Bi%3D1%7D%5E%5Cinfty%20i%5Cmathrm%7BPr%7D(X%20%3D%20i)%0A" /></p><p>使用一些技巧，可以得到X的方差：</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%20%20%20%20%5Cmathrm%7BVar%7D%28X%29%20%3D%20F''(1)%20%2B%20F'(1)%20-%20(F'(1))%20%5E%202%0A" /></p><p>所以，<img data-src="https://latex2img.i207m.top?inline=F%28z%29" style="display:inline-block;margin: 0;"/>中蕴含了关于X的很多信息。关于生成函数，还有很多有趣的性质，这里暂且不表。</p>
+<h3 id="suan-fa" id="算法">算法</h3>
+<p>我们考虑一个加强版的问题：给定<img data-src="https://latex2img.i207m.top?inline=n" style="display:inline-block;margin: 0;"/>个长度为<img data-src="https://latex2img.i207m.top?inline=m" style="display:inline-block;margin: 0;"/>的01字符串，问每个字符串最先出现在随机01序列中的概率。</p>
+<p>设<img data-src="https://latex2img.i207m.top?inline=f_%7Bi%2Cj%7D" style="display:inline-block;margin: 0;"/>表示字符串<img data-src="https://latex2img.i207m.top?inline=i" style="display:inline-block;margin: 0;"/>在01序列的前<img data-src="https://latex2img.i207m.top?inline=j" style="display:inline-block;margin: 0;"/>位中首次出现的概率，<img data-src="https://latex2img.i207m.top?inline=g_j" style="display:inline-block;margin: 0;"/>表示在01序列的前<img data-src="https://latex2img.i207m.top?inline=j" style="display:inline-block;margin: 0;"/>位中没有任何给定字符串出现的概率。它们对应的生成函数分别是<img data-src="https://latex2img.i207m.top?inline=F_i%28x%29%2CG(x)" style="display:inline-block;margin: 0;"/>。回忆上一节的期望性质，我们要求的就是<img data-src="https://latex2img.i207m.top?inline=F_i%281%29" style="display:inline-block;margin: 0;"/>。</p>
+<p>我们可以得到怎样的等式关系？</p>
+<p>根据定义，有<img data-src="https://latex2img.i207m.top?inline=g_i%3Dg_%7Bi%2B1%7D%2B%5Csum_%7Bj%3D1%7D%5Enf_%7Bj%2Ci%2B1%7D" style="display:inline-block;margin: 0;"/>，对应到生成函数：</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%20%20%20%20xG%28x%29%2B1%3DG(x)%2B%5Csum_%7Bi%3D1%7D%5EnF_%7Bi%7D(x)%0A" /></p><p>带入<img data-src="https://latex2img.i207m.top?inline=x%3D1" style="display:inline-block;margin: 0;"/>，有：</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%20%20%20%20%5Csum_%7Bi%3D1%7D%5EnF_%7Bi%7D%281%29%3D1%0A" /></p><p>好吧，有一些大炮打蚊子的感觉。这个等式的含义是，这个比赛一定会结束。</p>
+<p>我们再来看看<img data-src="https://latex2img.i207m.top?inline=f_%7Bi%2Cj%7D" style="display:inline-block;margin: 0;"/>的递推关系，这里会体现竞争关系。我们用<img data-src="https://latex2img.i207m.top?inline=a_%7Bt%2Ci%2Cj%7D" style="display:inline-block;margin: 0;"/>表示第t个串的j前缀是否是i串的一个j后缀。那么，对于任意的<img data-src="https://latex2img.i207m.top?inline=t" style="display:inline-block;margin: 0;"/>，有：</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%20%20%20%20G%28x%29(%5Cfrac%7B1%7D%7B2%7Dx)%5Em%3D%5Csum_%7Bi%3D1%7D%5En%5Csum_%7Bj%3D1%7D%5Ema_%7Bt%2Ci%2Cj%7DF_i(x)(%5Cfrac%7B1%7D%7B2%7Dx)%5E%7Bm-j%7D%0A" /></p><p>这个式子表示，在一个没有结束的序列之后补上<img data-src="https://latex2img.i207m.top?inline=t" style="display:inline-block;margin: 0;"/>串，就会得到一个结束的序列。但是这个序列可能在补完<img data-src="https://latex2img.i207m.top?inline=t" style="display:inline-block;margin: 0;"/>串之前就已经结束了，所以我们要减去这部分。</p>
+<p>带入<img data-src="https://latex2img.i207m.top?inline=x%3D1" style="display:inline-block;margin: 0;"/>，可以得到：</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%20%20%20%20G%281%29%3D%5Csum_%7Bi%3D1%7D%5En%5Csum_%7Bj%3D1%7D%5Ema_%7Bt%2Ci%2Cj%7DF_i(1)2%5E%7Bj%7D%0A" /></p><p>这给了我们<img data-src="https://latex2img.i207m.top?inline=n" style="display:inline-block;margin: 0;"/>个方程，再加上最开始的方程，我们就可以解出<img data-src="https://latex2img.i207m.top?inline=F_i%281%29%2CG(1)" style="display:inline-block;margin: 0;"/>这<img data-src="https://latex2img.i207m.top?inline=n%2B1" style="display:inline-block;margin: 0;"/>个未知量，得到问题的答案。</p>
+<p>计算机系的同学可能对时间复杂度比较感兴趣。这个算法的时间复杂度是<img data-src="https://latex2img.i207m.top?inline=O%28n%5E3%29" style="display:inline-block;margin: 0;"/>（假设<img data-src="https://latex2img.i207m.top?inline=n%2Cm" style="display:inline-block;margin: 0;"/>同阶），瓶颈在于求<img data-src="https://latex2img.i207m.top?inline=a" style="display:inline-block;margin: 0;"/>数组和解方程。另外，这个加强版的问题是信息学奥林匹克竞赛2017年的省队选拔题之一。</p>
+<h2 id="you-qu-de-guan-cha" id="有趣的观察">有趣的观察</h2>
+<p>至此，我们已经解决了这个问题的加强版。在结束之前，我还想分享一些有趣的观察。</p>
+<p>对于只有两个字符串的情况，有一个相关的趣味游戏。在游戏中，A首先选择一个长度为n的01序列，然后B再选择另一个等长的01序列。哪位玩家的序列最先在抛硬币的结果序列中出现就获得胜利。这个游戏叫做Penney’s game，它是由 Walter Penney 在 1969 年提出来的[2]。</p>
+<p>如果有朋友找你玩这个游戏，那么他可能是心怀鬼胎的。因为这个游戏总是对玩家B有利。更进一步的，如果把A选择的01串记为Sx，那么B选择0S或1S即可保证自己的胜率至少有<img data-src="https://latex2img.i207m.top?inline=%282-(1%2F2%29%5E%7Bn-1%7D)%2F3" style="display:inline-block;margin: 0;"/>。这里留作读者思考[3]。</p>
+<h2 id="jie-xiao-da-an" id="揭晓答案">揭晓答案</h2>
+<p>还记得本文开篇的问题吗？我们现在可以给出答案了！这里笔者自己充当了猴子，用输入法输入了这两首古诗并记录下敲击的键位，随后将它映射到长度为200的01序列。使用本文中的算法，可以得到这两首古诗的出现概率分别是——</p>
+<p>0.5和0.5。事实上，计算机的浮点精度已经不能表示二者如此微小的差异了。这听起来有一些遗憾。于是我又尝试计算了猴子首先写出这两首古诗的题目的概率——0.4999980926和0.5000019074，《八阵图》更容易出现。嗯，很好，看来杜工部确实起标题比较随意啊。</p>
+<h2 id="can-kao-wen-xian" id="参考文献">参考文献</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[1] Infinite Monkey Theorem. (n.d.). Wikipedia. </span><br><span class="line">    https://en.wikipedia.org/wiki/Infinite_monkey_theorem</span><br><span class="line">[2] Walter Penney, Journal of Recreational Mathematics, October 1969, p. 241.</span><br><span class="line">[3] Penney 的游戏：正所谓后发制人，先发制于人. (n.d.). Matrix67: The Aha Moments. </span><br><span class="line">    http://www.matrix67.com/blog/archives/6015</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
+              <a href="/tags/Fun/" rel="tag"><i class="fa fa-tag"></i> Fun</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/%E5%A6%82%E4%BD%95%E7%A7%91%E5%AD%A6%E5%9C%B0%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="prev" title="如何科学地使用国内服务器">
+      <i class="fa fa-chevron-left"></i> 如何科学地使用国内服务器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/OpenDiary-2023.6/" rel="next" title="OpenDiary-2023.6">
+      OpenDiary-2023.6 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cong-zhong-suo-zhou-zhi-de-ding-li-shuo-kai-qu"><span class="nav-number">1.</span> <span class="nav-text">从众所周知的定理说开去…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zhe-ge-tao-lun-zhen-de-you-yi-yi-ma"><span class="nav-number">2.</span> <span class="nav-text">这个讨论真的有意义吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ni-shuo-de-dui-suo-yi-zen-yao-ji-suan"><span class="nav-number">3.</span> <span class="nav-text">你说的对，所以怎么计算？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#qian-zhi-zhi-shi"><span class="nav-number">3.1.</span> <span class="nav-text">前置知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#suan-fa"><span class="nav-number">3.2.</span> <span class="nav-text">算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#you-qu-de-guan-cha"><span class="nav-number">4.</span> <span class="nav-text">有趣的观察</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jie-xiao-da-an"><span class="nav-number">5.</span> <span class="nav-text">揭晓答案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#can-kao-wen-xian"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="i207M"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">i207M</p>
+  <div class="site-description" itemprop="description">i207M's Fantastic Blog - Love</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/i207M" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;i207M" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:connect_at_mail.i207m.top" title="E-Mail → mailto:connect_at_mail.i207m.top" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-fas fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/i207M/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;i207M&#x2F;" rel="noopener" target="_blank">Luogu Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://speranzaleaf.github.io/" title="https:&#x2F;&#x2F;speranzaleaf.github.io&#x2F;" rel="noopener" target="_blank">Speranza Leaf</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kamome.moe/" title="https:&#x2F;&#x2F;kamome.moe&#x2F;" rel="noopener" target="_blank">Siunaus</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/cjyyb/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;cjyyb&#x2F;" rel="noopener" target="_blank">yyb</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nekko.moe/" title="https:&#x2F;&#x2F;nekko.moe&#x2F;" rel="noopener" target="_blank">nekko</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/zjp-shadow/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zjp-shadow&#x2F;" rel="noopener" target="_blank">zjp_shadow</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ywy-c-asm.cn/" title="https:&#x2F;&#x2F;www.ywy-c-asm.cn&#x2F;" rel="noopener" target="_blank">ywy_c_asm</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/Miracevin/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Miracevin&#x2F;" rel="noopener" target="_blank">Miracle</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hahamengbier.top/" title="https:&#x2F;&#x2F;hahamengbier.top&#x2F;" rel="noopener" target="_blank">mengbier</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">i207M</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '09f5f1273e68e2e773c5',
+      clientSecret: 'b9b92a06fa16f2c2905b55b35c509e55c03fc596',
+      repo        : 'blog-comment',
+      owner       : 'i207M',
+      admin       : ['i207M'],
+      id          : '6fe49a9e2712b35fab239d5f6f025b1f',
+      proxy       : 'https://cors.i207m.workers.dev/?https://github.com/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>

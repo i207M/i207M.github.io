@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.i207m.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="此贴用来记录一些日常使用和开发中的小技巧~ Program 清除macOS垃圾 1find . -name &amp;#x27;. DS_Store&amp;#x27; -type f -delete Git清除commit记录 123456789git reset COMMIT_ID --soft&#x2F;--hardgit fsck --unreachablegit reflog expire --expire-un">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tricks for Dev">
+<meta property="og:url" content="https://blog.i207m.top/2021/03/Tricks-for-Dev/index.html">
+<meta property="og:site_name" content="i207M&#39;s Fantastic Blog">
+<meta property="og:description" content="此贴用来记录一些日常使用和开发中的小技巧~ Program 清除macOS垃圾 1find . -name &amp;#x27;. DS_Store&amp;#x27; -type f -delete Git清除commit记录 123456789git reset COMMIT_ID --soft&#x2F;--hardgit fsck --unreachablegit reflog expire --expire-un">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.i207m.top/2022/07_5f398736bca79509e008f75ed8424e09.png">
+<meta property="article:published_time" content="2021-03-17T16:15:31.000Z">
+<meta property="article:modified_time" content="2025-03-05T01:24:34.775Z">
+<meta property="article:author" content="i207M">
+<meta property="article:tag" content="i207M,OI,THU">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.i207m.top/2022/07_5f398736bca79509e008f75ed8424e09.png">
+
+<link rel="canonical" href="https://blog.i207m.top/2021/03/Tricks-for-Dev/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+
+  <title>Tricks for Dev | i207M's Fantastic Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="i207M's Fantastic Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">i207M's Fantastic Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-留言">
+
+    <a href="/messages/" rel="section"><i class="fa fa-fw fa-comments"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.i207m.top/2021/03/Tricks-for-Dev/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="i207M">
+      <meta itemprop="description" content="i207M's Fantastic Blog - Love">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="i207M's Fantastic Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Tricks for Dev
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-18 00:15:31" itemprop="dateCreated datePublished" datetime="2021-03-18T00:15:31+08:00">2021-03-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Dev/" itemprop="url" rel="index"><span itemprop="name">Dev</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>此贴用来记录一些日常使用和开发中的小技巧~</p>
+<h2 id="program" id="Program">Program</h2>
+<h3 id="qing-chu-mac-os-la-ji" id="清除macOS垃圾">清除macOS垃圾</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name &#x27;. DS_Store&#x27; -type f -delete</span><br></pre></td></tr></table></figure>
+<h3 id="git-qing-chu-commit-ji-lu" id="Git清除commit记录">Git清除commit记录</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git reset COMMIT_ID --soft/--hard</span><br><span class="line"></span><br><span class="line">git fsck --unreachable</span><br><span class="line"></span><br><span class="line">git reflog expire --expire-unreachable=now --all</span><br><span class="line">git gc --prune=now</span><br><span class="line"></span><br><span class="line">git reset --hard SHA1</span><br><span class="line">git reset --hard HEAD^  (HEAD后面有几个^,就是撤销到往前第几次)</span><br></pre></td></tr></table></figure>
+<h3 id="git-hub-debug" id="GitHub-Debug">GitHub Debug</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- name: Setup tmate session</span><br><span class="line">  uses: mxschmitt/action-tmate@v3</span><br></pre></td></tr></table></figure>
+<h3 id="zai-git-li-shi-zhong-sou-suo-zi-fu-chuan" id="在Git历史中搜索字符串">在Git历史中搜索字符串</h3>
+<p>Git can search diffs with the -S option (it’s called pickaxe <a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-log#Documentation/git-log.txt--Sltstringgt">in the docs</a>)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log -S password</span><br></pre></td></tr></table></figure>
+<p>This will find any commit that added or removed the string <code>password</code>.</p>
+<h3 id="kuai-su-da-jian-wen-jian-fu-wu-qi" id="快速搭建文件服务器">快速搭建文件服务器</h3>
+<p>例如远程文件下载。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m http.server PORT</span><br></pre></td></tr></table></figure>
+<h3 id="vim-bao-cun-shi-fa-xian-mei-you-quan-xian" id="Vim保存时发现没有权限">Vim保存时发现没有权限</h3>
+<p>进入冒号，然后输入：<code>%! sudo tee % &gt; /dev/null</code></p>
+<p>解释：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%　　　　　  #VI/VIM编辑的文件内容</span><br><span class="line">!　　　　　　#管道</span><br><span class="line">sudo　　　　 #以root权限操作</span><br><span class="line">tee　　　　　#将标准输入（即通过管道过来的当前编辑的文件内容）输出到标准输出，同时写入到指定的文件中（即VI/VIM当前编辑的文件）</span><br><span class="line">%　　　　　  #VI/VIM编辑的文件</span><br><span class="line">\&gt; /dev/null　   #将标准输出重定向到/dev/null（不输出显示）</span><br></pre></td></tr></table></figure>
+<h3 id="htop-de-yan-se" id="htop的颜色">htop的颜色</h3>
+<p><img data-src="https://img.i207m.top/2022/07_5f398736bca79509e008f75ed8424e09.png" alt="image-20220705104210106"></p>
+<h3 id="duan-kou-zhuan-fa" id="端口转发">端口转发</h3>
+<p>例如将IPv6的流量转发到IPv4：socat</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat TCP6-LISTEN:5901,ipv6-v6only=1,reuseaddr,fork TCP4:127.0.0.1:5901</span><br></pre></td></tr></table></figure>
+<h2 id="system" id="System">System</h2>
+<h3 id="wei-hyper-v-zhong-ubuntu-da-kai-zeng-qiang-hui-hua" id="为Hyper-V中Ubuntu打开增强会话：">为Hyper-V中Ubuntu打开增强会话：</h3>
+<p>s.i207m.top/HDKAhe</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/microsoft/linux-vm-tools</span><br><span class="line"></span><br><span class="line">/etc/xrdp/xrdp.ini :</span><br><span class="line"></span><br><span class="line">port=vsock://-1:3389</span><br><span class="line">use_vsock=false</span><br></pre></td></tr></table></figure>
+<h3 id="ming-ming-guan-dao" id="命名管道">命名管道</h3>
+<p>好东西，好东西，文件系统级别的管道，跨语言。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bash: mkfifo &lt;name&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.mkfifo()</span><br></pre></td></tr></table></figure>
+<h3 id="cha-kan-jin-cheng-amp-cha-kan-duan-kou-zhan-yong" id="查看进程-查看端口占用">查看进程 &amp; 查看端口占用</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Linux</span></span><br><span class="line">ps -aux  <span class="comment"># 查看进程号</span></span><br><span class="line">netstat -ap  <span class="comment"># 查看占用端口的程序</span></span><br><span class="line">lsof -i:8080</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有</span></span><br><span class="line">sudo lsof -i -P -n | grep LISTEN</span><br><span class="line">sudo netstat -tulpn | grep LISTEN</span><br><span class="line">sudo ss -tulpn | grep LISTEN</span><br><span class="line"></span><br><span class="line"><span class="comment"># Windows</span></span><br><span class="line">netsh interface ipv4 show excludedportrange protocol=tcp  <span class="comment"># 列出系统保留端口</span></span><br></pre></td></tr></table></figure>
+<h3 id="cha-kan-gong-wang-ip" id="查看公网IP">查看公网IP</h3>
+<p><code>curl ip.i207m.top -L</code></p>
+<p>事实上我部署的这一服务会列出所有<code>headers</code>。添加<code>-L</code>的原因是网站只接受HTTPS连接。</p>
+<p>其他：<code>curl ip.sb</code></p>
+<h3 id="linux-quan-ju-dai-li" id="Linux全局代理">Linux全局代理</h3>
+<p>在命令前加上<code>proxychains/proxychains-ng</code> 相关配置看<a target="_blank" rel="noopener" href="https://blog.popkx.com/Ubuntu-install-proxychains-let-terminal-using-socks5-proxy-speed-up-downloading/">这里</a></p>
+<h3 id="tong-ji-wen-jian-jia-da-xiao" id="统计文件夹大小">统计文件夹大小</h3>
+<p><code>du -h --max-depth=1</code></p>
+<h3 id="ya-suo-wen-jian" id="压缩文件">压缩文件</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">zip -r [file_name.zip] [files/folder to zip] -x [file path/name to exclude]</span><br><span class="line">unzip</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">也可以使用 7za</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">也可以使用 tar</span></span><br><span class="line">tar -zcvf 压缩文件名 .tar.gz 被压缩文件名</span><br><span class="line">tar -zxvf 压缩文件名.tar.gz</span><br></pre></td></tr></table></figure>
+<h3 id="ubuntu-an-quan-geng-xin" id="Ubuntu安全更新">Ubuntu安全更新</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt list --upgradable | grep -e &quot;-security&quot; | awk -F &quot;/&quot; &#x27;&#123;print $1&#125;&#x27; | xargs apt install</span><br></pre></td></tr></table></figure>
+<h4 id="jin-lie-chu" id="仅列出">仅列出</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt list --upgradable | grep -e &quot;-security&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="windows-ren-wu-guan-li-qi-nei-cun-zhan-yong" id="Windows任务管理器内存占用">Windows任务管理器内存占用</h3>
+<p>很多时候发现任务管理器里占用的内存加起来远小于系统实际占用的内存，Why？</p>
+<p>TL; DR 资源监视器里的内存—工作集才是真正占用的。</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/43714216/answer/1164044678">扩展阅读</a></p>
+<blockquote>
+<p>（你要是觉得 Windows 的这个难以看懂，那 Linux 这边会更让人吃惊，因为起码 Windows 还能算准总的内存使用，Linux 干脆连总总量都有多种不同口径）前面说了，主要的问题在于多个进程之间可以有共享内存，这意味着计算的时候，有 3 种可能的思路，分别满足三种特性中的两个，即所谓不可能三角</p>
+<ol>
+<li>不算共享的，这就会导致直接相加后少于实际内存使用</li>
+<li>算共享的，这就会导致直接相加后多于实际内存使用</li>
+<li>算共享的，但是那部分数据除以被共享的次数，可以让加起来的总和等于实际内存使用，但是可能会出现开新进程后，单个进程显示内存使用率反而降低的反常情况</li>
+</ol>
+<p>（这 3 种算法就是所谓的 USS RSS PSS ）可以看出，并不存在一种完美的算法能准确衡量单个进程的内存使用。而之所以说 Linux 这边更复杂，则是因为 Linux 默认启用了 overcommit 特性，加了个 VSS 指标，申请的内存可以大于实际使用的。这下好了，连找到总内存利用率都变成了不可能的任务。好多人在 Linux 下试图做 fallible allocator，实际根本没用，OOM 基本都是发生在访问内存而不是分配内存的时候。</p>
+</blockquote>
+<h3 id="jiang-stdout-tong-shi-shu-chu-dao-zhong-duan-he-wen-jian" id="将stdout同时输出到终端和文件">将stdout同时输出到终端和文件</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SomeCommand 2&gt;&amp;1 | tee SomeFile.txt</span><br></pre></td></tr></table></figure>
+<p>(If you want the output only, drop the <code>2&gt;&amp;1</code> above)</p>
+<h2 id="language" id="Language">Language</h2>
+<h3 id="use-strict" id="‘use-strict’">‘use strict’</h3>
+<p><code>'use strict'</code>指令在 JavaScript 1.8.5 (ECMAScript5) 中新增。</p>
+<p>它不是一条语句，但是是一个字面量表达式，在 JavaScript 旧版本中会被忽略。</p>
+<p><code>'use strict'</code>的目的是指定代码在严格条件下执行。严格模式下你不能使用未声明的变量。还有更多。</p>
+<h2 id="philosophy" id="Philosophy">Philosophy</h2>
+<h3 id="ming-ming-gui-fan" id="命名规范">命名规范</h3>
+<div class="warning">
+<p>deprecated</p>
+</div>
+<p>较长的变量名用下划线，特别的，Go语言用小驼峰式。常量全大写+下划线。</p>
+<p>URI用短横线。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E3%80%8A%E5%9B%BE%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84%E3%80%8B%E7%AC%AC4%E5%91%A8%E4%B9%A0%E9%A2%98/" rel="prev" title="离散数学《图论与代数结构》第4周习题">
+      <i class="fa fa-chevron-left"></i> 离散数学《图论与代数结构》第4周习题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E3%80%8A%E5%9B%BE%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84%E3%80%8B%E7%AC%AC5%E5%91%A8%E4%B9%A0%E9%A2%98/" rel="next" title="离散数学《图论与代数结构》第5周习题">
+      离散数学《图论与代数结构》第5周习题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#program"><span class="nav-number">1.</span> <span class="nav-text">Program</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#qing-chu-mac-os-la-ji"><span class="nav-number">1.1.</span> <span class="nav-text">清除macOS垃圾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-qing-chu-commit-ji-lu"><span class="nav-number">1.2.</span> <span class="nav-text">Git清除commit记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-hub-debug"><span class="nav-number">1.3.</span> <span class="nav-text">GitHub Debug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zai-git-li-shi-zhong-sou-suo-zi-fu-chuan"><span class="nav-number">1.4.</span> <span class="nav-text">在Git历史中搜索字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kuai-su-da-jian-wen-jian-fu-wu-qi"><span class="nav-number">1.5.</span> <span class="nav-text">快速搭建文件服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-bao-cun-shi-fa-xian-mei-you-quan-xian"><span class="nav-number">1.6.</span> <span class="nav-text">Vim保存时发现没有权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#htop-de-yan-se"><span class="nav-number">1.7.</span> <span class="nav-text">htop的颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#duan-kou-zhuan-fa"><span class="nav-number">1.8.</span> <span class="nav-text">端口转发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#system"><span class="nav-number">2.</span> <span class="nav-text">System</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wei-hyper-v-zhong-ubuntu-da-kai-zeng-qiang-hui-hua"><span class="nav-number">2.1.</span> <span class="nav-text">为Hyper-V中Ubuntu打开增强会话：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ming-ming-guan-dao"><span class="nav-number">2.2.</span> <span class="nav-text">命名管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cha-kan-jin-cheng-amp-cha-kan-duan-kou-zhan-yong"><span class="nav-number">2.3.</span> <span class="nav-text">查看进程 &amp; 查看端口占用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cha-kan-gong-wang-ip"><span class="nav-number">2.4.</span> <span class="nav-text">查看公网IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-quan-ju-dai-li"><span class="nav-number">2.5.</span> <span class="nav-text">Linux全局代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tong-ji-wen-jian-jia-da-xiao"><span class="nav-number">2.6.</span> <span class="nav-text">统计文件夹大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ya-suo-wen-jian"><span class="nav-number">2.7.</span> <span class="nav-text">压缩文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu-an-quan-geng-xin"><span class="nav-number">2.8.</span> <span class="nav-text">Ubuntu安全更新</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jin-lie-chu"><span class="nav-number">2.8.1.</span> <span class="nav-text">仅列出</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-ren-wu-guan-li-qi-nei-cun-zhan-yong"><span class="nav-number">2.9.</span> <span class="nav-text">Windows任务管理器内存占用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jiang-stdout-tong-shi-shu-chu-dao-zhong-duan-he-wen-jian"><span class="nav-number">2.10.</span> <span class="nav-text">将stdout同时输出到终端和文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#language"><span class="nav-number">3.</span> <span class="nav-text">Language</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#use-strict"><span class="nav-number">3.1.</span> <span class="nav-text">‘use strict’</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#philosophy"><span class="nav-number">4.</span> <span class="nav-text">Philosophy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ming-ming-gui-fan"><span class="nav-number">4.1.</span> <span class="nav-text">命名规范</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="i207M"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">i207M</p>
+  <div class="site-description" itemprop="description">i207M's Fantastic Blog - Love</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/i207M" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;i207M" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:connect_at_mail.i207m.top" title="E-Mail → mailto:connect_at_mail.i207m.top" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-fas fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/i207M/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;i207M&#x2F;" rel="noopener" target="_blank">Luogu Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://speranzaleaf.github.io/" title="https:&#x2F;&#x2F;speranzaleaf.github.io&#x2F;" rel="noopener" target="_blank">Speranza Leaf</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kamome.moe/" title="https:&#x2F;&#x2F;kamome.moe&#x2F;" rel="noopener" target="_blank">Siunaus</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/cjyyb/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;cjyyb&#x2F;" rel="noopener" target="_blank">yyb</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nekko.moe/" title="https:&#x2F;&#x2F;nekko.moe&#x2F;" rel="noopener" target="_blank">nekko</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/zjp-shadow/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zjp-shadow&#x2F;" rel="noopener" target="_blank">zjp_shadow</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ywy-c-asm.cn/" title="https:&#x2F;&#x2F;www.ywy-c-asm.cn&#x2F;" rel="noopener" target="_blank">ywy_c_asm</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/Miracevin/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Miracevin&#x2F;" rel="noopener" target="_blank">Miracle</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hahamengbier.top/" title="https:&#x2F;&#x2F;hahamengbier.top&#x2F;" rel="noopener" target="_blank">mengbier</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">i207M</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '09f5f1273e68e2e773c5',
+      clientSecret: 'b9b92a06fa16f2c2905b55b35c509e55c03fc596',
+      repo        : 'blog-comment',
+      owner       : 'i207M',
+      admin       : ['i207M'],
+      id          : '9695bee97fa217bdf226e8f43179b865',
+      proxy       : 'https://cors.i207m.workers.dev/?https://github.com/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>

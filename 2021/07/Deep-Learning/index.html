@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.i207m.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="开始看书！ （朱军推荐过的另一本书：Pattern Recognition and Machine Learning，一个著名论文Pay Attention to MLP）  Part I: Applied Math and Machine Learning Basics 线性模型无法学习XOR运算。 Probability 高维高斯分布：其中是正定实对称阵，给出n个变量的协方差。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep Learning Book">
+<meta property="og:url" content="https://blog.i207m.top/2021/07/Deep-Learning/index.html">
+<meta property="og:site_name" content="i207M&#39;s Fantastic Blog">
+<meta property="og:description" content="开始看书！ （朱军推荐过的另一本书：Pattern Recognition and Machine Learning，一个著名论文Pay Attention to MLP）  Part I: Applied Math and Machine Learning Basics 线性模型无法学习XOR运算。 Probability 高维高斯分布：其中是正定实对称阵，给出n个变量的协方差。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.i207m.top/2021/07_69898bfbb30f001357b1471f880b627b.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5CSigma">
+<meta property="og:image" content="https://img.i207m.top/2021/08_a92319bf57af21872c803c78eefbf263.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=P%28x%7Cc%3Di%29">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5CSigma">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=P%28c%3Di%29">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=P%28c%7Cx%29">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%3D%5Cfrac%7Bp%7D%7B1-p%7D">
+<meta property="og:image" content="https://latex2img.i207m.top?from=I%28x%29%3D-%5Clog%20P(x)%0A">
+<meta property="og:image" content="https://latex2img.i207m.top?from=H%28x%29%3D-E%5B%5Clog%20P(x)%5D%0A">
+<meta property="og:image" content="https://latex2img.i207m.top?from=D_%7BKL%7D%28P%7C%7CQ%29%3DE%5B%5Clog%5Cfrac%7BP(x)%7D%7BQ(x)%7D%5D%0A">
+<meta property="og:image" content="https://latex2img.i207m.top?from=H%28P%2CQ%29%3D-E_%7Bx%5Csim%20P%7D%5Clog%20Q(x)%0A">
+<meta property="og:image" content="https://img.i207m.top/2021/08_de581efccc32f1da570127463195fe9d.png">
+<meta property="og:image" content="https://img.i207m.top/2021/08_dda3b27c5afa04551a2ae30c3c0536bf.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=x%5E*%3D%5Carg%5Cmin%20f%28x%29">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=x_0">
+<meta property="og:image" content="https://img.i207m.top/2021/08_c9adea4526d062317c08858309974dac.png">
+<meta property="og:image" content="https://img.i207m.top/2021/08_a9cc95d7aef98c8d10c322b1c09af3c6.png">
+<meta property="og:image" content="https://img.i207m.top/2021/08_44cd3be9fc9f6098e21ebd634d63c25b.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=2%5En">
+<meta property="article:published_time" content="2021-07-16T09:48:20.000Z">
+<meta property="article:modified_time" content="2025-03-05T01:24:34.770Z">
+<meta property="article:author" content="i207M">
+<meta property="article:tag" content="MachineLearning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.i207m.top/2021/07_69898bfbb30f001357b1471f880b627b.png">
+
+<link rel="canonical" href="https://blog.i207m.top/2021/07/Deep-Learning/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+
+  <title>Deep Learning Book | i207M's Fantastic Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="i207M's Fantastic Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">i207M's Fantastic Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-留言">
+
+    <a href="/messages/" rel="section"><i class="fa fa-fw fa-comments"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.i207m.top/2021/07/Deep-Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="i207M">
+      <meta itemprop="description" content="i207M's Fantastic Blog - Love">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="i207M's Fantastic Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Deep Learning Book
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-16 17:48:20" itemprop="dateCreated datePublished" datetime="2021-07-16T17:48:20+08:00">2021-07-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>开始看书！</p>
+<p>（朱军推荐过的另一本书：<em>Pattern Recognition and Machine Learning</em>，一个著名论文<em>Pay Attention to MLP</em>）</p>
+<p><img data-src="https://img.i207m.top/2021/07_69898bfbb30f001357b1471f880b627b.png" alt="image-20210719190153975"></p>
+<h2 id="part-i-applied-math-and-machine-learning-basics" id="Part-I-Applied-Math-and-Machine-Learning-Basics">Part I: Applied Math and Machine Learning Basics</h2>
+<p>线性模型无法学习XOR运算。</p>
+<h3 id="probability" id="Probability">Probability</h3>
+<p>高维高斯分布：其中<img data-src="https://latex2img.i207m.top?inline=%5CSigma" style="display:inline-block;margin: 0;"/>是正定实对称阵，给出n个变量的协方差。</p>
+<p><img data-src="https://img.i207m.top/2021/08_a92319bf57af21872c803c78eefbf263.png" alt="image-20210801220808474"></p>
+<p>高斯混合模型：</p>
+<ul>
+<li>
+<p><img data-src="https://latex2img.i207m.top?inline=P%28x%7Cc%3Di%29" style="display:inline-block;margin: 0;"/>​是高斯分布，其中​c是隐变量。</p>
+<p>Some mixtures can have more constraints. For example, the covariance could be share across components via the constraint <img data-src="https://latex2img.i207m.top?inline=%5CSigma" style="display:inline-block;margin: 0;"/>.</p>
+</li>
+<li>
+<p><img data-src="https://latex2img.i207m.top?inline=P%28c%3Di%29" style="display:inline-block;margin: 0;"/>: prior probability</p>
+</li>
+<li>
+<p><img data-src="https://latex2img.i207m.top?inline=P%28c%7Cx%29" style="display:inline-block;margin: 0;"/>: posterior probability</p>
+</li>
+<li>
+<p>任意分布可以由足够多的高斯分布拟合到任意精度。</p>
+</li>
+</ul>
+<p>logit:</p>
+<ul>
+<li>log-it，对数几率</li>
+<li>是odds的log，其中odds<img data-src="https://latex2img.i207m.top?inline=%3D%5Cfrac%7Bp%7D%7B1-p%7D" style="display:inline-block;margin: 0;"/>​​</li>
+</ul>
+<p>测度理论：</p>
+<ul>
+<li>数学分析</li>
+<li>巴拿赫-塔斯基定理：在选择公理成立的情况下，可以将一个三维实心球分成有限（不可测的）部分，然后仅仅通过旋转和平移到其他地方重新组合，就可以组成两个半径和原来相同的完整的球。</li>
+</ul>
+<p>Jacobian matrix:</p>
+<ul>
+<li>数学分析</li>
+<li>描述了非线性坐标变换</li>
+</ul>
+<h3 id="information-theory" id="Information-Theory">Information Theory</h3>
+<p><strong>Self-infomation</strong>:</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=I%28x%29%3D-%5Clog%20P(x)%0A" /></p><ul>
+<li>unit: nat</li>
+</ul>
+<p><strong>Shannon entropy</strong>:</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=H%28x%29%3D-E%5B%5Clog%20P(x)%5D%0A" /></p><p><strong>Kullbacj-Leibler (KL) divergence</strong>:</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=D_%7BKL%7D%28P%7C%7CQ%29%3DE%5B%5Clog%5Cfrac%7BP(x)%7D%7BQ(x)%7D%5D%0A" /></p><ul>
+<li>not symmetric</li>
+</ul>
+<p><strong>Cross-entropy</strong>:</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=H%28P%2CQ%29%3D-E_%7Bx%5Csim%20P%7D%5Clog%20Q(x)%0A" /></p><p><strong>Structured probabilistic model</strong>:</p>
+<ul>
+<li>
+<p>directed<br>
+<img data-src="https://img.i207m.top/2021/08_de581efccc32f1da570127463195fe9d.png" alt="image-20210802114025577"></p>
+</li>
+<li>
+<p>undirected<br>
+<img data-src="https://img.i207m.top/2021/08_dda3b27c5afa04551a2ae30c3c0536bf.png" alt="image-20210802114038154"></p>
+</li>
+</ul>
+<h3 id="numerical-computation" id="Numerical-Computation">Numerical Computation</h3>
+<p>rounding error:</p>
+<ul>
+<li>accumulate</li>
+<li>underflow: ~0</li>
+<li>overflow: ~inf
+<ul>
+<li>occur: exp in softmax</li>
+</ul>
+</li>
+</ul>
+<p><img data-src="https://latex2img.i207m.top?inline=x%5E*%3D%5Carg%5Cmin%20f%28x%29" style="display:inline-block;margin: 0;"/>​</p>
+<p>我们使用二阶Taylor series在<img data-src="https://latex2img.i207m.top?inline=x_0" style="display:inline-block;margin: 0;"/>处展开：</p>
+<p><img data-src="https://img.i207m.top/2021/08_c9adea4526d062317c08858309974dac.png" alt="image-20210802220622079"></p>
+<p>由于Hessian矩阵固定，因此我们可以解出临界点，这就是我们估算的极值点：</p>
+<p><img data-src="https://img.i207m.top/2021/08_a9cc95d7aef98c8d10c322b1c09af3c6.png" alt="image-20210802220835799"></p>
+<p>Optimization algorithms that use only the gradient, such as gradient descent, are called <strong>ﬁrst-order optimization algorithms</strong>. Optimization algorithms that also use the Hessian matrix, such as Newton’s method, are called <strong>second-order optimization algorithms</strong>.</p>
+<p>Constrained Optimization:</p>
+<ul>
+<li>
+<p>将gradient descent的step映射到定义域上</p>
+</li>
+<li>
+<p>换元</p>
+</li>
+<li>
+<p>拉格朗日乘子法（条件极值）</p>
+<p><img data-src="https://img.i207m.top/2021/08_44cd3be9fc9f6098e21ebd634d63c25b.png" alt="image-20210802222002701"></p>
+</li>
+</ul>
+<h3 id="machine-learning-basics" id="Machine-Learning-Basics">Machine Learning Basics</h3>
+<p>Tasks:</p>
+<ul>
+<li>
+<p>Classification</p>
+</li>
+<li>
+<p>Classification with missing inputs</p>
+<p>变量不能同时获得，如果有n个输入，就有<img data-src="https://latex2img.i207m.top?inline=2%5En" style="display:inline-block;margin: 0;"/>种获得信息的情况。</p>
+</li>
+<li>
+<p>Regression: insurance premiums</p>
+</li>
+<li>
+<p>Transcription: image, speech</p>
+</li>
+<li>
+<p>Machine translation</p>
+</li>
+<li>
+<p>Structured output: parsing, pixel-wise segmentation, image captioning</p>
+</li>
+<li>
+<p>Anomaly detection</p>
+</li>
+<li>
+<p>Synthesis and sampling: generate example, speech synthesis: there is no single correct output</p>
+</li>
+<li>
+<p>imputation of missing values</p>
+</li>
+<li>
+<p>Denoising</p>
+</li>
+<li>
+<p>Density estimation</p>
+</li>
+</ul>
+<p>Performance measure</p>
+<p>Experience: blurred boundaries</p>
+<ul>
+<li>supervised</li>
+<li>unsupervised:
+<ul>
+<li>learn probability distribution</li>
+<li>synthesis</li>
+<li>denoising</li>
+<li>clustering</li>
+</ul>
+</li>
+<li>semi-supervised</li>
+</ul>
+<p>Capacity:</p>
+<ul>
+<li>
+<p>choose hypothesis space: linear, quadratic, or more</p>
+<p>Machine learning algorithms will generally perform best when their capacity</p>
+<p>is appropriate for the true complexity of the task they need to perform and the</p>
+<p>amount of training data they are provided with.</p>
+</li>
+<li>
+<p>奥卡姆剃刀</p>
+</li>
+</ul>
+<p>nonparametric models:</p>
+<ul>
+<li>nearest neighbor regression</li>
+<li>wrap a parametric learning algorithm inside another algorithm that increases the number of parameters as needed</li>
+</ul>
+<p>Bayes error</p>
+<p><strong>The no free lunch theorem</strong></p>
+<p>Regularization is any modiﬁcation we make to a learning algorithm that is intended to reduce its generalization error but not its training error.</p>
+<p>k-fold cross-validation: One problem is that no unbiased estimators of the variance of such average error estimators exist (Bengio and Grandvalet, 2004), but approximations are typically used.</p>
+<p><a target="_blank" rel="noopener" href="https://stats.stackexchange.com/questions/136673/how-to-understand-that-mle-of-variance-is-biased-in-a-gaussian-distribution">https://stats.stackexchange.com/questions/136673/how-to-understand-that-mle-of-variance-is-biased-in-a-gaussian-distribution</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/MachineLearning/" rel="tag"><i class="fa fa-tag"></i> MachineLearning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/OI%E8%B6%A3%E4%BA%8B/" rel="prev" title="OI趣事">
+      <i class="fa fa-chevron-left"></i> OI趣事
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/%E8%87%B4%E7%90%86-%E4%BF%A1%E8%AE%A101%E7%AC%AC%E4%B8%80%E5%B1%8A%E7%94%B5%E7%AB%9E%E6%AF%94%E8%B5%9B/" rel="next" title="致理-信计01第一届电竞比赛">
+      致理-信计01第一届电竞比赛 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#part-i-applied-math-and-machine-learning-basics"><span class="nav-number">1.</span> <span class="nav-text">Part I: Applied Math and Machine Learning Basics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#probability"><span class="nav-number">1.1.</span> <span class="nav-text">Probability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#information-theory"><span class="nav-number">1.2.</span> <span class="nav-text">Information Theory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numerical-computation"><span class="nav-number">1.3.</span> <span class="nav-text">Numerical Computation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#machine-learning-basics"><span class="nav-number">1.4.</span> <span class="nav-text">Machine Learning Basics</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="i207M"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">i207M</p>
+  <div class="site-description" itemprop="description">i207M's Fantastic Blog - Love</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/i207M" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;i207M" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:connect_at_mail.i207m.top" title="E-Mail → mailto:connect_at_mail.i207m.top" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-fas fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/i207M/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;i207M&#x2F;" rel="noopener" target="_blank">Luogu Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://speranzaleaf.github.io/" title="https:&#x2F;&#x2F;speranzaleaf.github.io&#x2F;" rel="noopener" target="_blank">Speranza Leaf</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kamome.moe/" title="https:&#x2F;&#x2F;kamome.moe&#x2F;" rel="noopener" target="_blank">Siunaus</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/cjyyb/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;cjyyb&#x2F;" rel="noopener" target="_blank">yyb</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nekko.moe/" title="https:&#x2F;&#x2F;nekko.moe&#x2F;" rel="noopener" target="_blank">nekko</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/zjp-shadow/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zjp-shadow&#x2F;" rel="noopener" target="_blank">zjp_shadow</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ywy-c-asm.cn/" title="https:&#x2F;&#x2F;www.ywy-c-asm.cn&#x2F;" rel="noopener" target="_blank">ywy_c_asm</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/Miracevin/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Miracevin&#x2F;" rel="noopener" target="_blank">Miracle</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hahamengbier.top/" title="https:&#x2F;&#x2F;hahamengbier.top&#x2F;" rel="noopener" target="_blank">mengbier</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">i207M</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.i207m.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多元微分 区域：联通开集 凸区域上的凸函数一定是D上的连续函数。   对梯度的理解 Zhihu 梯度是向量场的对偶向量（V的对偶空间：V上的线性映射的集合）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mathematical Analysis(2)">
+<meta property="og:url" content="https://blog.i207m.top/2021/03/Mathematical-Analysis(2)/index.html">
+<meta property="og:site_name" content="i207M&#39;s Fantastic Blog">
+<meta property="og:description" content="多元微分 区域：联通开集 凸区域上的凸函数一定是D上的连续函数。   对梯度的理解 Zhihu 梯度是向量场的对偶向量（V的对偶空间：V上的线性映射的集合）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.i207m.top/2021/06_9aaa7df9cf3cc9f8b97189c9c1ba8690.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_1310b5adfdb843799456938a9058d232.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/30/owX7ZI9MKidQVkl.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cmathbb%20d">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=p">
+<meta property="og:image" content="https://i.loli.net/2021/03/30/bBP8IfDXsq9z6cu.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/30/F9I8mohYgjR6yrG.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=df%3D%5B%5Coverset%7B%5Ctext%7B~%7D%7D%7Bf%7D%5D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=C%5Er">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=g%3A%20V%28%5Csubset%20%5CR%5En%29%5Cto%20%5CR%5Em%2Cg(x_0)%3D0%2CJ(g(x_0))">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=C%5Er">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cvarphi_1%20%5Cdots%20%5Cvarphi_m%2C%20st.%20g%28%5Cvarphi_1(x_%7Bm%2B1%7D%20%5Cdots%20x_n%29%2C%5Cdots%2Cx_%7Bm%2B1%7D%20%5Cdots%20x_n)%3D0">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=J%28%5Cvarphi%29%3D-J(g_%7B1...m%7D)%5E%7B-1%7DJ(g_%7Bm%2B1...n%7D)">
+<meta property="og:image" content="https://img.i207m.top/2021/06_85725eb38523b2d95e61f16dbbb93e08.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=C%5Er">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=g%3AV%28%5Csubset%20%5CR%5En%29%5Cto%20%5CR%5En%2CJ(g(x_0))%5Cneq0">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=g%5E%7B-1%7D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=J%28g%5E%7B-1%7D%29%3DJ(g)%5E%7B-1%7D">
+<meta property="og:image" content="https://img.i207m.top/2021/06_4264b4b0267fc8e848c46fb78c1baf81.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_480264a04a361fa2f97d7b598400d9aa.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_9144f1b96938746f26fc12329e653c8f.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cpart%20B">
+<meta property="og:image" content="https://i.loli.net/2021/04/18/3XOYQjhSimK9u8I.png">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%5Ckappa%28s%29%3D%5Cfrac%7B%7C%7Cr">
+<meta property="og:image" content="https://img.i207m.top/2021/06_129282e59d95098f623c54285f7374ce.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_2b305db219879e52e02e4b1aa149ba05.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cnabla%20%5Ccdot%20f">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%5Cmathbb%20%7Bdiv%7DF%3D%5Cfrac%7B%5Cpart%20P%7D%7B%5Cpart%20x%7D%2B%5Cfrac%7B%5Cpart%20Q%7D%7B%5Cpart%20y%7D%2B%5Cfrac%7B%5Cpart%20R%7D%7B%5Cpart%20z%7D%0A">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cnabla%20%5Ctimes%20f">
+<meta property="og:image" content="https://img.i207m.top/2021/06_15b88ca06960de121dc93f6a120b2265.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_557d0fddb254b62174c0c4ee6b76c94c.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_9082d2137f01cd991541c384a79fd2fa.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=F%3D%5Cnabla%20%5Ctimes%20G">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cvarphi">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=G%2B%5Cnabla%5Cvarphi">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5CDelta%5CPhi%3D%5Cnabla%5Ccdot%28%5Cnabla%5CPhi%29%3D(%5Csum%5Cfrac%20%7B%5Cpart%5E2%7D%20%7B%5Cpart%20x_i%5E2%7D)%5CPhi">
+<meta property="og:image" content="https://img.i207m.top/2021/06_6af6f669a8175a9d9a2011f453537e74.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_7037170ba4e5172074a06fa51dc0769a.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5CR%5E2">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5CR%5E2">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=d%28Pdx%2BQdy%29%3D0">
+<meta property="og:image" content="https://img.i207m.top/2021/06_429ce1449791b4527e6792c200db89a7.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_faa223eabf0c8d33b82120f04da9d868.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_58702f0d29991d0a6c7e057fed77ae45.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=t">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5CGamma">
+<meta property="og:image" content="https://img.i207m.top/2021/06_8b2fbacda9617db9fe5c158e085b4ec5.png">
+<meta property="og:image" content="https://latex2img.i207m.top?from=I_m%3D%5Cint_0%5E%7B%5Cpi%2F2%7D%5Csin%5Em%28x%29d%20x%0A">
+<meta property="og:image" content="https://img.i207m.top/2021/05_3ab5802d0a6d772f1bb65a179ab6f3dc.png">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cbegin%7Balign%7D+%26I_n%3D%5Cint%5Cfrac%7Bdt%7D%7B(t%5E2%2Ba%5E2)%5En%7D(n%3E1%2Ca%3E0)%5C+%26I_n%3D%5Cfrac%7Bt%7D%7B(t%5E2%2Ba%5E2)%5En%7D%2B2nI_n-2na%5E2I_%7Bn%2B1%7D.%5C+%26I_1%3D%5Cfrac%7B1%7D%7Ba%7D%5Carctan%5Cfrac%7Bt%7D%7Ba%7D%2BC.+%5Cend%7Balign%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cbegin%7Balign%7D+%5Cint%5Cfrac%7B%28Bx%2BC%29dx%7D%7Bx%5E2%2Bpx%2Bq%7D%26%3D%5Cint%5Cfrac%7B%5Cfrac%7BB%7D%7B2%7D%5B2%28x%2B%5Cfrac%7Bp%7D%7B2%7D-%5Cfrac%7Bp%7D%7B2%7D%29%5D%2BC%7D%7B%28x%2B%5Cfrac%7Bp%7D%7B2%7D%29%5E2%2B%28q-%5Cfrac%7Bp%5E2%7D%7B4%7D%29%7D+%5C%5C+%26%3D%5Cfrac%7BB%7D%7B2%7D%5Cint%5Cfrac%7Bd%28x%2B%5Cfrac%7Bp%7D%7B2%7D%29%5E2%7D%7B%28x%2B%5Cfrac%7Bp%7D%7B2%7D%29%5E2%2B%28q-%5Cfrac%7Bp%5E2%7D%7B4%7D%29%7D%2B%28C-%5Cfrac%7BBp%7D%7B2%7D%29%5Cint%5Cfrac%7Bdx%7D%7B%28x%2B%5Cfrac%7Bp%7D%7B2%7D%29%5E2%2B%28q-%5Cfrac%7Bp%5E2%7D%7B4%7D%29%7D+%5C%5C+%26%3D%5Cfrac%7BB%7D%7B2%7D%5Cln%7Cx%5E2%2Bpx%2Bq%7C%2B%5Cfrac%7BC-%5Cfrac%7BBp%7D%7B2%7D%7D%7B%5Csqrt%7Bq-%5Cfrac%7Bp%5E2%7D%7B4%7D%7D%7D%5Carctan%5Cfrac%7Bx%2B%5Cfrac%7Bp%7D%7B2%7D%7D%7B%5Csqrt%7Bq-%5Cfrac%7Bp%5E2%7D%7B4%7D%7D%7D%2BD.+%5Cend%7Balign%7D">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%5Cint_%7B-%5Cinfin%7D%5E%7B%5Cinfin%7D%5Cfrac%7Bdx%7D%7Bx%5E2%2Bpx%2Bq%7D%3D%5Cfrac%7B%5Cpi%7D%7B%5Csqrt%7Bq-p%5E2%2F4%7D%7D%0A">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=r">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=r%5E2%5Csin%5Ctheta">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=x%3Dr%5Csin%5Ctheta%5Ccos%5Cphi">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cbegin%7Bcases%7D+x_%7B1%7D%3Dr%5Ccos%5Cvarphi+_%7B1%7D+%5C%5C%5B1ex%5D+x_%7B2%7D%3Dr%5Csin%5Cvarphi_%7B1%7D%5Ccos%5Cvarphi_%7B2%7D+%5C%5C%5B1ex%5D+x_%7B3%7D%3Dr%5Csin%5Cvarphi_%7B1%7D%5Csin%5Cvarphi_%7B2%7D+%5C%5C%5B1ex%5D+%5Ccdot%5Ccdot%5Ccdot%5Ccdot%5Ccdot%5Ccdot+%5C%5C%5B1ex%5D+x_%7Bn-1%7D%3Dr%5Csin%5Cvarphi_%7B1%7D%5Ccdot%5Ccdot%5Ccdot+%5Csin%5Cvarphi_%7Bn-2%7D%5Ccos%5Cvarphi_%7Bn-1%7D+%5C%5C%5B1ex%5D+x_%7Bn%7D%3Dr%5Csin%5Cvarphi_%7B1%7D%5Ccdot%5Ccdot%5Ccdot+%5Csin%5Cvarphi_%7Bn-2%7D%5Csin%5Cvarphi_%7Bn-1%7D+%5Cend%7Bcases%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cmathcal%7BJ%7D%3D+r%5E%7Bn-1%7D%5Csin%5E%7Bn-2%7D%5Cvarphi_%7B1%7D%5Csin%5E%7Bn-3%7D%5Cvarphi_%7B2%7D...%5Csin%5Cvarphi_%7Bn-2%7D">
+<meta property="og:image" content="https://img.i207m.top/2021/06_1bead718db321699f6003992640dc81d.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_4f99249962c348b4fa1c78f4a14e385f.jpeg">
+<meta property="og:image" content="https://img.i207m.top/2021/06_5d161f6d1401f8bf239e376cb081d71e.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_e870ffad268d717239a122118430bd75.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_5a22949c4c33e64fc0d7ee472da717e4.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_e7717805f75040d12ad40be2541e89bc.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=I%3DAA%5ET">
+<meta property="og:image" content="https://latex2img.i207m.top?from=%7C%7Ca%7C%7C%5E2%7C%7Cb%7C%7C%5E2-%28a%5Ccdot%20b%29%5E2%3D%7C%7Ca%5Ctimes%20b%7C%7C%5E2%5Cge%200%0A">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cbar%20A%3DA">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Ctheta%5Cin%5B0%2C%5Cpi%5D%2C%5Cphi%20%5Cin%20%5B0%2C2%5Cpi%5D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Csin">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5B0%2C2%5Cpi%5D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=c%3D%5Csup%5C%7Bc%5Cin%20%5Ba%2Cb%5D~%7C~%5Ba%2Cc%5D%5Cdots%5C%7D">
+<meta property="og:image" content="https://img.i207m.top/2021/06_26887da159ddc0a098135991225a747a.png">
+<meta property="article:published_time" content="2021-03-30T14:35:42.000Z">
+<meta property="article:modified_time" content="2025-03-05T01:24:34.772Z">
+<meta property="article:author" content="i207M">
+<meta property="article:tag" content="数学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.i207m.top/2021/06_9aaa7df9cf3cc9f8b97189c9c1ba8690.png">
+
+<link rel="canonical" href="https://blog.i207m.top/2021/03/Mathematical-Analysis(2)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+
+  <title>Mathematical Analysis(2) | i207M's Fantastic Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="i207M's Fantastic Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">i207M's Fantastic Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-留言">
+
+    <a href="/messages/" rel="section"><i class="fa fa-fw fa-comments"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.i207m.top/2021/03/Mathematical-Analysis(2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="i207M">
+      <meta itemprop="description" content="i207M's Fantastic Blog - Love">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="i207M's Fantastic Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mathematical Analysis(2)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-30 22:35:42" itemprop="dateCreated datePublished" datetime="2021-03-30T22:35:42+08:00">2021-03-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">课程</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="duo-yuan-wei-fen" id="多元微分">多元微分</h2>
+<p>区域：联通开集</p>
+<p>凸区域上的凸函数一定是D上的连续函数。</p>
+<p><img data-src="https://img.i207m.top/2021/06_9aaa7df9cf3cc9f8b97189c9c1ba8690.png" alt="image-20210625155259021"></p>
+<p><img data-src="https://img.i207m.top/2021/06_1310b5adfdb843799456938a9058d232.png" alt="image-20210625155340966"></p>
+<h3 id="dui-ti-du-de-li-jie" id="对梯度的理解">对梯度的理解</h3>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/44115400">Zhihu</a></p>
+<p>梯度是向量场的对偶向量（V的对偶空间：V上的线性映射的集合）。</p>
+<p>向量可以被定义为：可以给函数求方向导数。</p>
+<p>1-形式就是梯度。</p>
+<p><img data-src="https://i.loli.net/2021/03/30/owX7ZI9MKidQVkl.png" alt="image-20210330231106046"></p>
+<h3 id="dui-duo-yuan-wei-ji-fen-zhong-img-src-https-latex-2-img-i-207-m-top-inline-5-cmathbb-20-d-style-display-inline-block-margin-0-de-li-jie" id="对多元微积分中-mathbb-d的理解">对多元微积分中<img data-src="https://latex2img.i207m.top?inline=%5Cmathbb%20d" style="display:inline-block;margin: 0;"/>的理解</h3>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/44190499">Zhihu</a></p>
+<p>核心在如何理解<strong>余切空间</strong>。</p>
+<p>函数芽：<img data-src="https://latex2img.i207m.top?inline=p" style="display:inline-block;margin: 0;"/>点任意小的邻域内相等的函数构成的等价类。</p>
+<p><strong>余切空间：对函数芽求方向导数</strong>。</p>
+<p><img data-src="https://i.loli.net/2021/03/30/bBP8IfDXsq9z6cu.png" alt="image-20210330230254172"></p>
+<p><img data-src="https://i.loli.net/2021/03/30/F9I8mohYgjR6yrG.png" alt="image-20210330230317822"></p>
+<p>因此，<img data-src="https://latex2img.i207m.top?inline=df%3D%5B%5Coverset%7B%5Ctext%7B~%7D%7D%7Bf%7D%5D" style="display:inline-block;margin: 0;"/>.</p>
+<h3 id="ding-li-men" id="定理们">定理们</h3>
+<p>隐映射定理/隐函数定理：<img data-src="https://latex2img.i207m.top?inline=C%5Er" style="display:inline-block;margin: 0;"/>映射<img data-src="https://latex2img.i207m.top?inline=g%3A%20V%28%5Csubset%20%5CR%5En%29%5Cto%20%5CR%5Em%2Cg(x_0)%3D0%2CJ(g(x_0))" style="display:inline-block;margin: 0;"/><strong>行满秩</strong>，则存在<img data-src="https://latex2img.i207m.top?inline=C%5Er" style="display:inline-block;margin: 0;"/>函数<img data-src="https://latex2img.i207m.top?inline=%5Cvarphi_1%20%5Cdots%20%5Cvarphi_m%2C%20st.%20g%28%5Cvarphi_1(x_%7Bm%2B1%7D%20%5Cdots%20x_n%29%2C%5Cdots%2Cx_%7Bm%2B1%7D%20%5Cdots%20x_n)%3D0" style="display:inline-block;margin: 0;"/>，且<img data-src="https://latex2img.i207m.top?inline=J%28%5Cvarphi%29%3D-J(g_%7B1...m%7D)%5E%7B-1%7DJ(g_%7Bm%2B1...n%7D)" style="display:inline-block;margin: 0;"/>。其中隐函数定理是局限在2维的版本。</p>
+<p><img data-src="https://img.i207m.top/2021/06_85725eb38523b2d95e61f16dbbb93e08.png" alt="image-20210625151549782"></p>
+<p>逆映射定理/反函数定理：<img data-src="https://latex2img.i207m.top?inline=C%5Er" style="display:inline-block;margin: 0;"/>映射<img data-src="https://latex2img.i207m.top?inline=g%3AV%28%5Csubset%20%5CR%5En%29%5Cto%20%5CR%5En%2CJ(g(x_0))%5Cneq0" style="display:inline-block;margin: 0;"/>，则存在<img data-src="https://latex2img.i207m.top?inline=g%5E%7B-1%7D" style="display:inline-block;margin: 0;"/>且<img data-src="https://latex2img.i207m.top?inline=J%28g%5E%7B-1%7D%29%3DJ(g)%5E%7B-1%7D" style="display:inline-block;margin: 0;"/></p>
+<p><img data-src="https://img.i207m.top/2021/06_4264b4b0267fc8e848c46fb78c1baf81.png" alt="image-20210625151810832"></p>
+<p>秩定理：</p>
+<p><img data-src="https://img.i207m.top/2021/06_480264a04a361fa2f97d7b598400d9aa.png" alt="image-20210622201650260"></p>
+<h2 id="qu-xian-he-qu-mian" id="曲线和曲面">曲线和曲面</h2>
+<p>光滑曲线：连续可导，且正则（各向导数不同时为0）</p>
+<p>零面积集：有限个矩形</p>
+<p><img data-src="https://img.i207m.top/2021/06_9144f1b96938746f26fc12329e653c8f.png" alt="image-20210625232532611"></p>
+<p>B有面积当且仅当B的边界<img data-src="https://latex2img.i207m.top?inline=%5Cpart%20B" style="display:inline-block;margin: 0;"/>是零面积集。</p>
+<h3 id="qu-lu-he-nao-lu" id="曲率和挠率">曲率和挠率</h3>
+<p><img data-src="https://i.loli.net/2021/04/18/3XOYQjhSimK9u8I.png" alt="image-20210418111625389"></p>
+<p>记住：</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%5Ckappa%28s%29%3D%5Cfrac%7B%7C%7Cr'(t)%5Ctimes%20r''(t)%7C%7C%7D%7B%7C%7Cr'(t)%7C%7C%5E3%7D%5C%5C%0A%5Ctau(x)%3D-%5Cfrac%7B%5Cdet(r'(t)%2Cr''(t)%2Cr'''(t))%7D%7B%7C%7Cr'(t)%5Ctimes%20r''(t)%7C%7C%5E2%7D%5C%5C%0Adt%2Fds%3D1%2F%7CC'(t)%7C%0A" /></p><h3 id="di-yi-xing-qu-xian-ji-fen" id="第一型曲线积分">第一型曲线积分</h3>
+<p><img data-src="https://img.i207m.top/2021/06_129282e59d95098f623c54285f7374ce.png" alt="image-20210624214125651"></p>
+<h3 id="di-er-xing-qu-mian-ji-fen" id="第二型曲面积分">第二型曲面积分</h3>
+<p><img data-src="https://img.i207m.top/2021/06_2b305db219879e52e02e4b1aa149ba05.png" alt="image-20210625111759021"></p>
+<h3 id="chang" id="场">场</h3>
+<p>div (divergence) 散度，即通量，<img data-src="https://latex2img.i207m.top?inline=%5Cnabla%20%5Ccdot%20f" style="display:inline-block;margin: 0;"/></p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%5Cmathbb%20%7Bdiv%7DF%3D%5Cfrac%7B%5Cpart%20P%7D%7B%5Cpart%20x%7D%2B%5Cfrac%7B%5Cpart%20Q%7D%7B%5Cpart%20y%7D%2B%5Cfrac%7B%5Cpart%20R%7D%7B%5Cpart%20z%7D%0A" /></p><p>rot (rotation) 旋度，即环量，<img data-src="https://latex2img.i207m.top?inline=%5Cnabla%20%5Ctimes%20f" style="display:inline-block;margin: 0;"/></p>
+<p><img data-src="https://img.i207m.top/2021/06_15b88ca06960de121dc93f6a120b2265.png" alt="image-20210624194726625"></p>
+<p><img data-src="https://img.i207m.top/2021/06_557d0fddb254b62174c0c4ee6b76c94c.png" alt="image-20210624194747163"></p>
+<p><img data-src="https://img.i207m.top/2021/06_9082d2137f01cd991541c384a79fd2fa.png" alt="image-20210625212324454"></p>
+<p>有势场 == 保守场 == 无旋场</p>
+<p>旋度场 == 无源场</p>
+<p><img data-src="https://latex2img.i207m.top?inline=F%3D%5Cnabla%20%5Ctimes%20G" style="display:inline-block;margin: 0;"/>，则G称为F的向量势，且对于任意连续可微函数<img data-src="https://latex2img.i207m.top?inline=%5Cvarphi" style="display:inline-block;margin: 0;"/>，有<img data-src="https://latex2img.i207m.top?inline=G%2B%5Cnabla%5Cvarphi" style="display:inline-block;margin: 0;"/>也是F的向量势。</p>
+<p><img data-src="https://latex2img.i207m.top?inline=%5CDelta%5CPhi%3D%5Cnabla%5Ccdot%28%5Cnabla%5CPhi%29%3D(%5Csum%5Cfrac%20%7B%5Cpart%5E2%7D%20%7B%5Cpart%20x_i%5E2%7D)%5CPhi" style="display:inline-block;margin: 0;"/></p>
+<h3 id="gong-shi-men" id="公式们">公式们</h3>
+<h4 id="green" id="Green">Green</h4>
+<p>把封闭曲线积分转为封闭区域的积分。</p>
+<p><img data-src="https://img.i207m.top/2021/06_6af6f669a8175a9d9a2011f453537e74.png" alt="image-20210625211253591"></p>
+<p><img data-src="https://img.i207m.top/2021/06_7037170ba4e5172074a06fa51dc0769a.png" alt="image-20210625211223796"></p>
+<p>对于<img data-src="https://latex2img.i207m.top?inline=%5CR%5E2" style="display:inline-block;margin: 0;"/>的单/多连通区域和连续函数来说，积分与路径无关 == 恰当微分。</p>
+<p>对于<img data-src="https://latex2img.i207m.top?inline=%5CR%5E2" style="display:inline-block;margin: 0;"/>的单连通区域和连续函数来说，积分与路径无关 == 恰当微分 == <img data-src="https://latex2img.i207m.top?inline=d%28Pdx%2BQdy%29%3D0" style="display:inline-block;margin: 0;"/>。</p>
+<h4 id="gauss" id="Gauss">Gauss</h4>
+<p>把封闭的曲面积分转为三重积分。</p>
+<p><img data-src="https://img.i207m.top/2021/06_429ce1449791b4527e6792c200db89a7.png" alt="image-20210624193947588"></p>
+<h4 id="stokes" id="Stokes">Stokes</h4>
+<p>把曲面的边界积分转为曲面积分。</p>
+<p><img data-src="https://img.i207m.top/2021/06_faa223eabf0c8d33b82120f04da9d868.png" alt="image-20210625212030532"></p>
+<p><img data-src="https://img.i207m.top/2021/06_58702f0d29991d0a6c7e057fed77ae45.png" alt="image-20210624194441696"></p>
+<p>其中<img data-src="https://latex2img.i207m.top?inline=t" style="display:inline-block;margin: 0;"/>是<img data-src="https://latex2img.i207m.top?inline=%5CGamma" style="display:inline-block;margin: 0;"/>的单位切向量。</p>
+<p>高维Stokes：</p>
+<p><img data-src="https://img.i207m.top/2021/06_8b2fbacda9617db9fe5c158e085b4ec5.png" alt="image-20210625213719043"></p>
+<h2 id="wei-ji-fen" id="微积分">微积分</h2>
+<p>几个积分的式子：</p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=I_m%3D%5Cint_0%5E%7B%5Cpi%2F2%7D%5Csin%5Em%28x%29d%20x%0A" /></p><p><img data-src="https://img.i207m.top/2021/05_3ab5802d0a6d772f1bb65a179ab6f3dc.png" alt="image-20210529132928742"></p>
+<p><img data-src="https://www.zhihu.com/equation?tex=%5Cbegin%7Balign%7D+%26I_n%3D%5Cint%5Cfrac%7Bdt%7D%7B(t%5E2%2Ba%5E2)%5En%7D(n%3E1%2Ca%3E0)%5C+%26I_n%3D%5Cfrac%7Bt%7D%7B(t%5E2%2Ba%5E2)%5En%7D%2B2nI_n-2na%5E2I_%7Bn%2B1%7D.%5C+%26I_1%3D%5Cfrac%7B1%7D%7Ba%7D%5Carctan%5Cfrac%7Bt%7D%7Ba%7D%2BC.+%5Cend%7Balign%7D" alt="[公式]"></p>
+<p><img data-src="https://www.zhihu.com/equation?tex=%5Cbegin%7Balign%7D+%5Cint%5Cfrac%7B%28Bx%2BC%29dx%7D%7Bx%5E2%2Bpx%2Bq%7D%26%3D%5Cint%5Cfrac%7B%5Cfrac%7BB%7D%7B2%7D%5B2%28x%2B%5Cfrac%7Bp%7D%7B2%7D-%5Cfrac%7Bp%7D%7B2%7D%29%5D%2BC%7D%7B%28x%2B%5Cfrac%7Bp%7D%7B2%7D%29%5E2%2B%28q-%5Cfrac%7Bp%5E2%7D%7B4%7D%29%7D+%5C%5C+%26%3D%5Cfrac%7BB%7D%7B2%7D%5Cint%5Cfrac%7Bd%28x%2B%5Cfrac%7Bp%7D%7B2%7D%29%5E2%7D%7B%28x%2B%5Cfrac%7Bp%7D%7B2%7D%29%5E2%2B%28q-%5Cfrac%7Bp%5E2%7D%7B4%7D%29%7D%2B%28C-%5Cfrac%7BBp%7D%7B2%7D%29%5Cint%5Cfrac%7Bdx%7D%7B%28x%2B%5Cfrac%7Bp%7D%7B2%7D%29%5E2%2B%28q-%5Cfrac%7Bp%5E2%7D%7B4%7D%29%7D+%5C%5C+%26%3D%5Cfrac%7BB%7D%7B2%7D%5Cln%7Cx%5E2%2Bpx%2Bq%7C%2B%5Cfrac%7BC-%5Cfrac%7BBp%7D%7B2%7D%7D%7B%5Csqrt%7Bq-%5Cfrac%7Bp%5E2%7D%7B4%7D%7D%7D%5Carctan%5Cfrac%7Bx%2B%5Cfrac%7Bp%7D%7B2%7D%7D%7B%5Csqrt%7Bq-%5Cfrac%7Bp%5E2%7D%7B4%7D%7D%7D%2BD.+%5Cend%7Balign%7D" alt="[公式]"></p>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%5Cint_%7B-%5Cinfin%7D%5E%7B%5Cinfin%7D%5Cfrac%7Bdx%7D%7Bx%5E2%2Bpx%2Bq%7D%3D%5Cfrac%7B%5Cpi%7D%7B%5Csqrt%7Bq-p%5E2%2F4%7D%7D%0A" /></p><p>极坐标换元的Jacobi行列式：</p>
+<p>二维：<img data-src="https://latex2img.i207m.top?inline=r" style="display:inline-block;margin: 0;"/></p>
+<p>三维：<img data-src="https://latex2img.i207m.top?inline=r%5E2%5Csin%5Ctheta" style="display:inline-block;margin: 0;"/>，其中<img data-src="https://latex2img.i207m.top?inline=x%3Dr%5Csin%5Ctheta%5Ccos%5Cphi" style="display:inline-block;margin: 0;"/></p>
+<p><img data-src="https://www.zhihu.com/equation?tex=%5Cbegin%7Bcases%7D+x_%7B1%7D%3Dr%5Ccos%5Cvarphi+_%7B1%7D+%5C%5C%5B1ex%5D+x_%7B2%7D%3Dr%5Csin%5Cvarphi_%7B1%7D%5Ccos%5Cvarphi_%7B2%7D+%5C%5C%5B1ex%5D+x_%7B3%7D%3Dr%5Csin%5Cvarphi_%7B1%7D%5Csin%5Cvarphi_%7B2%7D+%5C%5C%5B1ex%5D+%5Ccdot%5Ccdot%5Ccdot%5Ccdot%5Ccdot%5Ccdot+%5C%5C%5B1ex%5D+x_%7Bn-1%7D%3Dr%5Csin%5Cvarphi_%7B1%7D%5Ccdot%5Ccdot%5Ccdot+%5Csin%5Cvarphi_%7Bn-2%7D%5Ccos%5Cvarphi_%7Bn-1%7D+%5C%5C%5B1ex%5D+x_%7Bn%7D%3Dr%5Csin%5Cvarphi_%7B1%7D%5Ccdot%5Ccdot%5Ccdot+%5Csin%5Cvarphi_%7Bn-2%7D%5Csin%5Cvarphi_%7Bn-1%7D+%5Cend%7Bcases%7D" alt="[公式]"></p>
+<p><img data-src="https://www.zhihu.com/equation?tex=%5Cmathcal%7BJ%7D%3D+r%5E%7Bn-1%7D%5Csin%5E%7Bn-2%7D%5Cvarphi_%7B1%7D%5Csin%5E%7Bn-3%7D%5Cvarphi_%7B2%7D...%5Csin%5Cvarphi_%7Bn-2%7D" alt="[公式]"></p>
+<p><img data-src="https://img.i207m.top/2021/06_1bead718db321699f6003992640dc81d.png" alt="image-20210625142409891"></p>
+<h3 id="san-jiao-han-shu" id="三角函数">三角函数</h3>
+<p><img data-src="https://img.i207m.top/2021/06_4f99249962c348b4fa1c78f4a14e385f.jpeg" alt="img"></p>
+<h4 id="fan-san-jiao-han-shu" id="反三角函数">反三角函数</h4>
+<p><img data-src="https://img.i207m.top/2021/06_5d161f6d1401f8bf239e376cb081d71e.png" alt="image-20210625213007627"></p>
+<h4 id="shuang-qu-san-jiao-han-shu" id="双曲三角函数">双曲三角函数</h4>
+<p><img data-src="https://img.i207m.top/2021/06_e870ffad268d717239a122118430bd75.png" alt="image-20210625212559581"></p>
+<p><img data-src="https://img.i207m.top/2021/06_5a22949c4c33e64fc0d7ee472da717e4.png" alt="image-20210625212820059"></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/20042215">https://zhuanlan.zhihu.com/p/20042215</a></p>
+<p><img data-src="https://img.i207m.top/2021/06_e7717805f75040d12ad40be2541e89bc.png" alt="image-20210625210938405"></p>
+<h2 id="xian-xing-dai-shu" id="线性代数">线性代数</h2>
+<h3 id="zheng-jiao-ju-zhen" id="正交矩阵">正交矩阵</h3>
+<p>注意到<img data-src="https://latex2img.i207m.top?inline=I%3DAA%5ET" style="display:inline-block;margin: 0;"/> ，也就是说矩阵的行（或列）向量之间点积等于0（向量正交），行（或列）向量与自身的点积等于1（单位向量），所以正交矩阵又有另一种定义：由行之间两两正交、列之间两两正交的单位向量组成的方阵。</p>
+<h2 id="ji-qiao-amp-zhu-yi-shi-xiang" id="技巧-注意事项">技巧&amp;注意事项</h2>
+<p style=""><img data-src="https://latex2img.i207m.top?from=%7C%7Ca%7C%7C%5E2%7C%7Cb%7C%7C%5E2-%28a%5Ccdot%20b%29%5E2%3D%7C%7Ca%5Ctimes%20b%7C%7C%5E2%5Cge%200%0A" /></p><p>证明闭集：</p>
+<ul>
+<li>补集是开集</li>
+<li>对取极限封闭</li>
+<li><img data-src="https://latex2img.i207m.top?inline=%5Cbar%20A%3DA" style="display:inline-block;margin: 0;"/></li>
+</ul>
+<p>连续映射：开集的原象是开集</p>
+<p>子空间拓扑</p>
+<p>注意球坐标换元后变量的范围：<img data-src="https://latex2img.i207m.top?inline=%5Ctheta%5Cin%5B0%2C%5Cpi%5D%2C%5Cphi%20%5Cin%20%5B0%2C2%5Cpi%5D" style="display:inline-block;margin: 0;"/>。高维情况类似，只有最后一个角（也就是出现全<img data-src="https://latex2img.i207m.top?inline=%5Csin" style="display:inline-block;margin: 0;"/>的）的范围是<img data-src="https://latex2img.i207m.top?inline=%5B0%2C2%5Cpi%5D" style="display:inline-block;margin: 0;"/></p>
+<p>证明某个区间都满足某个性质的方法：设<img data-src="https://latex2img.i207m.top?inline=c%3D%5Csup%5C%7Bc%5Cin%20%5Ba%2Cb%5D~%7C~%5Ba%2Cc%5D%5Cdots%5C%7D" style="display:inline-block;margin: 0;"/></p>
+<p>利用连通性、开集来证明</p>
+<p>多元微积分泰勒公式</p>
+<p>拟微分平均值定理</p>
+<p>化为一元</p>
+<p>很多时候直观是错的，或者说直观只在一维成立。但是可以用直观进行验证，例如简单的等式。</p>
+<p>用对称性简化运算！</p>
+<p>配方</p>
+<p>聚点定理+开覆盖证明和闭集有关的定理。</p>
+<hr>
+<p>似乎周坚的考试题有一部分出自《组合优化》</p>
+<p>让我预言一下明天考什么：</p>
+<p>格林公式，等周问题，麦克斯韦方程组，角形式</p>
+<p>周坚习题课上埋的伏笔：</p>
+<p>高斯积分，傅里叶分析，椭圆积分</p>
+<p><img data-src="https://img.i207m.top/2021/06_26887da159ddc0a098135991225a747a.png" alt="image-20210625232125630"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/Python,-Are-you-kidding-me/" rel="prev" title="Python, Are you kidding me?">
+      <i class="fa fa-chevron-left"></i> Python, Are you kidding me?
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/Advanced-Linear-Algebra(2)/" rel="next" title="Advanced Linear Algebra(2)">
+      Advanced Linear Algebra(2) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#duo-yuan-wei-fen"><span class="nav-number">1.</span> <span class="nav-text">多元微分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dui-ti-du-de-li-jie"><span class="nav-number">1.1.</span> <span class="nav-text">对梯度的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dui-duo-yuan-wei-ji-fen-zhong-img-src-https-latex-2-img-i-207-m-top-inline-5-cmathbb-20-d-style-display-inline-block-margin-0-de-li-jie"><span class="nav-number">1.2.</span> <span class="nav-text">对多元微积分中的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ding-li-men"><span class="nav-number">1.3.</span> <span class="nav-text">定理们</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qu-xian-he-qu-mian"><span class="nav-number">2.</span> <span class="nav-text">曲线和曲面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#qu-lu-he-nao-lu"><span class="nav-number">2.1.</span> <span class="nav-text">曲率和挠率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#di-yi-xing-qu-xian-ji-fen"><span class="nav-number">2.2.</span> <span class="nav-text">第一型曲线积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#di-er-xing-qu-mian-ji-fen"><span class="nav-number">2.3.</span> <span class="nav-text">第二型曲面积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chang"><span class="nav-number">2.4.</span> <span class="nav-text">场</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gong-shi-men"><span class="nav-number">2.5.</span> <span class="nav-text">公式们</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#green"><span class="nav-number">2.5.1.</span> <span class="nav-text">Green</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gauss"><span class="nav-number">2.5.2.</span> <span class="nav-text">Gauss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stokes"><span class="nav-number">2.5.3.</span> <span class="nav-text">Stokes</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wei-ji-fen"><span class="nav-number">3.</span> <span class="nav-text">微积分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#san-jiao-han-shu"><span class="nav-number">3.1.</span> <span class="nav-text">三角函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fan-san-jiao-han-shu"><span class="nav-number">3.1.1.</span> <span class="nav-text">反三角函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shuang-qu-san-jiao-han-shu"><span class="nav-number">3.1.2.</span> <span class="nav-text">双曲三角函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xian-xing-dai-shu"><span class="nav-number">4.</span> <span class="nav-text">线性代数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zheng-jiao-ju-zhen"><span class="nav-number">4.1.</span> <span class="nav-text">正交矩阵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ji-qiao-amp-zhu-yi-shi-xiang"><span class="nav-number">5.</span> <span class="nav-text">技巧&amp;注意事项</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="i207M"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">i207M</p>
+  <div class="site-description" itemprop="description">i207M's Fantastic Blog - Love</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/i207M" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;i207M" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:connect_at_mail.i207m.top" title="E-Mail → mailto:connect_at_mail.i207m.top" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-fas fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/i207M/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;i207M&#x2F;" rel="noopener" target="_blank">Luogu Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://speranzaleaf.github.io/" title="https:&#x2F;&#x2F;speranzaleaf.github.io&#x2F;" rel="noopener" target="_blank">Speranza Leaf</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kamome.moe/" title="https:&#x2F;&#x2F;kamome.moe&#x2F;" rel="noopener" target="_blank">Siunaus</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/cjyyb/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;cjyyb&#x2F;" rel="noopener" target="_blank">yyb</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nekko.moe/" title="https:&#x2F;&#x2F;nekko.moe&#x2F;" rel="noopener" target="_blank">nekko</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/zjp-shadow/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zjp-shadow&#x2F;" rel="noopener" target="_blank">zjp_shadow</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ywy-c-asm.cn/" title="https:&#x2F;&#x2F;www.ywy-c-asm.cn&#x2F;" rel="noopener" target="_blank">ywy_c_asm</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/Miracevin/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Miracevin&#x2F;" rel="noopener" target="_blank">Miracle</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hahamengbier.top/" title="https:&#x2F;&#x2F;hahamengbier.top&#x2F;" rel="noopener" target="_blank">mengbier</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">i207M</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+    </div>
+</body>
+</html>

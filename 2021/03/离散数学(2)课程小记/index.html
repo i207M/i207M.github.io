@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.i207m.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="学习离散数学(2)过程中的一些记录。 图论 道路与回路 简单道路：边不重复 初级道路：点不重复 12345回路：起点终点相同简单通路：起点到终点所经过的边不同简单回路：起点到终点所经过的边不同+回路初级通路：起点到终点所经过的顶点各异+简单通路初级回路&#x2F;圈：起点到终点所经过的顶点除起点终点相同外，其余顶点各异+简单回路  如果简单图G的任意两结点之间恒有，则G中存在哈密顿回路。 如果简单图G的任意">
+<meta property="og:type" content="article">
+<meta property="og:title" content="离散数学(2)课程小记">
+<meta property="og:url" content="https://blog.i207m.top/2021/03/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6(2)%E8%AF%BE%E7%A8%8B%E5%B0%8F%E8%AE%B0/index.html">
+<meta property="og:site_name" content="i207M&#39;s Fantastic Blog">
+<meta property="og:description" content="学习离散数学(2)过程中的一些记录。 图论 道路与回路 简单道路：边不重复 初级道路：点不重复 12345回路：起点终点相同简单通路：起点到终点所经过的边不同简单回路：起点到终点所经过的边不同+回路初级通路：起点到终点所经过的顶点各异+简单通路初级回路&#x2F;圈：起点到终点所经过的顶点除起点终点相同外，其余顶点各异+简单回路  如果简单图G的任意两结点之间恒有，则G中存在哈密顿回路。 如果简单图G的任意">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=d%28a%29%2Bd(b)%5Cge%20n">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=d%28a%29%2Bd(b)%5Cge%20n-1">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=v_1%2Cv_2%2C%E2%8B%AF%2Cv_k">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=G-v_1-v_2-%E2%8B%AF-v_k">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cle%202">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=BB%5ET">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=K%3DD-A">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=v">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=r%28C_e%29%3Dm-n%2B1">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=BC%5ET_e%3D0">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=C_e%3DPC_f">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=C_f%3D%28I~~C_%7Bf12%7D%29%3D(%E4%BD%99%E6%A0%91%E8%BE%B9~~%E6%A0%91%E8%BE%B9)">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=C_%7Bf12%7D%3D-B_%7B11%7D%5ETB_%7B12%7D%5E%7B-T%7D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Ctext%7B%E5%9F%BA%E6%9C%AC%E5%85%B3%E8%81%94%E7%9F%A9%E9%98%B5%7D%3D%28B_%7B11%7D~~B_%7B12%7D%29">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=r%28S_e%29%3Dn-1">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=S_eC_e%5ET%3D0">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=S_e%3DPS_f">
+<meta property="og:image" content="https://i.loli.net/2021/03/30/rHdvIGEPcCx4yKD.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=S_f%3D%28S_%7Bf11%7D~~I%29">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=S_%7Bf11%7D%3D-C_%7Bf12%7D%5ET%3DB_%7B12%7D%5E%7B-1%7DB_%7B11%7D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=n-m%2Bd%3Dk">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=d%2Ck">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=3d%5Cle%202m">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%3C6">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=m%3D3n-6%2Cd%3D2n-4%2C3d%3D2m">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=K_3">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=m%5Cle%202n-4%2C4d%5Cle%202m">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=n%5Cge%204">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=m%3C9~%5Ctt%7Bor%7D~n%3C5">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%28G%5E*%29%5E*%3DG">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/edPiazB3H5OLZRW.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/13/W7jTZE15G6aduei.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=G*">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=b%5Bi%5D%5Bj%5D%3DL_x%5Bi%5D%2BL_y%5Bj%5D-c%5Bi%5D%5Bj%5D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cexist%20g%5Cin%20M%2Cst.%20%5Cforall%20a%5Cin%20M%2C%20a%3Dg%5Em">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cmin%5C%7Bk~%7C~a%5Ek%3De%5C%7D%3D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cexist%20a%5Cin%20G%2Cst.%20G%3D%5C%7Ba%5Ek%7Ck%5Cin%20%5CZ%5C%7D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cvarphi%28n%29">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%2B%5Cinfin">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=a%2Ca%5E%7B-1%7D">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=k%3D%5Cmin%5C%7Bk~%7C~a%5Ek%5Cin%20H%5C%7D%2C%7CH%7C%3Dn%2Fk">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5CZ_n">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5BG%3A1%5D%3D%5BG%3AH%5D%5BH%3A1%5D">
+<meta property="og:image" content="https://img.i207m.top/2021/06_cf44d1628aa5f21e107d79890d4494b5.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_d0f619f64b438d4da178a1e4381379cd.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_0ec62ac6ff211de21644a25ac7c807e7.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=d_u%2Bd_v%5Cge%20n">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=G-%7CS%7C">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=d%28u%29%3En%2F2%5CRightarrow">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5CRightarrow">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=%5Cge3">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=a%2Cb%5Cin%20H%2Cab%5E%7B-1%7D%5Cin%20H">
+<meta property="og:image" content="https://img.i207m.top/2021/06_913cdf8740216676dc9da8e766682da6.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_e2d9a49d395dbcd6da7077ff24f8b923.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_13f98991f6fbd05765453f21362be780.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_79547e912183fc2eca32af1ebbaf9e30.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_13489c25332d51bfafad1dac32e93f54.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_5670aced9a445d2c22d2b25640a4c0ee.png">
+<meta property="og:image" content="https://latex2img.i207m.top?inline=d%28%3E1%29">
+<meta property="og:image" content="https://img.i207m.top/2021/06_d3f5a8ee40744ebaf1e7f81a88f7523d.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_1c4708f0c5ffc7bc651a1992183b6432.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_f271ff5b0d2575cde0f796ad9631d21b.png">
+<meta property="og:image" content="https://img.i207m.top/2021/06_22c777e3d12453a39396b0f00ba6348c.png">
+<meta property="article:published_time" content="2021-03-11T04:22:08.000Z">
+<meta property="article:modified_time" content="2025-03-05T01:24:34.779Z">
+<meta property="article:author" content="i207M">
+<meta property="article:tag" content="离散数学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://latex2img.i207m.top?inline=d%28a%29%2Bd(b)%5Cge%20n">
+
+<link rel="canonical" href="https://blog.i207m.top/2021/03/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6(2)%E8%AF%BE%E7%A8%8B%E5%B0%8F%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+
+  <title>离散数学(2)课程小记 | i207M's Fantastic Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="i207M's Fantastic Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">i207M's Fantastic Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-留言">
+
+    <a href="/messages/" rel="section"><i class="fa fa-fw fa-comments"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.i207m.top/2021/03/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6(2)%E8%AF%BE%E7%A8%8B%E5%B0%8F%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="i207M">
+      <meta itemprop="description" content="i207M's Fantastic Blog - Love">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="i207M's Fantastic Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          离散数学(2)课程小记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-11 12:22:08" itemprop="dateCreated datePublished" datetime="2021-03-11T12:22:08+08:00">2021-03-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">课程</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>学习离散数学(2)过程中的一些记录。</p>
+<h2 id="tu-lun" id="图论">图论</h2>
+<h3 id="dao-lu-yu-hui-lu" id="道路与回路">道路与回路</h3>
+<p>简单道路：边不重复</p>
+<p>初级道路：点不重复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">回路：起点终点相同</span><br><span class="line">简单通路：起点到终点所经过的边不同</span><br><span class="line">简单回路：起点到终点所经过的边不同+回路</span><br><span class="line">初级通路：起点到终点所经过的顶点各异+简单通路</span><br><span class="line">初级回路/圈：起点到终点所经过的顶点除起点终点相同外，其余顶点各异+简单回路</span><br></pre></td></tr></table></figure>
+<div class="info">
+<p>如果简单图G的任意两结点之间恒有<img data-src="https://latex2img.i207m.top?inline=d%28a%29%2Bd(b)%5Cge%20n" style="display:inline-block;margin: 0;"/>，则G中存在哈密顿回路。</p>
+<p>如果简单图G的任意两结点之间恒有<img data-src="https://latex2img.i207m.top?inline=d%28a%29%2Bd(b)%5Cge%20n-1" style="display:inline-block;margin: 0;"/>，则G中存在哈密顿道路。</p>
+<p>此定理的证明妙啊！</p>
+</div>
+<p>如果图G有哈密顿回路，那么任取k个点<img data-src="https://latex2img.i207m.top?inline=v_1%2Cv_2%2C%E2%8B%AF%2Cv_k" style="display:inline-block;margin: 0;"/>，则<img data-src="https://latex2img.i207m.top?inline=G-v_1-v_2-%E2%8B%AF-v_k" style="display:inline-block;margin: 0;"/>的连通分支不会超过k个。</p>
+<p>哈密顿回路问题可转化到闭合图上。</p>
+<div class="success">
+<p>有关道路、回路的题目的证明技巧：以最长初级道路为基础。</p>
+</div>
+<p>在满足三角不等式的前提下，TSP问题的便宜算法得出的近似解与实际最优解之比<img data-src="https://latex2img.i207m.top?inline=%5Cle%202" style="display:inline-block;margin: 0;"/>.</p>
+<p>邮递员问题（中国邮路问题）的充分必要条件的证明也很妙啊！</p>
+<ul>
+<li>G的每条边最多重复1次</li>
+<li>G的任一回路上重复边的长度之和不超过该回路长度的一半</li>
+</ul>
+<h3 id="shu" id="树">树</h3>
+<p>基本关联矩阵：关联矩阵去掉一行。</p>
+<p>生成树计数的矩阵<img data-src="https://latex2img.i207m.top?inline=BB%5ET" style="display:inline-block;margin: 0;"/>的结果就是基尔霍夫矩阵<img data-src="https://latex2img.i207m.top?inline=K%3DD-A" style="display:inline-block;margin: 0;"/>.</p>
+<p>必经某边的（有向）生成树计数：将<img data-src="https://latex2img.i207m.top?inline=v" style="display:inline-block;margin: 0;"/>的其他入边删除；或原答案-删边后的答案。</p>
+<h4 id="hui-lu-ju-zhen" id="回路矩阵">回路矩阵</h4>
+<p>完全回路矩阵：</p>
+<ul>
+<li><img data-src="https://latex2img.i207m.top?inline=r%28C_e%29%3Dm-n%2B1" style="display:inline-block;margin: 0;"/>. 证明从两个方向。</li>
+<li><img data-src="https://latex2img.i207m.top?inline=BC%5ET_e%3D0" style="display:inline-block;margin: 0;"/>. 证明方法：对回路与点的相关性进行分析。</li>
+<li><img data-src="https://latex2img.i207m.top?inline=C_e%3DPC_f" style="display:inline-block;margin: 0;"/></li>
+</ul>
+<p>基本回路矩阵：回路仅含一条非树边，可以写为<img data-src="https://latex2img.i207m.top?inline=C_f%3D%28I~~C_%7Bf12%7D%29%3D(%E4%BD%99%E6%A0%91%E8%BE%B9~~%E6%A0%91%E8%BE%B9)" style="display:inline-block;margin: 0;"/>.</p>
+<ul>
+<li><img data-src="https://latex2img.i207m.top?inline=C_%7Bf12%7D%3D-B_%7B11%7D%5ETB_%7B12%7D%5E%7B-T%7D" style="display:inline-block;margin: 0;"/>（其中<img data-src="https://latex2img.i207m.top?inline=%5Ctext%7B%E5%9F%BA%E6%9C%AC%E5%85%B3%E8%81%94%E7%9F%A9%E9%98%B5%7D%3D%28B_%7B11%7D~~B_%7B12%7D%29" style="display:inline-block;margin: 0;"/>）. 感觉很神奇，我还不太理解逆矩阵的几何意义。</li>
+</ul>
+<h4 id="ge-ji-ju-zhen" id="割集矩阵">割集矩阵</h4>
+<p>割集：要求“最小”。</p>
+<p>完全割集矩阵：</p>
+<ul>
+<li><img data-src="https://latex2img.i207m.top?inline=r%28S_e%29%3Dn-1" style="display:inline-block;margin: 0;"/></li>
+<li><img data-src="https://latex2img.i207m.top?inline=S_eC_e%5ET%3D0" style="display:inline-block;margin: 0;"/></li>
+<li><img data-src="https://latex2img.i207m.top?inline=S_e%3DPS_f" style="display:inline-block;margin: 0;"/></li>
+</ul>
+<p>基本割集：</p>
+<p><img data-src="https://i.loli.net/2021/03/30/rHdvIGEPcCx4yKD.png" alt="image-20210330114547686"></p>
+<p>基本割集矩阵：仅含一条树边，可以写为<img data-src="https://latex2img.i207m.top?inline=S_f%3D%28S_%7Bf11%7D~~I%29" style="display:inline-block;margin: 0;"/></p>
+<ul>
+<li><img data-src="https://latex2img.i207m.top?inline=S_%7Bf11%7D%3D-C_%7Bf12%7D%5ET%3DB_%7B12%7D%5E%7B-1%7DB_%7B11%7D" style="display:inline-block;margin: 0;"/>. 这更神奇了。</li>
+</ul>
+<div class="warning">
+<p>无法直观理解…</p>
+</div>
+<h3 id="ping-mian-tu" id="平面图">平面图</h3>
+<p>平面图：<img data-src="https://latex2img.i207m.top?inline=n-m%2Bd%3Dk" style="display:inline-block;margin: 0;"/>，<img data-src="https://latex2img.i207m.top?inline=d%2Ck" style="display:inline-block;margin: 0;"/>分别为域、连通块数量。</p>
+<p>因为没有割边，所以每条边都与两个不同的域相邻。域边界数对域求和等于2m.</p>
+<p>简单平面图<img data-src="https://latex2img.i207m.top?inline=3d%5Cle%202m" style="display:inline-block;margin: 0;"/>，一定存在度数<img data-src="https://latex2img.i207m.top?inline=%3C6" style="display:inline-block;margin: 0;"/>的节点。</p>
+<p>极大平面图<img data-src="https://latex2img.i207m.top?inline=m%3D3n-6%2Cd%3D2n-4%2C3d%3D2m" style="display:inline-block;margin: 0;"/>.</p>
+<p>若简单图G不含<img data-src="https://latex2img.i207m.top?inline=K_3" style="display:inline-block;margin: 0;"/>子图，则有<img data-src="https://latex2img.i207m.top?inline=m%5Cle%202n-4%2C4d%5Cle%202m" style="display:inline-block;margin: 0;"/>.</p>
+<p><img data-src="https://latex2img.i207m.top?inline=n%5Cge%204" style="display:inline-block;margin: 0;"/>的极大平面图，每个点的度数大于等于3.</p>
+<p>若<img data-src="https://latex2img.i207m.top?inline=m%3C9~%5Ctt%7Bor%7D~n%3C5" style="display:inline-block;margin: 0;"/>，则G可平面。</p>
+<p>判定图的平面性：先按连通块、割点拆开。然后循环：去掉度为2的点，去掉重边。</p>
+<p>若G是平面连通图，则<img data-src="https://latex2img.i207m.top?inline=%28G%5E*%29%5E*%3DG" style="display:inline-block;margin: 0;"/>.</p>
+<p>G有对偶图等价于G为平面图。</p>
+<p>平面图的对偶图是平面图。</p>
+<p><img data-src="https://i.loli.net/2021/04/12/edPiazB3H5OLZRW.png" alt="image-20210412192445421"></p>
+<p><img data-src="https://i.loli.net/2021/04/13/W7jTZE15G6aduei.png" alt="image-20210413103111065"></p>
+<h3 id="tu-de-zhao-se" id="图的着色">图的着色</h3>
+<p>非空图的色数=2当且仅当没有奇回路。</p>
+<p>平面连通图的域可以2着色当且仅当G中存在欧拉回路。</p>
+<blockquote>
+<p>必要性：</p>
+<p>无奇回路 -&gt; 域边界数为偶数 -&gt; 再对偶，原图点度为偶数 -&gt; 有欧拉回路</p>
+<p>充分性同理。</p>
+</blockquote>
+<p><img data-src="https://latex2img.i207m.top?inline=G*" style="display:inline-block;margin: 0;"/>点2着色当且仅当连通图G有欧拉回路。</p>
+<hr>
+<div class="success">
+<p>习题课对知识的讲解不错</p>
+</div>
+<p>匹配与网络流、图的连通性：鸽了</p>
+<p>补一个最佳匹配算法：</p>
+<ol>
+<li>
+<p>每行每列有一个界值，初始时每行的界值为本行最大值，每列的界值为0，行列界值之和将会是答案</p>
+</li>
+<li>
+<p>构造矩阵B，<img data-src="https://latex2img.i207m.top?inline=b%5Bi%5D%5Bj%5D%3DL_x%5Bi%5D%2BL_y%5Bj%5D-c%5Bi%5D%5Bj%5D" style="display:inline-block;margin: 0;"/></p>
+</li>
+<li>
+<p>对0进行最小覆盖，直到覆盖数=n</p>
+</li>
+<li>
+<p>否则，在未覆盖元素中选择最小非零元a，把a调成0。（也就是若i行j列已覆盖，+a；）若i行j列未覆盖，-a</p>
+<p>修改界值，行取最大值，也就是没覆盖的行-a；已覆盖的列+a</p>
+</li>
+<li>
+<p>于是重新求最小覆盖</p>
+</li>
+</ol>
+<hr>
+<h2 id="dai-shu-jie-gou" id="代数结构">代数结构</h2>
+<h3 id="gai-nian" id="概念">概念</h3>
+<p>代数系统：集合+若干运算</p>
+<p><strong>半群</strong>：集合+一个二元运算满足结合律</p>
+<p>(含)幺(半)群：半群+单位元=结合律+单位元</p>
+<p>交换幺群：幺群+交换律</p>
+<p>循环幺群：幺群，且<img data-src="https://latex2img.i207m.top?inline=%5Cexist%20g%5Cin%20M%2Cst.%20%5Cforall%20a%5Cin%20M%2C%20a%3Dg%5Em" style="display:inline-block;margin: 0;"/></p>
+<p><strong>群</strong>：所有元素都可逆的含幺半群=结合律+单位元+可逆</p>
+<p>交换群、阿贝尔群：满足交换律的群</p>
+<p>阶：群G中元素a，<img data-src="https://latex2img.i207m.top?inline=%5Cmin%5C%7Bk~%7C~a%5Ek%3De%5C%7D%3D" style="display:inline-block;margin: 0;"/>O&lt;a&gt;，称为a的阶或周期。群的阶数是元素的个数。</p>
+<p>循环群：群，且<img data-src="https://latex2img.i207m.top?inline=%5Cexist%20a%5Cin%20G%2Cst.%20G%3D%5C%7Ba%5Ek%7Ck%5Cin%20%5CZ%5C%7D" style="display:inline-block;margin: 0;"/></p>
+<h3 id="ding-li" id="定理">定理</h3>
+<p>半群（幺群）的满同态也是半群（幺群）。</p>
+<p>设G=&lt;a&gt;, O&lt;a&gt;=n，则G有<img data-src="https://latex2img.i207m.top?inline=%5Cvarphi%28n%29" style="display:inline-block;margin: 0;"/>个生成元；若O&lt;a&gt;=<img data-src="https://latex2img.i207m.top?inline=%2B%5Cinfin" style="display:inline-block;margin: 0;"/>，则生成元只有<img data-src="https://latex2img.i207m.top?inline=a%2Ca%5E%7B-1%7D" style="display:inline-block;margin: 0;"/>。</p>
+<p>循环群的子群也是循环群。若还是无限群，则子群也是无限群；若有限群，则<img data-src="https://latex2img.i207m.top?inline=k%3D%5Cmin%5C%7Bk~%7C~a%5Ek%5Cin%20H%5C%7D%2C%7CH%7C%3Dn%2Fk" style="display:inline-block;margin: 0;"/>。</p>
+<p>n阶循环群和<img data-src="https://latex2img.i207m.top?inline=%5CZ_n" style="display:inline-block;margin: 0;"/>同构。</p>
+<p><strong>Cayley定理</strong>：任意群G和一个变换群同构。</p>
+<p><strong>Lagrange定理</strong>：设G是有限群，H是G的子群，则<img data-src="https://latex2img.i207m.top?inline=%5BG%3A1%5D%3D%5BG%3AH%5D%5BH%3A1%5D" style="display:inline-block;margin: 0;"/></p>
+<hr>
+<p>以下是复习时写的：</p>
+<h2 id="fu-xi" id="复习">复习</h2>
+<h3 id="jing-dian-jie-lun" id="经典结论">经典结论</h3>
+<p>6个人中如果没有3个人互相认识，则至少有3个人相互不认识。</p>
+<p>点的度数和为偶数。</p>
+<p><strong>Hall定理</strong>：完全匹配的充要条件$\forall A\subset X,|\Gamma(A)|\ge |A| $.</p>
+<p><img data-src="https://img.i207m.top/2021/06_cf44d1628aa5f21e107d79890d4494b5.png" alt="image-20210614101145370"></p>
+<p><img data-src="https://img.i207m.top/2021/06_d0f619f64b438d4da178a1e4381379cd.png" alt="image-20210614100454334"></p>
+<p>二分图的最大匹配数r，与其邻接矩阵的最小覆盖数s相等。</p>
+<p>无割点的等价性质：</p>
+<p><img data-src="https://img.i207m.top/2021/06_0ec62ac6ff211de21644a25ac7c807e7.png" alt="image-20210614212644991"></p>
+<h3 id="zheng-ming-ji-qiao" id="证明技巧">证明技巧</h3>
+<p>度数对边求和，得到的是度数的平方。</p>
+<p>极长道路的端点的出边都在道路上。</p>
+<p>构造性的证明。先假设存在小回路，然后每次扩展一个点。</p>
+<h3 id="ha-mi-dun-hui-lu-xiang-guan" id="哈密顿回路相关">哈密顿回路相关</h3>
+<ul>
+<li><img data-src="https://latex2img.i207m.top?inline=d_u%2Bd_v%5Cge%20n" style="display:inline-block;margin: 0;"/></li>
+<li><img data-src="https://latex2img.i207m.top?inline=G-%7CS%7C" style="display:inline-block;margin: 0;"/>的连通分支不超过|S|个</li>
+<li>闭合图</li>
+<li>证明没有H回路：
+<ul>
+<li>二分图黑白点个数相同</li>
+<li><img data-src="https://latex2img.i207m.top?inline=d%28u%29%3En%2F2%5CRightarrow" style="display:inline-block;margin: 0;"/>存在H回路上相邻的点，两点都和A相连</li>
+</ul>
+</li>
+</ul>
+<p>拼不等式，通过某项把两个方向的不等式连起来。</p>
+<p>每两个面之间最多一条公共边<img data-src="https://latex2img.i207m.top?inline=%5CRightarrow" style="display:inline-block;margin: 0;"/>每个点度数<img data-src="https://latex2img.i207m.top?inline=%5Cge3" style="display:inline-block;margin: 0;"/>.</p>
+<p><strong>构造集合</strong>。</p>
+<p>H是G的子群的充要条件是：对于任意的<img data-src="https://latex2img.i207m.top?inline=a%2Cb%5Cin%20H%2Cab%5E%7B-1%7D%5Cin%20H" style="display:inline-block;margin: 0;"/>.</p>
+<h3 id="qi-fa-xing-de-zheng-ming" id="启发性的证明">启发性的证明</h3>
+<p><img data-src="https://img.i207m.top/2021/06_913cdf8740216676dc9da8e766682da6.png" alt="image-20210612104635519"></p>
+<p><img data-src="https://img.i207m.top/2021/06_e2d9a49d395dbcd6da7077ff24f8b923.png" alt="image-20210612111701535"></p>
+<p><img data-src="https://img.i207m.top/2021/06_13f98991f6fbd05765453f21362be780.png" alt="image-20210612163026019"></p>
+<p><img data-src="https://img.i207m.top/2021/06_79547e912183fc2eca32af1ebbaf9e30.png" alt="image-20210612231540202"></p>
+<p><strong>五色猜想</strong></p>
+<p><img data-src="https://img.i207m.top/2021/06_13489c25332d51bfafad1dac32e93f54.png" alt="image-20210615155353502"></p>
+<p><img data-src="https://img.i207m.top/2021/06_5670aced9a445d2c22d2b25640a4c0ee.png" alt="image-20210614101002418"></p>
+<p>设简单连通图G的节点数是15,其中8个点的度是4，6个点的度是6，一个点的度是8，证明：G是非平面图。</p>
+<p><strong>证明</strong>：因为每个结点的度都是偶数。所以存在欧拉回路。所以G的域可以2着色。</p>
+<p>极大平面图的域都是三角形，而且满足m=3n-6. 由计算可知，G的边数比极大平面图正好少了1. 也即，G中除了一个域的边数是4，其余的边数是3. 即，除了一个域的边数不能被3整除，其余均可被3整除。所以G的域不可2着色。推出矛盾。</p>
+<hr>
+<p>若无割边的平面图除一个域外，其余各域的边界数都可以被<img data-src="https://latex2img.i207m.top?inline=d%28%3E1%29" style="display:inline-block;margin: 0;"/>整除，则G的域不可被二着色。</p>
+<p><strong>证明</strong>：从度数奇偶性入手。</p>
+<p><img data-src="https://img.i207m.top/2021/06_d3f5a8ee40744ebaf1e7f81a88f7523d.png" alt="image-20210614101427714"></p>
+<p><img data-src="https://img.i207m.top/2021/06_1c4708f0c5ffc7bc651a1992183b6432.png" alt="image-20210614194146863"></p>
+<p><img data-src="https://img.i207m.top/2021/06_f271ff5b0d2575cde0f796ad9631d21b.png" alt="image-20210614194316820"></p>
+<p><img data-src="https://img.i207m.top/2021/06_22c777e3d12453a39396b0f00ba6348c.png" alt="image-20210614234340904"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 离散数学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E3%80%8A%E5%9B%BE%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84%E3%80%8B%E7%AC%AC3%E5%91%A8%E4%B9%A0%E9%A2%98/" rel="prev" title="离散数学《图论与代数结构》第3周习题">
+      <i class="fa fa-chevron-left"></i> 离散数学《图论与代数结构》第3周习题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/PI---Pomodoro-Improved-%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/" rel="next" title="PI - Pomodoro Improved 插件开发">
+      PI - Pomodoro Improved 插件开发 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tu-lun"><span class="nav-number">1.</span> <span class="nav-text">图论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dao-lu-yu-hui-lu"><span class="nav-number">1.1.</span> <span class="nav-text">道路与回路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shu"><span class="nav-number">1.2.</span> <span class="nav-text">树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#hui-lu-ju-zhen"><span class="nav-number">1.2.1.</span> <span class="nav-text">回路矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ge-ji-ju-zhen"><span class="nav-number">1.2.2.</span> <span class="nav-text">割集矩阵</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ping-mian-tu"><span class="nav-number">1.3.</span> <span class="nav-text">平面图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tu-de-zhao-se"><span class="nav-number">1.4.</span> <span class="nav-text">图的着色</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dai-shu-jie-gou"><span class="nav-number">2.</span> <span class="nav-text">代数结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gai-nian"><span class="nav-number">2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ding-li"><span class="nav-number">2.2.</span> <span class="nav-text">定理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fu-xi"><span class="nav-number">3.</span> <span class="nav-text">复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jing-dian-jie-lun"><span class="nav-number">3.1.</span> <span class="nav-text">经典结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zheng-ming-ji-qiao"><span class="nav-number">3.2.</span> <span class="nav-text">证明技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ha-mi-dun-hui-lu-xiang-guan"><span class="nav-number">3.3.</span> <span class="nav-text">哈密顿回路相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qi-fa-xing-de-zheng-ming"><span class="nav-number">3.4.</span> <span class="nav-text">启发性的证明</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="i207M"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">i207M</p>
+  <div class="site-description" itemprop="description">i207M's Fantastic Blog - Love</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/i207M" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;i207M" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:connect_at_mail.i207m.top" title="E-Mail → mailto:connect_at_mail.i207m.top" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-fas fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/i207M/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;i207M&#x2F;" rel="noopener" target="_blank">Luogu Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://speranzaleaf.github.io/" title="https:&#x2F;&#x2F;speranzaleaf.github.io&#x2F;" rel="noopener" target="_blank">Speranza Leaf</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kamome.moe/" title="https:&#x2F;&#x2F;kamome.moe&#x2F;" rel="noopener" target="_blank">Siunaus</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/cjyyb/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;cjyyb&#x2F;" rel="noopener" target="_blank">yyb</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nekko.moe/" title="https:&#x2F;&#x2F;nekko.moe&#x2F;" rel="noopener" target="_blank">nekko</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/zjp-shadow/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zjp-shadow&#x2F;" rel="noopener" target="_blank">zjp_shadow</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ywy-c-asm.cn/" title="https:&#x2F;&#x2F;www.ywy-c-asm.cn&#x2F;" rel="noopener" target="_blank">ywy_c_asm</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/Miracevin/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Miracevin&#x2F;" rel="noopener" target="_blank">Miracle</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hahamengbier.top/" title="https:&#x2F;&#x2F;hahamengbier.top&#x2F;" rel="noopener" target="_blank">mengbier</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">i207M</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '09f5f1273e68e2e773c5',
+      clientSecret: 'b9b92a06fa16f2c2905b55b35c509e55c03fc596',
+      repo        : 'blog-comment',
+      owner       : 'i207M',
+      admin       : ['i207M'],
+      id          : 'd4eda199afd19f4640b4b6c1f12bbbb1',
+      proxy       : 'https://cors.i207m.workers.dev/?https://github.com/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>

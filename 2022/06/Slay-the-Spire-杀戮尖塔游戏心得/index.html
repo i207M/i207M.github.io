@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.i207m.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言 本人比较手残，CSGO，LOL这种比较考验操作和手速的游戏不太玩得来。相应的，我非常喜欢玩休闲益智的游戏，像MC（休闲益智？？？但是我就是最喜欢），P社，解谜（太难的也不行）。  小时候非常喜欢一个游戏，Guild of Dungeoneering。现在想来，玩法属于是杀戮尖塔的先辈了，也是Rougelike的打牌游戏。当时印象最深，也是最喜欢用的，是用华尔兹舞者，它的技能是攻击力&#x3D;手牌数，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Slay the Spire 杀戮尖塔游戏心得">
+<meta property="og:url" content="https://blog.i207m.top/2022/06/Slay-the-Spire-%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94%E6%B8%B8%E6%88%8F%E5%BF%83%E5%BE%97/index.html">
+<meta property="og:site_name" content="i207M&#39;s Fantastic Blog">
+<meta property="og:description" content="前言 本人比较手残，CSGO，LOL这种比较考验操作和手速的游戏不太玩得来。相应的，我非常喜欢玩休闲益智的游戏，像MC（休闲益智？？？但是我就是最喜欢），P社，解谜（太难的也不行）。  小时候非常喜欢一个游戏，Guild of Dungeoneering。现在想来，玩法属于是杀戮尖塔的先辈了，也是Rougelike的打牌游戏。当时印象最深，也是最喜欢用的，是用华尔兹舞者，它的技能是攻击力&#x3D;手牌数，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.i207m.top/2022/06_1e7190a94ad2a269167c2f00956e9b43.png">
+<meta property="article:published_time" content="2022-06-16T12:21:50.000Z">
+<meta property="article:modified_time" content="2025-03-05T01:24:34.775Z">
+<meta property="article:author" content="i207M">
+<meta property="article:tag" content="i207M,OI,THU">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.i207m.top/2022/06_1e7190a94ad2a269167c2f00956e9b43.png">
+
+<link rel="canonical" href="https://blog.i207m.top/2022/06/Slay-the-Spire-%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94%E6%B8%B8%E6%88%8F%E5%BF%83%E5%BE%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+
+  <title>Slay the Spire 杀戮尖塔游戏心得 | i207M's Fantastic Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="i207M's Fantastic Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">i207M's Fantastic Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-留言">
+
+    <a href="/messages/" rel="section"><i class="fa fa-fw fa-comments"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.i207m.top/2022/06/Slay-the-Spire-%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94%E6%B8%B8%E6%88%8F%E5%BF%83%E5%BE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="i207M">
+      <meta itemprop="description" content="i207M's Fantastic Blog - Love">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="i207M's Fantastic Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Slay the Spire 杀戮尖塔游戏心得
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-16 20:21:50" itemprop="dateCreated datePublished" datetime="2022-06-16T20:21:50+08:00">2022-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Game/" itemprop="url" rel="index"><span itemprop="name">Game</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="qian-yan" id="前言">前言</h2>
+<p>本人比较手残，CSGO，LOL这种比较考验操作和手速的游戏不太玩得来。相应的，我非常喜欢玩休闲益智的游戏，像MC（休闲益智？？？但是我就是最喜欢），P社，解谜（太难的也不行）。</p>
+<p><img data-src="https://img.i207m.top/2022/06_1e7190a94ad2a269167c2f00956e9b43.png" alt="image-20220616204000293"></p>
+<p>小时候非常喜欢一个游戏，Guild of Dungeoneering。现在想来，玩法属于是杀戮尖塔的先辈了，也是Rougelike的打牌游戏。当时印象最深，也是最喜欢用的，是用华尔兹舞者，它的技能是攻击力=手牌数，然后配合过牌，一回合打出30多伤害，Boss都滚了一圈，很爽。</p>
+<p>这种游戏的一个好处是，不会很花时间，打完一局就可以跑。又因为Rougelike，所以没太多可以养成的，也没什么存档可言。</p>
+<h2 id="geng-xin" id="更新">更新</h2>
+<p>Meet the <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv18224211">端口化思想</a>。</p>
+<h3 id="hong-ku-cha" id="红裤衩">红裤衩</h3>
+<p>一切战士转防战，一切战士转烧牌。</p>
+<h3 id="zei" id="贼">贼</h3>
+<p>TBD</p>
+<h3 id="ji-bao" id="寄宝">寄宝</h3>
+<p>TBD</p>
+<h3 id="guan-pi" id="观批">观批</h3>
+<p>红蓝猛虎沙雕无限，突出一个攻杀。</p>
+<h2 id="geng-xin-qian" id="更新前">更新前</h2>
+<p>下面的经验是游戏时间不足20h时写的，现在看来太幼稚了些。</p>
+<h2 id="tong-yong" id="通用">通用</h2>
+<p>一些总结：<a target="_blank" rel="noopener" href="https://steamcommunity.com/sharedfiles/filedetails/?l=chinese&amp;id=2003260594">1</a></p>
+<ul>
+<li>手牌不是越多越好，除非你的过牌+打牌能力很强（比方说都变成0费），不然你会因为摸不到核心牌而抓耳挠腮。一回合抽5张牌，因此手牌数在10~15是比较好的。（猎人完美陀螺一张牌秒杀全场太爽了）（20张以上的手牌如果没有一些强力的过牌手段，是很费劲的）</li>
+<li>符文金字塔。对于过牌能力强的卡组很好，否则经常会手牌卡在手里动不了。</li>
+<li>冻结之眼。非常好的遗物，也非常费脑筋。</li>
+<li>钢笔尖。比想象中的好用，本以为10次的CD太长了，但是经常能够出其不意。</li>
+<li>墨水瓶的效果要数好回合，不然有时候其实挺讨厌的，把我刚放进去的牌再抽回来。</li>
+<li>医疗箱是个好东西，从此不再怕诅咒。医疗箱+卡戎之灰+硬撑=1费15防6群伤。</li>
+</ul>
+<h3 id="feature-bug" id="Feature-Bug">Feature/Bug</h3>
+<ul>
+<li>星盘保存并退出可以删牌。</li>
+<li>死灵书可以卡掉诅咒牌。</li>
+</ul>
+<h2 id="tie-jia-zhan-shi" id="铁甲战士">铁甲战士</h2>
+<p>Steam上的总结：<a target="_blank" rel="noopener" href="https://steamcommunity.com/sharedfiles/filedetails/?id=1382398914&amp;searchtext=%E9%93%81%E7%94%B2%E6%88%98%E5%A3%AB">1</a>, <a target="_blank" rel="noopener" href="https://steamcommunity.com/sharedfiles/filedetails/?id=2520498395">2</a></p>
+<ul>
+<li>壁垒太有用了，甲叠起来之后。必拿。</li>
+<li>狂怒+势不可当：打攻击牌得格挡，进而打伤害。</li>
+<li>战士的自己的过牌卡比较少，剑柄打击、战吼升级后还可以。</li>
+<li>战士也是比较缺费的。多选些0费或1费卡。</li>
+</ul>
+<h3 id="ge-dang-liu" id="格挡流">格挡流</h3>
+<p>核心牌：全身撞击（必须敲，不然打不出去）、壁垒（必须敲，不然打不出去）</p>
+<p>防御牌：巩固、狂怒（+势不可当）、硬撑（最好配上医疗箱）、耸肩无视（前期过度）、岿然不动</p>
+<h3 id="li-liang-liu" id="力量流">力量流</h3>
+<p>力量流没有严格意义上的核心牌，只要有办法攒力量、打伤害就行。</p>
+<p>攒力量：燃烧、突破极限、恶魔形态、撕裂（+自燃）、J. A. X.、活动肌肉</p>
+<p>打伤害：连续拳、重刃、飞剑回旋镖</p>
+<h2 id="jing-mo-xi-shou" id="静默猎手">静默猎手</h2>
+<p>猎手和战士的最大区别是没有每回合的回血，所以要更谨慎一些。但是可以明显感觉猎手起甲要更容易，很多时候都能把伤害挡住。原因可能是手牌的费用平均比较少。</p>
+<p>静默猎手运转牌的能力也显著增强，主要是他抽牌多而且牌大部分都能打出去，不一定要等combo。</p>
+<p>猎手的卡组也是比较好配的，走混合路线很好，比方说涂毒（小刀+毒）。</p>
+<ul>
+<li>善用爆发和肾上腺素和SL</li>
+<li>大胆弃牌</li>
+</ul>
+<h3 id="xiao-dao-liu" id="小刀流">小刀流</h3>
+<p>子弹时间、无限刀刃、刀刃之舞（至少相当于1费打12）、<strong>终结技</strong></p>
+<h3 id="du-liu" id="毒流">毒流</h3>
+<p>开了好几把，终于打出一把很爽的毒猎。</p>
+<p>催化剂、弹跳药瓶、毒雾、致残毒云、致命毒药</p>
+<h2 id="gu-zhang-ji-qi-ren" id="故障机器人">故障机器人</h2>
+<p>还没玩的很好。</p>
+<ul>
+<li>白噪声，简直就是白嫖。</li>
+<li>快速检索、搜寻、全息影像（要敲掉消耗）过牌神器</li>
+<li>汇集：白嫖能量</li>
+</ul>
+<h3 id="wan-qiu" id="玩球">玩球</h3>
+<p>多重释放、递归</p>
+<h4 id="hei-qiu" id="黑球">黑球</h4>
+<p>愁云惨淡</p>
+<h3 id="wu-gong" id="物攻">物攻</h3>
+<p>TBD</p>
+<h2 id="guan-zhe" id="观者">观者</h2>
+<p>一直没太玩明白。这些姿态还不能善用。</p>
+<p>观者是打起来很爽的，因为在第一层，白色卡就有很强的输出。愤怒加攻，平静加费，真言疯狂输出。</p>
+<ul>
+<li>审判，最强。必拿，优先敲，特别有用。</li>
+<li>坚韧用来抗伤害挺好的。</li>
+<li>点穴是一个奇怪的输出方式。</li>
+</ul>
+<h2 id="miscellaneous" id="Miscellaneous">Miscellaneous</h2>
+<p>第一次胜利（铁甲战士）：</p>
+<p>自从拿到符文金字塔开始，过牌变得很困难，每一回合非常的费脑筋，但是确实有用。</p>
+<p>这次的策略比较混合，又有全身撞击+格挡牌，又有活动肌肉+连续拳，看似又能打又能抗，其实是走成了个四不像。</p>
+<p>这次的经验教训是，手牌太多了！20多张牌，根本过不动。</p>
+<p>第一次胜利（静默猎手）：</p>
+<p>打起来对脑袋轻松多了。</p>
+<p>第一次打就通关了，但是自己的牌挺杂的，又有中毒又有小刀，然后子弹时间还没出几个。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/06/OpenDiary-2022.6/" rel="prev" title="OpenDiary-2022.6">
+      <i class="fa fa-chevron-left"></i> OpenDiary-2022.6
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/07/OpenDiary-2022Summer/" rel="next" title="OpenDiary-2022Summer">
+      OpenDiary-2022Summer <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#qian-yan"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#geng-xin"><span class="nav-number">2.</span> <span class="nav-text">更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hong-ku-cha"><span class="nav-number">2.1.</span> <span class="nav-text">红裤衩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zei"><span class="nav-number">2.2.</span> <span class="nav-text">贼</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ji-bao"><span class="nav-number">2.3.</span> <span class="nav-text">寄宝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#guan-pi"><span class="nav-number">2.4.</span> <span class="nav-text">观批</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#geng-xin-qian"><span class="nav-number">3.</span> <span class="nav-text">更新前</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tong-yong"><span class="nav-number">4.</span> <span class="nav-text">通用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#feature-bug"><span class="nav-number">4.1.</span> <span class="nav-text">Feature&#x2F;Bug</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tie-jia-zhan-shi"><span class="nav-number">5.</span> <span class="nav-text">铁甲战士</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ge-dang-liu"><span class="nav-number">5.1.</span> <span class="nav-text">格挡流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#li-liang-liu"><span class="nav-number">5.2.</span> <span class="nav-text">力量流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jing-mo-xi-shou"><span class="nav-number">6.</span> <span class="nav-text">静默猎手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xiao-dao-liu"><span class="nav-number">6.1.</span> <span class="nav-text">小刀流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#du-liu"><span class="nav-number">6.2.</span> <span class="nav-text">毒流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gu-zhang-ji-qi-ren"><span class="nav-number">7.</span> <span class="nav-text">故障机器人</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wan-qiu"><span class="nav-number">7.1.</span> <span class="nav-text">玩球</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#hei-qiu"><span class="nav-number">7.1.1.</span> <span class="nav-text">黑球</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wu-gong"><span class="nav-number">7.2.</span> <span class="nav-text">物攻</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#guan-zhe"><span class="nav-number">8.</span> <span class="nav-text">观者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#miscellaneous"><span class="nav-number">9.</span> <span class="nav-text">Miscellaneous</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="i207M"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">i207M</p>
+  <div class="site-description" itemprop="description">i207M's Fantastic Blog - Love</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/i207M" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;i207M" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:connect_at_mail.i207m.top" title="E-Mail → mailto:connect_at_mail.i207m.top" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-fas fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.luogu.com.cn/blog/i207M/" title="https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;i207M&#x2F;" rel="noopener" target="_blank">Luogu Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://speranzaleaf.github.io/" title="https:&#x2F;&#x2F;speranzaleaf.github.io&#x2F;" rel="noopener" target="_blank">Speranza Leaf</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://kamome.moe/" title="https:&#x2F;&#x2F;kamome.moe&#x2F;" rel="noopener" target="_blank">Siunaus</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/cjyyb/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;cjyyb&#x2F;" rel="noopener" target="_blank">yyb</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nekko.moe/" title="https:&#x2F;&#x2F;nekko.moe&#x2F;" rel="noopener" target="_blank">nekko</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/zjp-shadow/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;zjp-shadow&#x2F;" rel="noopener" target="_blank">zjp_shadow</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.ywy-c-asm.cn/" title="https:&#x2F;&#x2F;www.ywy-c-asm.cn&#x2F;" rel="noopener" target="_blank">ywy_c_asm</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/Miracevin/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Miracevin&#x2F;" rel="noopener" target="_blank">Miracle</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hahamengbier.top/" title="https:&#x2F;&#x2F;hahamengbier.top&#x2F;" rel="noopener" target="_blank">mengbier</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">i207M</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '09f5f1273e68e2e773c5',
+      clientSecret: 'b9b92a06fa16f2c2905b55b35c509e55c03fc596',
+      repo        : 'blog-comment',
+      owner       : 'i207M',
+      admin       : ['i207M'],
+      id          : '3288b99c3cf709ad2b4c1b802cbe1d21',
+      proxy       : 'https://cors.i207m.workers.dev/?https://github.com/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>
